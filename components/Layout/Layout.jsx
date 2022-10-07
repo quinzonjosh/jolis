@@ -1,5 +1,11 @@
+import Button from "../Button/Button";
+import Category from "../Category/Category";
 import Footer from "../Footer/Footer";
+import MobileNavbar from "../MobileNavbar/MobileNavbar";
 import Navbar from "../Navbar/Navbar";
+import Product from "../Product/Product";
+
+
 
 const Layout = ({ children }) => {
   return (
@@ -7,8 +13,11 @@ const Layout = ({ children }) => {
       <Navbar />
       <main> {children} </main>
       <Footer />
+      {/* <Category /> */}
     </>
   );
 };
 
 export default Layout;
+
+
