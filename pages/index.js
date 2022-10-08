@@ -13,8 +13,6 @@ export default function Home() {
         <div className="text-2xl font-bold pl-[5%] py-[3%]">
           Featured Products
         </div>
-        {/* CAROUSEL */}
-        <div></div>
       </section>
 
       <section className="flex flex-row border-b-2 border-black">
