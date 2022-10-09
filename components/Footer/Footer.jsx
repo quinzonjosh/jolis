@@ -3,7 +3,7 @@ import { FaFacebookSquare } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <section className="flex justify-evenly w-full items-center p-10">
+    <section className="flex justify-evenly w-full items-center p-10 border-t-2 border-black">
       <div className="font-bold">JOLIS</div>
 
       <div className="">
