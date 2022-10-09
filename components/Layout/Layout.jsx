@@ -3,9 +3,6 @@ import Category from "../Category/Category";
 import Footer from "../Footer/Footer";
 import MobileNavbar from "../MobileNavbar/MobileNavbar";
 import Navbar from "../Navbar/Navbar";
-import Product from "../Product/Product";
-
-
 
 const Layout = ({ children }) => {
   return (
@@ -19,5 +16,3 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
-
-
