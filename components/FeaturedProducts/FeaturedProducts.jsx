@@ -1,4 +1,6 @@
 import Product from "../Product/Product";
+import data from "../../data/products.json";
+
 const FeaturedProducts = () => {
   return (
     <section className="py-8 border-b-2 border-black">
@@ -9,9 +11,22 @@ const FeaturedProducts = () => {
 
         <div className="flex justify-center gap-2">
           {/* product card */}
+          {/* array_object.map((item, index) =>  { return <Something title={item.title} description={item.description} key={index} /> }) */}
+          {data.map((product, index) => {
+            return (
+              <Product
+                image={product.image}
+                name={product.name}
+                category={product.category}
+                espana_stock={product.espana_stock}
+                pnoval_stock={product.pnoval_stock}
+                key={index}
+              />
+            );
+          })}
+          {/* <Product />
           <Product />
-          <Product />
-          <Product />
+          <Product /> */}
         </div>
       </div>
     </section>

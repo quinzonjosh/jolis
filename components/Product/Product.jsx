@@ -1,25 +1,25 @@
 import Image from "next/image";
 
-function Product({ prop }) {
+function Product({ image, name, category, espana_stock, pnoval_stock }) {
   return (
     <div className="block max-w-[310px] p-6 border border-black">
       <div className="relative w-64 h-64">
-        <Image src="/images/sample.jpg" alt="sample" layout="fill" />
+        <Image src={image} alt="sample" layout="fill" />
       </div>
 
-      <h3 className="font-bold break-words">Product name</h3>
-      <p className="mb-3">Product Category</p>
+      <h3 className="font-bold break-words">{name}</h3>
+      <p className="mb-3">{category}</p>
       <div className="flex flex-row gap-5">
         <div className="flex flex-col">
           <div className="font-bold">Espana Branch</div>
           <div className="bg-zinc-200 rounded-xl px-1 text-center">
-            In stock
+            {espana_stock}
           </div>
         </div>
         <div className="flex flex-col">
           <div className="font-bold">P. Noval Branch</div>
           <div className="bg-zinc-200 rounded-xl px-3 text-center">
-            Out of Stock
+            {pnoval_stock}
           </div>
         </div>
       </div>
