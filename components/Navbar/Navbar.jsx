@@ -1,12 +1,41 @@
+import Link from "next/link";
+import { GrSearch } from "react-icons/gr";
+
 const Navbar = () => {
   return (
-    <div class="navbar_container" className="flex">
-      <h1 className="text-3xl font-bold underline">JOLI'S</h1>
-      <input type="text" name="Search here"></input>
-      <a href="/">Home</a>
-      <a href="/categories">Products</a>
-      <a href="">Get in touch</a>
-    </div>
+    <section className="flex justify-center w-full gap-2 py-5 items-center border-b-2 border-black">
+      <span className="text-3xl font-bold">JOLI'S</span>
+
+      <div className="flex w-[60%]">
+        <input
+          type="search"
+          name="Search here"
+          value="Search products"
+          className="w-[100%] border-2 border-black border-r-0 p-2 text-xs"
+        />
+        <button className="border-2 border-l-0 border-black p-1">
+          <GrSearch />
+        </button>
+      </div>
+
+      <ul className="flex flex-row gap-2">
+        <li>
+          <Link href="/">
+            <a>Home</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/categories">
+            <a>Products</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/">
+            <a>Get in touch</a>
+          </Link>
+        </li>
+      </ul>
+    </section>
   );
 };
 
