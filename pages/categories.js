@@ -1,11 +1,11 @@
 import Layout from "../components/Layout/Layout";
-import Titlebar from "../components/Titlebar/Titlebar";
+import Banner from "../components/Banner/Banner";
 import CategoryView from "../components/CategoryView/CategoryView";
 
 const categories = () => { 
   return (
     <Layout>
-        <Titlebar text="Product Categories"/>
+        <Banner title="Product Categories"/>
         <CategoryView />
     </Layout>
   )
