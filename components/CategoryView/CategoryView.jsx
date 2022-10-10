@@ -1,39 +1,46 @@
-import React, { useState } from 'react';
-import Category from '../Category/Category';
-import Pagination from '../Pagination/Pagination';
+import React, { useState, useEffect } from "react";
+import Category from "../Category/Category";
+import Pagination from "../Pagination/Pagination";
+import Link from "next/link";
 
 const CategoryView = () => {
-    let numCategories = 240; //Stores the number of categories
-    let categoryPages = []; //Stores 12 cards each
-    let categoryCards = []; //Stores the category cards
-    const [pageNumber, setPageNumber] = useState(1);
-    
-    //Generate test cards
-    let cardCount = 0;
-    while(cardCount < numCategories)
-    {
-        for(let i = 0; i < 12; i++)
-        {
-            //Check if there are categs remaining
-            if(cardCount == numCategories)
-                break;
-            categoryCards.push(<a href="/categories" key={i+1} className="m-1"><Category categoryName={"Test " + (cardCount+1)}/></a>);
-            cardCount++;
-        }
-        //Push categoryCards into page
-        categoryPages.push(categoryCards);
-        //Clear current cards
-        categoryCards = [];
-    }
-  
+  const CATEGORIES_PER_PAGE = 12;
+  const [pageNumber, setPageNumber] = useState(1);
+  const CATEGORY_CARDS = [...Array(100).keys()].map((item) => {
     return (
-    <div className="py-6">
-        <div className="grid grid-cols-4 grid-rows-3 py-10">
-            {categoryPages[pageNumber-1]}           
-        </div>
-        <Pagination numPages={categoryPages.length} currentPage={pageNumber} pageChanger={setPageNumber}/>
-    </div>
-  )
-}
+      <Link href="/categories" key={item}>
+        <Category categoryName={`Category ${item + 1}`} />
+      </Link>
+    );
+  });
+  const [categories, setCategories] = useState([]);
+  const numPages = Math.ceil(CATEGORY_CARDS.length / CATEGORIES_PER_PAGE);
 
-export default CategoryView
+  useEffect(() => {
+    if (pageNumber === 1) {
+      setCategories(CATEGORY_CARDS.slice(0, CATEGORIES_PER_PAGE * pageNumber));
+      return;
+    }
+
+    const startPage = CATEGORIES_PER_PAGE * (pageNumber - 1);
+    const endPage = CATEGORIES_PER_PAGE * pageNumber;
+    setCategories(CATEGORY_CARDS.slice(startPage, endPage));
+  }, [pageNumber]);
+
+  return (
+    <section className="py-6">
+      <div className="container mx-auto">
+        <div className="grid gap-5 lg:grid-cols-4 lg:grid-rows-3 md:grid-cols-3 md:grid-rows-4 grid-cols-1 py-10">
+          {categories}
+        </div>
+        <Pagination
+          numPages={numPages}
+          currentPage={pageNumber}
+          pageChanger={setPageNumber}
+        />
+      </div>
+    </section>
+  );
+};
+
+export default CategoryView;
