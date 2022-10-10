@@ -1,15 +1,19 @@
+import Image from 'next/image'
+
 const Category = ({imageLink, categoryName}) =>{
     return (
-        <div className="category_container text-center">
-            <img className="block ml-auto mr-auto" src={imageLink} alt="category image" />
-            <span>{categoryName}</span>       {/* category name holder */}   
+        <div className="category_container text-center flex flex-col items-center">
+            <div className='relative w-64 h-64'>
+                <Image layout='fill'  src={imageLink} alt="category image" />
+            </div>
+            <p>{categoryName}</p>       {/* category name holder */}   
             
         </div>
     );
 }
 
 Category.defaultProps = {
-    imageLink: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaA3XvSJrcPIH1Jcd5inZpvvaSKziv-4aVVtVj5cpalIXEQpqHjlsevtLrZDi2xr61l5g&usqp=CAU"
+    imageLink: "/images/default.jpg"
 }
 
 export default Category;
