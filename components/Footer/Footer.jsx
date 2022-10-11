@@ -4,7 +4,7 @@ import { FaFacebookSquare } from "react-icons/fa";
 const Footer = () => {
   return (
     <section className="flex justify-evenly w-full items-center p-10 border-t-2 border-black">
-      <div className="font-bold">JOLIS</div>
+      <div className="font-bold">JOLI&apos;S</div>
 
       <div className="">
         <span className="font-bold">Overview</span>
