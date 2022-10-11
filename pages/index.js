@@ -22,6 +22,7 @@ export default function Home() {
                 See our products
               </button>
             </div>
+
             <div className="flex flex-col w-[50%] border-black px-[5%] pt-[5%] pb-[10%] items-center">
               <div className="text-2xl font-bold text-center py-[5%]">
                 Visit our stores
