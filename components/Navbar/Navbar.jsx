@@ -13,7 +13,7 @@ const Navbar = () => {
         <input
           type="search"
           name="Search here"
-          value="Search products"
+          placeholder="Search products"
           className="w-[100%] border-2 border-black border-r-0 p-2 text-xs"
         />
         <button className="border-2 border-l-0 border-black p-1">
