@@ -7,7 +7,7 @@ const Navbar = () => {
 
   return (
     <section className="flex justify-center w-full gap-2 py-5 items-center border-b-2 border-black">
-      <span className="text-3xl font-bold ">JOLI'S</span>
+      <span className="text-3xl font-bold ">JOLI&apos;S</span>
 
       <div className="flex w-[60%]">
         <input
