@@ -2,6 +2,8 @@ import Link from "next/link";
 import { GrSearch } from "react-icons/gr";
 import { useState } from "react";
 import styles from "./Navbar.module.css";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
 const Navbar = () => {
   const [hideNav, setHideNav] = useState(true);
 
@@ -21,27 +23,29 @@ const Navbar = () => {
         </button>
       </div>
       <button
+        className="md:hidden block"
         onClick={() => {
           setHideNav((hideNav) => {
             return !hideNav;
           });
         }}
       >
-        Open
+        <GiHamburgerMenu />
       </button>
 
       <div
         className={`${hideNav ? "-left-full" : "left-0"} ${styles.nav_links}`}
       >
-        <ul className="flex flex-col md:flex-row gap-2">
+        <ul className="flex flex-col md:flex-row gap-2 p-5">
           <button
+            className="md:hidden block self-end"
             onClick={() => {
               setHideNav((hideNav) => {
                 return !hideNav;
               });
             }}
           >
-            Close
+            <AiOutlineClose />
           </button>
           <li>
             <Link href="/">
