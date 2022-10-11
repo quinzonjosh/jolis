@@ -1,5 +1,5 @@
 [
-    {
+    {   
         "image": "/images/sample.jpg",
         "name": "Pencil",
         "category": "School supplies",
@@ -7,6 +7,7 @@
         "pnoval_stock": "Out of stock"
     },
     {
+
         "image": "/images/sample.jpg",
         "name": "Table",
         "category": "School supplies",
@@ -14,12 +15,55 @@
         "pnoval_stock": "Out of stock"
     },
     {
+
+        "image": "/images/sample.jpg",
+        "name": "Book X",
+        "category": "Books","active" : true, 
+        
+        "espana_stock": "In stock",
+        "pnoval_stock": "Out of stock"
+    },
+    {
+
+        "image": "/images/sample.jpg",
+        "name": "Ruler",
+        "category": "School supplies",
+        "espana_stock": "Out of stock",
+        "pnoval_stock": "Out of stock"
+    },
+    {   
+
+        "image": "/images/sample.jpg",
+        "name": "Pencil",
+        "category": "School supplies",
+        "espana_stock": "In stock",
+        "pnoval_stock": "Out of stock"
+    },
+    {
+   
+        "image": "/images/sample.jpg",
+        "name": "Table",
+        "category": "School supplies",
+        "espana_stock": "Out of stock",
+        "pnoval_stock": "Out of stock"
+    },
+    {
+
         "image": "/images/sample.jpg",
         "name": "Book X",
         "category": "Books",
         "espana_stock": "In stock",
         "pnoval_stock": "Out of stock"
+    },
+    {
+  
+        "image": "/images/sample.jpg",
+        "name": "Ruler",
+        "category": "School supplies",
+        "espana_stock": "Out of stock",
+        "pnoval_stock": "Out of stock"
     }
+    
     
 ]
 
