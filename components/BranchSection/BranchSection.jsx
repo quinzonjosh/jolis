@@ -1,82 +1,88 @@
-import Image from "next/image"
+import Image from "next/image";
 
-const BranchSection = ({branchName, facebookLink, phoneNumber, address, reverse}) => {
-    if(!reverse)
-        return (
-                <section className="border-b-2 border-black">
-                    <div className="m-10 flex flex-col flex-wrap items-start max-h-96 relative top-6">
-                        <p className="text-2xl font-bold mb-10">
-                            {branchName}
-                        </p>
-                        <p className="text-xl font-bold mb-10">
-                            Reach Us
-                        </p>
-                        <p className="mb-10">
-                            <a className="float-left mr-12">Facebook</a> 
-                            <a href={facebookLink} className="hover:text-blue-400 w-2/4 text-ellipsis float-left relative bottom-3">
-                                {facebookLink}
-                            </a>
-                        </p>
-                        <p className="mb-10">
-                            <a className="float-left mr-20">Phone</a>
-                            <a className="float-left relative right-2">
-                                {phoneNumber}
-                            </a>
-                        </p>
-                        <p className="mb-10">
-                            <a className="float-left mr-14">Address</a> 
-                            <a className="w-2/4 text-ellipsis float-left relative bottom-3">
-                                {address}  
-                            </a>
-                        </p>
-                        <div className="relative w-2/5 h-96 left-36 bottom-6">
-                            <Image layout='fill' priority="true" src="/images/default.jpg" alt="branch image" />
-                        </div>
-                    </div>
-                </section>
-            )
-    else
-        return (
-            <section className="">
-                <div className="m-10 flex flex-col flex-wrap items-start max-h-96 relative top-6">   
-                    <div className="relative w-2/5 h-96 bottom-6 mr-80">
-                        <Image layout='fill' priority="true" src="/images/default.jpg" alt="branch image" />
-                    </div>
-                    <p className="text-2xl font-bold mb-10">
-                        {branchName}
-                    </p>
-                    <p className="text-xl font-bold mb-10">
-                        Reach Us
-                    </p>
-                    <p className="mb-10">
-                        <a className="float-left mr-12">Facebook</a> 
-                        <a href={facebookLink} className="hover:text-blue-400 w-2/4 text-ellipsis float-left relative bottom-3">
-                            {facebookLink}
-                        </a>
-                    </p>
-                    <p className="mb-10">
-                        <a className="float-left mr-20">Phone</a>
-                        <a className="float-left relative right-2">
-                            {phoneNumber}
-                        </a>
-                    </p>
-                    <p className="mb-10">
-                        <a className="float-left mr-14">Address</a> 
-                        <a className="w-2/4 text-ellipsis float-left relative bottom-3">
-                            {address}  
-                        </a>
-                    </p>
-                </div>
-            </section>
-        )
-}
+const BranchInfo = ({
+  branchName,
+  facebookLink,
+  phoneNumber,
+  address,
+  mapFirst,
+}) => {
+  return (
+    <div
+      className={`flex flex-col   ${
+        mapFirst ? "order-2 md:w-2/5" : "order-1 md:1/2"
+      }`}
+    >
+      <p className="text-2xl font-bold mb-10">{branchName}</p>
+      <p className="text-xl font-bold mb-10">Reach Us</p>
+      <span className="mb-10">
+        <p className="float-left mr-12">Facebook</p>
+        <a
+          href={facebookLink}
+          className="w-1/2 md:w-2/4 hover:text-blue-400 break-words float-left"
+        >
+          {facebookLink}
+        </a>
+      </span>
+      <p className="mb-10">
+        <a className="float-left mr-20">Phone</a>
+        <a className="float-left relative right-2">{phoneNumber}</a>
+      </p>
+      <span className="mb-10">
+        <a className="float-left mr-14">Address</a>
+        <a className="w-2/4 break-words float-left">{address}</a>
+      </span>
+    </div>
+  );
+};
+
+const BranchMap = ({ mapFirst }) => {
+  return (
+    <div
+      className={`relative w-full md:w-2/5 h-96 ${
+        mapFirst ? "order-2 md:order-1" : "order-2"
+      }`}
+    >
+      <Image
+        layout="fill"
+        priority="true"
+        src="/images/default.jpg"
+        alt="branch image"
+      />
+    </div>
+  );
+};
+
+const BranchSection = ({
+  branchName,
+  facebookLink,
+  phoneNumber,
+  address,
+  mapFirst,
+}) => {
+  return (
+    <section className="border-b-2 border-black">
+      <div className="container px-10 md:px-0 mx-auto py-10 flex flex-col items-center md:flex-row md:items-start justify-between">
+        <BranchInfo
+          branchName={branchName}
+          facebookLink={facebookLink}
+          phoneNumber={phoneNumber}
+          address={address}
+          mapFirst={mapFirst}
+        />
+        {/* TODO: add link embedd to google maps here */}
+        <BranchMap mapFirst={mapFirst} />
+      </div>
+    </section>
+  );
+};
 
 BranchSection.defaultProps = {
-    branchName: "Location Branch",
-    facebookLink: "XXXXXXXXXXXXXX",
-    phoneNumber: "09xx xxxx xxx",
-    address: "XXXXXXXXXXXXXX",
-    reverse: false
-}
+  branchName: "Location Branch",
+  facebookLink: "XXXXXXXXXXXXXX",
+  phoneNumber: "09xx xxxx xxx",
+  address: "XXXXXXXXXXXXXX",
+  reverse: false,
+};
 
-export default BranchSection
+export default BranchSection;
