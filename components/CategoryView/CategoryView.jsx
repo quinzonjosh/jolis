@@ -6,10 +6,11 @@ import Link from "next/link";
 const CategoryView = () => {
   const CATEGORIES_PER_PAGE = 12;
   const [pageNumber, setPageNumber] = useState(1);
-  const CATEGORY_CARDS = [...Array(100).keys()].map((item) => {
+  const CATEGORIES = ["Books", "School Supplies"];
+  const CATEGORY_CARDS = [...Array(CATEGORIES.length).keys()].map((item) => {
     return (
       <Link href="/categories" key={item}>
-        <Category categoryName={`Category ${item + 1}`} />
+        <Category categoryName={CATEGORIES[item]} />
       </Link>
     );
   });
