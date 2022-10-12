@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <Layout className="w-full">
       <section className="text-4xl font-bold text-center p-10 border-b border-black">
-        {data.categoryName}
+        {data.query != null ? data.categoryName : "Product Listing"}
       </section>
 
       <section className="flex flex-row border-b border-black py-10">
