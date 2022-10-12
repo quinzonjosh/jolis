@@ -3,12 +3,16 @@ import Image from "next/image";
 import Layout from "../components/Layout/Layout";
 import Link from "next/link";
 import { GrSearch } from "react-icons/gr";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
+  const data = router.query;
+
   return (
     <Layout className="w-full">
       <section className="text-4xl font-bold text-center p-10 border-b border-black">
-        Category Name
+        {data.categoryName}
       </section>
 
       <section className="flex flex-row border-b border-black py-10">
