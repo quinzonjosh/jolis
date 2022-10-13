@@ -1,5 +1,4 @@
 import Product from "../Product/Product";
-import data from "../../data/products.json";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import styles from "./FeaturedProducts.module.css";
@@ -8,7 +7,7 @@ import {
   CustomRightArrow,
 } from "../CustomArrows/CustomArrows";
 
-const FeaturedProducts = () => {
+const FeaturedProducts = ({ data }) => {
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.

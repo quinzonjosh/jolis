@@ -3,13 +3,15 @@ import Image from "next/image";
 import Layout from "../components/Layout/Layout";
 import FeaturedProducts from "../components/FeaturedProducts/FeaturedProducts";
 import Banner from "../components/Banner/Banner";
+import Link from "next/link";
+import data from "../data/products.json";
 
-export default function Home() {
+export default function Home({ featuredProducts }) {
   return (
     <Layout className="w-full">
       <Banner title="Welcome to Joli's" />
 
-      <FeaturedProducts />
+      <FeaturedProducts data={data} />
 
       <section>
         <div>
@@ -19,7 +21,9 @@ export default function Home() {
                 Some Catchy Heading Here
               </div>
               <button className="border-2 p-1 border-black w-[55%]">
-                See our products
+                <Link href="/productListing">
+                  <a> See our products </a>
+                </Link>
               </button>
             </div>
 
@@ -36,4 +40,16 @@ export default function Home() {
       </section>
     </Layout>
   );
+}
+
+export function getStaticProps() {
+  const featuredProducts = data.filter((item) => {
+    return item.featured == true;
+  });
+
+  return {
+    props: {
+      featuredProducts: featuredProducts,
+    },
+  };
 }

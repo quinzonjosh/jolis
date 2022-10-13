@@ -4,7 +4,8 @@
         "name": "Monet Acrylic Colour Book A3",
         "category": "Acrylic Color Books",
         "espana_stock": "In stock",
-        "pnoval_stock": "Out of stock"
+        "pnoval_stock": "Out of stock",
+        "featured": true
     },
     {
 
@@ -12,7 +13,8 @@
         "name": "Monet Acrylic Colour Book A4",
         "category": "Acrylic Color Books",
         "espana_stock": "Out of stock",
-        "pnoval_stock": "Out of stock"
+        "pnoval_stock": "Out of stock",
+        "featured": false
     },
     {
 
@@ -20,7 +22,8 @@
         "name": "Book X",
         "category": "Books",
         "espana_stock": "In stock",
-        "pnoval_stock": "Out of stock"
+        "pnoval_stock": "Out of stock",
+        "featured": true
     },
     {
 
@@ -28,7 +31,8 @@
         "name": "Derwent Tinted Charcoal 12",
         "category": "Pencils",
         "espana_stock": "Out of stock",
-        "pnoval_stock": "Out of stock"
+        "pnoval_stock": "Out of stock",
+        "featured": true
     },
     {   
 
@@ -36,7 +40,8 @@
         "name": "Cattleya Filler (Medium)",
         "category": "Notebooks",
         "espana_stock": "In stock",
-        "pnoval_stock": "Out of stock"
+        "pnoval_stock": "Out of stock",
+        "featured": false
     },
     {
    
@@ -44,7 +49,8 @@
         "name": "Cattleya Filler (Small)",
         "category": "Notebooks",
         "espana_stock": "Out of stock",
-        "pnoval_stock": "Out of stock"
+        "pnoval_stock": "Out of stock",
+        "featured": true
     },
     {
 
@@ -52,7 +58,8 @@
         "name": "Cattleya Filler (Big)",
         "category": "Notebooks",
         "espana_stock": "In stock",
-        "pnoval_stock": "Out of stock"
+        "pnoval_stock": "Out of stock",
+        "featured": false
     },
     {
   
@@ -60,7 +67,8 @@
         "name": "Notebook 1",
         "category": "Notebooks",
         "espana_stock": "Out of stock",
-        "pnoval_stock": "Out of stock"
+        "pnoval_stock": "Out of stock",
+        "featured": true
     },
     {
   
@@ -68,7 +76,8 @@
         "name": "Notebook 2",
         "category": "Notebooks",
         "espana_stock": "In stock",
-        "pnoval_stock": "Out of stock"
+        "pnoval_stock": "Out of stock",
+        "featured": true
     },
     {
   
@@ -76,7 +85,8 @@
         "name": "Notebook 3",
         "category": "Notebooks",
         "espana_stock": "Out of stock",
-        "pnoval_stock": "In Stock"
+        "pnoval_stock": "In Stock",
+        "featured": false
     },
     {
   
@@ -84,7 +94,8 @@
         "name": "Steno Type notebook",
         "category": "Notebooks",
         "espana_stock": "Out of Stock",
-        "pnoval_stock": "IOut of Stock"
+        "pnoval_stock": "Out of Stock",
+        "featured": true
     },
     {
   
@@ -92,7 +103,8 @@
         "name": "Giorgione Detailing Brush 1",
         "category": "Brushes",
         "espana_stock": "Out of Stock",
-        "pnoval_stock": "In Stock"
+        "pnoval_stock": "In Stock",
+        "featured": true
     },
     {
   
@@ -100,7 +112,9 @@
         "name": "Giorgione Detailing Brush 2",
         "category": "Brushes",
         "espana_stock": "In Stock",
-        "pnoval_stock": "Out of Stock"
+        "pnoval_stock": "Out of Stock",
+        "featured": false
+        
     },
     {
   
@@ -108,7 +122,9 @@
         "name": "Giorgione Detailing Brush 3",
         "category": "Brushes",
         "espana_stock": "In Stock",
-        "pnoval_stock": "In Stock"
+        "pnoval_stock": "In Stock",
+        "featured": false
+
     }
 
     
