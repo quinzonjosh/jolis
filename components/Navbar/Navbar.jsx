@@ -53,12 +53,12 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/">
+            <Link href="/categories">
               <a>Products</a>
             </Link>
           </li>
           <li>
-            <Link href="/">
+            <Link href="/branches">
               <a>Get in touch</a>
             </Link>
           </li>
@@ -69,3 +69,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

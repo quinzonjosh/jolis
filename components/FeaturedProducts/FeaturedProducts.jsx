@@ -1,5 +1,4 @@
 import Product from "../Product/Product";
-import data from "../../data/products.json";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import styles from "./FeaturedProducts.module.css";
@@ -8,26 +7,47 @@ import {
   CustomRightArrow,
 } from "../CustomArrows/CustomArrows";
 
-const FeaturedProducts = () => {
+const FeaturedProducts = ({ data }) => {
   const responsive = {
-    superLargeDesktop: {
+    xxl: {
       // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
+      breakpoint: { max: 4000, min: 1536 },
       items: 5,
     },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+    xl: {
+      breakpoint: { max: 1535, min: 1280 },
       items: 4,
     },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
+    lg: {
+      breakpoint: { max: 1279, min: 1024 },
+      items: 3,
       partialVisibilityGutter: 40,
     },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
+    md: {
+      breakpoint: { max: 1023, min: 768 },
+      items: 2,
+      partialVisibilityGutter: 60,
+    },
+    sm: {
+      breakpoint: { max: 767, min: 620 },
+      items: 2,
+      partialVisibilityGutter: 10,
+    },
+    xs: {
+      breakpoint: { max: 619, min: 512 },
       items: 1,
-      partialVisibilityGutter: 80,
+      partialVisibilityGutter: 210,
+    },
+    xxs: {
+      breakpoint: { max: 511, min: 410 },
+      items: 1,
+      partialVisibilityGutter: 100,
+    },
+
+    xxxs: {
+      breakpoint: { max: 409, min: 0 },
+      items: 1,
+      partialVisibilityGutter: 0,
     },
   };
 
@@ -40,18 +60,18 @@ const FeaturedProducts = () => {
         <Carousel
           swipeable={true}
           draggable={true}
-          showDots={false}
+          showDots={true}
           responsive={responsive}
           infinite={true}
           keyBoardControl={true}
           transitionDuration={500}
-          containerClass={` mx-auto py-16 ${styles["carousel-container"]}`}
-          removeArrowOnDeviceType={["tablet", "mobile"]}
+          containerClass={` mx-auto py-16  ${styles["carousel-container"]}`}
+          removeArrowOnDeviceType={["md", "sm", "xs", "xxs", "xxxs"]}
           itemClass={`${styles["carousel-item"]}`}
           partialVisible={true}
           customRightArrow={<CustomRightArrow />}
           customLeftArrow={<CustomLeftArrow />}
-          partialVisbile={true}
+          dotListClass={`${styles["carousel-dots"]}`}
         >
           {data.map((product, index) => {
             return (
