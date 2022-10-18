@@ -3,13 +3,14 @@ import Category from "../Category/Category";
 import Pagination from "../Pagination/Pagination";
 import Link from "next/link";
 
-const CategoryView = () => {
+const CategoryView = ({ categoryList }) => {
   const CATEGORIES_PER_PAGE = 12;
   const [pageNumber, setPageNumber] = useState(1);
-  const CATEGORY_CARDS = [...Array(100).keys()].map((item) => {
+  const CATEGORIES = categoryList;
+  const CATEGORY_CARDS = [...Array(CATEGORIES.length).keys()].map((item) => {
     return (
       <Link href="/categories" key={item}>
-        <Category categoryName={`Category ${item + 1}`} />
+        <Category categoryName={CATEGORIES[item]} />
       </Link>
     );
   });
@@ -17,11 +18,6 @@ const CategoryView = () => {
   const numPages = Math.ceil(CATEGORY_CARDS.length / CATEGORIES_PER_PAGE);
 
   useEffect(() => {
-    if (pageNumber === 1) {
-      setCategories(CATEGORY_CARDS.slice(0, CATEGORIES_PER_PAGE * pageNumber));
-      return;
-    }
-
     const startPage = CATEGORIES_PER_PAGE * (pageNumber - 1);
     const endPage = CATEGORIES_PER_PAGE * pageNumber;
     setCategories(CATEGORY_CARDS.slice(startPage, endPage));
