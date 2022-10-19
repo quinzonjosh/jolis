@@ -8,10 +8,10 @@ const Category = ({imageLink, categoryName}) =>{
             query: {categoryName}
         }}>
             <div className="category_container text-center flex flex-col items-center hover:font-bold hover:text-blue-400">
-                <div className='relative w-64 h-64'>
+                <div className='relative lg:w-80 lg:h-80 md:w-56 md:h-56 w-40 h-40'>
                     <Image layout='fill' priority={true} src={imageLink} alt="category image" />
                 </div>
-                <p>{categoryName}</p>       {/* category name holder */}                   
+                <p>{categoryName}</p>                  
             </div>
         </Link>
     );

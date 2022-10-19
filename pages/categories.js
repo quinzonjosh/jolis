@@ -7,7 +7,7 @@ const categories = ({ categoryList }) => {
   return (
     <Layout>
       <Banner title="Product Categories" />
-      <CategoryView categoryList={categoryList} />
+      <CategoryView categoryList={categoryList}/>
     </Layout>
   );
 };
