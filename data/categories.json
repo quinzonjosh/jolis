@@ -1,1 +1,27 @@
-["Acrylic Color Books", "Books", "Brushes", "Notebooks", "Pencils"]
+[   
+    {
+        "image": "/images/Acrylic_Color_Books/Monet_Acrylic_Colour_Book_A3.jpg",
+        "name": "Acrylic Color Books",
+        "slug": "acrylic-color-books"
+    },
+    {
+        "image": "/images/sample.jpg",
+        "name": "Books",
+        "slug": "books"
+    },
+    {
+        "image": "/images/Brushes/Giorgione_Detailing_Brush1.jpg",
+        "name": "Brushes",
+        "slug": "brushes"
+    },
+    {
+        "image": "/images/Notebooks/Cattleya_Filler(medium).jpg",
+        "name": "Notebooks",
+        "slug": "notebooks"
+    },
+    {
+        "image": "/images/Pencils/Derwent_Tinted_Charcoal_12.jpg",
+        "name": "Pencils",
+        "slug": "pencils"
+    }
+    ]
