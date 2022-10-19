@@ -3,8 +3,8 @@ import Category from "../Category/Category";
 import Pagination from "../Pagination/Pagination";
 import Link from "next/link";
 
-const CategoryView = ({ categoryList, catPageNum }) => {
-  const CATEGORIES_PER_PAGE = catPageNum;
+const CategoryView = ({ categoryList }) => {
+  const CATEGORIES_PER_PAGE = 12;
   const [pageNumber, setPageNumber] = useState(1);
   const CATEGORIES = categoryList;
   const CATEGORY_CARDS = [...Array(CATEGORIES.length).keys()].map((item) => {
@@ -26,7 +26,7 @@ const CategoryView = ({ categoryList, catPageNum }) => {
   return (
     <section className="py-6">
       <div className="container mx-auto">
-        <div className="grid gap-5 lg:grid-cols-4 lg:grid-rows-3 md:grid-cols-3 md:grid-rows-4 grid-cols-1 py-10">
+        <div className="grid md:gap-5 sm:gap-2 lg:grid-cols-4 lg:grid-rows-3 md:grid-cols-3 md:grid-rows-4 grid-cols-2 grid-rows-6 lg:px-10 py-10">
           {categories}
         </div>
         <Pagination
