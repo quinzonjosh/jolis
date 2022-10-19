@@ -1,12 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link';
 
-const Category = ({imageLink, categoryName}) =>{
+const Category = ({imageLink, categoryName, slug}) =>{
     return (
-        <Link href={{
-            pathname: "/productListing",
-            query: {categoryName}
-        }}>
+        <Link href={`/categories/${slug}`}>
             <div className="category_container text-center flex flex-col items-center hover:font-bold hover:text-blue-400">
                 <div className='relative lg:w-80 lg:h-80 md:w-56 md:h-56 w-40 h-40'>
                     <Image layout='fill' priority={true} src={imageLink} alt="category image" />
