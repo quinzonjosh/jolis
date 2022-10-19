@@ -9,8 +9,12 @@ const Navbar = () => {
 
   return (
     <section className="flex justify-center w-full gap-2 py-5 items-center border-b-2 border-black">
-      <span className="text-3xl font-bold ">JOLI&apos;S</span>
-
+      <Link href="/">
+        <span className="text-4xl font-bold cursor-pointer">
+          <a>JOLI&apos;S</a>
+        </span>
+      </Link>
+      {/* search bar */}
       <div className="flex w-[60%]">
         <input
           type="search"
@@ -36,7 +40,7 @@ const Navbar = () => {
       <div
         className={`${hideNav ? "-left-full" : "left-0"} ${styles.nav_links}`}
       >
-        <ul className="flex flex-col md:flex-row gap-2 p-5">
+        <ul className="flex flex-col md:flex-row gap-2 p-5 text-xl">
           <button
             className="md:hidden block self-end"
             onClick={() => {
@@ -69,4 +73,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
