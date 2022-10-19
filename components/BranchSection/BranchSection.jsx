@@ -39,7 +39,7 @@ const BranchInfo = ({
 const BranchMap = ({ mapFirst }) => {
   return (
     <div
-      className={`relative w-full md:w-2/5 h-96 ${
+      className={`relative lg:w-2/5 lg:h-96 md:w-2/4 md:h-72 w-full h-56 ${
         mapFirst ? "order-2 md:order-1" : "order-2"
       }`}
     >
