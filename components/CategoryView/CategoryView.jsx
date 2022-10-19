@@ -3,8 +3,8 @@ import Category from "../Category/Category";
 import Pagination from "../Pagination/Pagination";
 import Link from "next/link";
 
-const CategoryView = ({ categoryList }) => {
-  const CATEGORIES_PER_PAGE = 12;
+const CategoryView = ({ categoryList, catPageNum }) => {
+  const CATEGORIES_PER_PAGE = catPageNum;
   const [pageNumber, setPageNumber] = useState(1);
   const CATEGORIES = categoryList;
   const CATEGORY_CARDS = [...Array(CATEGORIES.length).keys()].map((item) => {
