@@ -4,7 +4,7 @@ import Layout from "../components/Layout/Layout";
 import Link from "next/link";
 import { GrSearch } from "react-icons/gr";
 
-export default function Home() {
+export default function ProductListing() {
   return (
     <Layout className="w-full">
       <section className="text-4xl font-bold text-center p-10 border-b border-black">
