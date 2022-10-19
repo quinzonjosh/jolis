@@ -15,11 +15,11 @@ export default function ProductListing() {
         {data.categoryName != null ? data.categoryName : "Product Listing"}
       </section>
 
-      <section className="flex flex-row border-b border-black py-10">
+      <section className="flex py-10">
         {/* left panel */}
-        <div className="w-[25%] flex flex-col px-10 gap-2">
-          {/* Search bar */}
-          <div className="flex">
+        <div className="md:w-[20%]">
+          {/* search bar */}
+          <div className="flex md:w-[350px] m-auto mb-4">
             <input
               type="search"
               name="Search here"
@@ -30,10 +30,10 @@ export default function ProductListing() {
               <GrSearch />
             </button>
           </div>
-          {/* browse type */}
-          <div className="w-[100%] border border-black p-2">
-            <div className="text-xl">Browse Type</div>
-            <ul className="flex flex-col gap-1">
+          {/* browse type list */}
+          <div className="md:w-[350px] m-auto border border-black p-2 mb-4">
+            <div className="text-3xl pb-2">Browse Type</div>
+            <ul className="flex flex-col gap-2 text-2xl">
               <li>
                 <Link href="/">
                   <a>All products</a>
@@ -66,18 +66,18 @@ export default function ProductListing() {
               </li>
             </ul>
           </div>
-          {/* browse type */}
-          <div className="w-[100%] border border-black p-2">
-            <div className="text-xl">Browse Brands</div>
-            <ul className="flex flex-col gap-1">
+          {/* browse brand list */}
+          <div className="md:w-[350px] m-auto border border-black p-2 mb-4">
+            <div className="text-3xl pb-2">Browse Brand</div>
+            <ul className="flex flex-col gap-2 text-2xl">
               <li>
                 <Link href="/">
-                  <a>All Brands</a>
+                  <a>All brands</a>
                 </Link>
               </li>
               <li>
                 <Link href="/">
-                  <a>Mongol</a>
+                  <a>mongol</a>
                 </Link>
               </li>
               <li>
@@ -87,7 +87,7 @@ export default function ProductListing() {
               </li>
               <li>
                 <Link href="/">
-                  <a>Best Buy</a>
+                  <a>Best-Buy</a>
                 </Link>
               </li>
               <li>
@@ -102,11 +102,8 @@ export default function ProductListing() {
               </li>
             </ul>
           </div>
-        </div>
-
-        {/* All products grid */}
-        <div className="w-[70%]">
-          <div className="font-bold text-3xl">All Products</div>
+          {/* right panel */}
+          <div></div>
         </div>
       </section>
     </Layout>
