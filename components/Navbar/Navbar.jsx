@@ -53,17 +53,17 @@ const Navbar = () => {
           </button>
           <li>
             <Link href="/">
-              <a>Home</a>
+              <a className="lg:text-xl md:text-base text:xl relative lg:top-0 md:top-6 top-0 lg:right-0 md:right-4 right-0">Home</a>
             </Link>
           </li>
           <li>
             <Link href="/categories">
-              <a>Products</a>
+              <a className="lg:text-xl md:text-base text:xl relative lg:top-0 md:top-6 top-0 lg:right-0 md:right-4 right-0">Products</a>
             </Link>
           </li>
           <li>
             <Link href="/branches">
-              <a>Get in touch</a>
+              <a className="lg:text-xl md:text-base text:xl relative lg:right-0 md:right-4 right-0">Get in touch</a>
             </Link>
           </li>
         </ul>
