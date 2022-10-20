@@ -5,14 +5,19 @@ import Link from "next/link";
 import { GrSearch } from "react-icons/gr";
 import { useRouter } from "next/router";
 import categories from "../../data/categories.json";
-export default function ProductListing() {
-  const router = useRouter();
-  const data = router.query;
+import Product from "../../components/Product/Product";
+import productsList from "../../data/products.json";
 
+export default function ProductListing({ products }) {
+  const router = useRouter();
+  const category = router.query;
+  console.log(products);
   return (
     <Layout className="w-full">
       <section className="text-4xl font-bold text-center p-10 border-b border-black">
-        {data["productListing"] != null ? data["productListing"] : "Product Listing"}
+        {category["productListing"] != null
+          ? category["productListing"]
+          : "Product Listing"}
       </section>
 
       <section className="flex flex-row border-b border-black py-10">
@@ -35,34 +40,22 @@ export default function ProductListing() {
             <div className="text-xl">Browse Type</div>
             <ul className="flex flex-col gap-1">
               <li>
-                <Link href="/">
-                  <a>All products</a>
-                </Link>
+                  <button>All products</button>
               </li>
               <li>
-                <Link href="/">
-                  <a>Architecture</a>
-                </Link>
+                  <button>Architecture</button>
               </li>
               <li>
-                <Link href="/">
-                  <a>Drawing Supplies</a>
-                </Link>
+                  <button>Drawing Supplies</button>
               </li>
               <li>
-                <Link href="/">
-                  <a>School Supplies</a>
-                </Link>
+                  <button>School Supplies</button>
               </li>
               <li>
-                <Link href="/">
-                  <a>Tables</a>
-                </Link>
+                  <button>Tables</button>
               </li>
               <li>
-                <Link href="/">
-                  <a>Books</a>
-                </Link>
+                  <button>Books</button>
               </li>
             </ul>
           </div>
@@ -71,34 +64,22 @@ export default function ProductListing() {
             <div className="text-xl">Browse Brands</div>
             <ul className="flex flex-col gap-1">
               <li>
-                <Link href="/">
-                  <a>All Brands</a>
-                </Link>
+                  <button>All Brands</button>
               </li>
               <li>
-                <Link href="/">
-                  <a>Mongol</a>
-                </Link>
+                  <button>Mongol</button>
               </li>
               <li>
-                <Link href="/">
-                  <a>Faber Castell</a>
-                </Link>
+                  <button>Faber Castell</button>
               </li>
               <li>
-                <Link href="/">
-                  <a>Best Buy</a>
-                </Link>
+                  <button>Best Buy</button>
               </li>
               <li>
-                <Link href="/">
-                  <a>G-Tec</a>
-                </Link>
+                  <button>G-Tec</button>
               </li>
               <li>
-                <Link href="/">
-                  <a>Muji</a>
-                </Link>
+                  <button>Muji</button>
               </li>
             </ul>
           </div>
@@ -106,19 +87,45 @@ export default function ProductListing() {
 
         {/* All products grid */}
         <div className="w-[70%]">
-          <div className="font-bold text-3xl">All Products</div>
+          <div>
+            <h2 className="font-bold text-3xl">All Products</h2>
+            <div className="grid md:gap-5 sm:gap-2 md:grid-cols-3 grid-cols-2 lg:px-10 py-10">
+              {products.map((product, index) => {
+                return (
+                  <Product
+                    key={index}
+                    image={product.image}
+                    name={product.name}
+                    category={product.category}
+                    espana_stock={product.espana_stock}
+                    pnoval_stock={product.pnoval_stock}
+                  />
+                );
+              })}
+            </div>
+          </div>
         </div>
       </section>
     </Layout>
   );
 }
 
-export function getStaticPath(){
+export function getStaticPaths() {
   const paths = categories.map((item) => {
-    return (
-      {params: {productListing:item.slug}}
-    )
-  })
-  console.log(paths)
-  return {paths, fallback: false}
+    return { params: { productListing: item.slug } };
+  });
+  return { paths, fallback: false };
+}
+
+export function getStaticProps(context) {
+  const productinCategory = productsList.filter((item) => {
+    const category = item.category.toLowerCase().split(" ").join("-");
+    return category == context.params.productListing;
+  });
+
+  return {
+    props: {
+      products: productinCategory,
+    },
+  };
 }
