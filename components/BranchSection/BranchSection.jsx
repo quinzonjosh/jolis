@@ -13,9 +13,9 @@ const BranchInfo = ({
         mapFirst ? "order-2 md:w-2/5" : "order-1 md:1/2"
       }`}
     >
-      <p className="text-2xl font-bold mb-10">{branchName}</p>
-      <p className="text-xl font-bold mb-10">Reach Us</p>
-      <span className="mb-10">
+      <p className="text-2xl font-bold mb-10 lg:mx-8">{branchName}</p>
+      <p className="text-xl font-bold mb-10 lg:mx-8">Reach Us</p>
+      <span className="mb-10 lg:mx-8">
         <p className="float-left mr-12">Facebook</p>
         <a
           href={facebookLink}
@@ -24,11 +24,11 @@ const BranchInfo = ({
           {facebookLink}
         </a>
       </span>
-      <p className="mb-10">
+      <p className="mb-10 lg:mx-8">
         <a className="float-left mr-20">Phone</a>
         <a className="float-left relative right-2">{phoneNumber}</a>
       </p>
-      <span className="mb-10">
+      <span className="mb-10 lg:mx-8">
         <a className="float-left mr-14">Address</a>
         <a className="w-2/4 break-words float-left">{address}</a>
       </span>
@@ -39,7 +39,7 @@ const BranchInfo = ({
 const BranchMap = ({ mapFirst }) => {
   return (
     <div
-      className={`relative w-full md:w-2/5 h-96 ${
+      className={`relative w-full md:w-2/5 h-96 lg:mx-8 ${
         mapFirst ? "order-2 md:order-1" : "order-2"
       }`}
     >
