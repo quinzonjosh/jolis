@@ -6,12 +6,12 @@ import Link from "next/link";
 const CategoryView = ({ categoryList }) => {
   const CATEGORIES_PER_PAGE = 12;
   const [pageNumber, setPageNumber] = useState(1);
-  const CATEGORIES = categoryList;
-  const CATEGORY_CARDS = [...Array(CATEGORIES.length).keys()].map((item) => {
+  const CATEGORY_CARDS = categoryList.map((item) => {
     return (
-      <Link href="/categories" key={item}>
-        <Category categoryName={CATEGORIES[item]} />
+      <Link href="/categories" key={item.name}>
+        <Category categoryName={item.name} imageLink={item.image} slug={item.slug} />
       </Link>
+
     );
   });
   const [categories, setCategories] = useState([]);
