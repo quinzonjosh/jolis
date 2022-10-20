@@ -1,0 +1,4 @@
+.nav_links{
+    @apply absolute w-full h-full top-0 bg-white z-10 transition-all md:z-0 md:w-[20%] md:bg-none md:static;
+}
+

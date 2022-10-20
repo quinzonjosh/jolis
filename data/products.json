@@ -1,0 +1,133 @@
+[
+    {   
+        "image": "/images/Acrylic_Color_Books/Monet_Acrylic_Colour_Book_A3.jpg",
+        "name": "Monet Acrylic Colour Book A3",
+        "category": "Acrylic Color Books",
+        "espana_stock": "In stock",
+        "pnoval_stock": "Out of stock",
+        "featured": true
+    },
+    {
+
+        "image": "/images/Acrylic_Color_Books/Monet_Acrylic_Colour_Book_A4.jpg",
+        "name": "Monet Acrylic Colour Book A4",
+        "category": "Acrylic Color Books",
+        "espana_stock": "Out of stock",
+        "pnoval_stock": "Out of stock",
+        "featured": false
+    },
+    {
+
+        "image": "/images/sample.jpg",
+        "name": "Book X",
+        "category": "Books",
+        "espana_stock": "In stock",
+        "pnoval_stock": "Out of stock",
+        "featured": true
+    },
+    {
+
+        "image": "/images/Pencils/Derwent_Tinted_Charcoal_12.jpg",
+        "name": "Derwent Tinted Charcoal 12",
+        "category": "Pencils",
+        "espana_stock": "Out of stock",
+        "pnoval_stock": "Out of stock",
+        "featured": true
+    },
+    {   
+
+        "image": "/images/Notebooks/Cattleya_Filler(medium).jpg",
+        "name": "Cattleya Filler (Medium)",
+        "category": "Notebooks",
+        "espana_stock": "In stock",
+        "pnoval_stock": "Out of stock",
+        "featured": false
+    },
+    {
+   
+        "image": "/images/Notebooks/Cattleya_Filler(small).jpg",
+        "name": "Cattleya Filler (Small)",
+        "category": "Notebooks",
+        "espana_stock": "Out of stock",
+        "pnoval_stock": "Out of stock",
+        "featured": true
+    },
+    {
+
+        "image": "/images/Notebooks/Cattleya_Filler(Big).jpg",
+        "name": "Cattleya Filler (Big)",
+        "category": "Notebooks",
+        "espana_stock": "In stock",
+        "pnoval_stock": "Out of stock",
+        "featured": false
+    },
+    {
+  
+        "image": "/images/Notebooks/Notebook1.jpg",
+        "name": "Notebook 1",
+        "category": "Notebooks",
+        "espana_stock": "Out of stock",
+        "pnoval_stock": "Out of stock",
+        "featured": true
+    },
+    {
+  
+        "image": "/images/Notebooks/Notebook2.jpg",
+        "name": "Notebook 2",
+        "category": "Notebooks",
+        "espana_stock": "In stock",
+        "pnoval_stock": "Out of stock",
+        "featured": true
+    },
+    {
+  
+        "image": "/images/Notebooks/Notebook3.jpg",
+        "name": "Notebook 3",
+        "category": "Notebooks",
+        "espana_stock": "Out of stock",
+        "pnoval_stock": "In Stock",
+        "featured": false
+    },
+    {
+  
+        "image": "/images/Notebooks/Steno_Type_notebook.jpg",
+        "name": "Steno Type notebook",
+        "category": "Notebooks",
+        "espana_stock": "Out of Stock",
+        "pnoval_stock": "Out of Stock",
+        "featured": true
+    },
+    {
+  
+        "image": "/images/Brushes/Giorgione_Detailing_Brush1.jpg",
+        "name": "Giorgione Detailing Brush 1",
+        "category": "Brushes",
+        "espana_stock": "Out of Stock",
+        "pnoval_stock": "In Stock",
+        "featured": true
+    },
+    {
+  
+        "image": "/images/Brushes/Giorgione_Detailing_Brush2.jpg",
+        "name": "Giorgione Detailing Brush 2",
+        "category": "Brushes",
+        "espana_stock": "In Stock",
+        "pnoval_stock": "Out of Stock",
+        "featured": false
+        
+    },
+    {
+  
+        "image": "/images/Brushes/Giorgione_Detailing_Brush3.jpg",
+        "name": "Giorgione Detailing Brush 3",
+        "category": "Brushes",
+        "espana_stock": "In Stock",
+        "pnoval_stock": "In Stock",
+        "featured": false
+
+    }
+
+    
+    
+]
+

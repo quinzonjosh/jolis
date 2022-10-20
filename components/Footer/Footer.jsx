@@ -1,24 +1,67 @@
+import Link from "next/link";
+import { FaFacebookSquare } from "react-icons/fa";
+
 const Footer = () => {
   return (
-    <div>
-      <h1>JOLI'S</h1>
-        <div className="overview_container">
-          Overview
-          <a href="">Home</a>
-          <a href="">Products</a>
-          <a href="">Our branches</a>
-          <a href="">Contact us</a>
-        </div>
-        <div className="our_products_container">
-          <a href="">Architecture</a>
-          <a href="">School Supplies</a>
-          <a href="">Drawing Supplies</a>
-          <a href="">Tables</a>
-        </div>
-        <div className="footer_contact_us">
-          <img src="" alt="facebook logo"/>
-        </div>
-    </div>
+    <section className="flex md:flex-row flex-col justify-evenly w-full items-center text-center p-10 gap-2 border-t-2 border-black">
+      <div className="font-bold text-[2rem] md:text-[3rem]">JOLI&apos;S</div>
+
+      <div className="">
+        <span className="font-bold">Overview</span>
+        <ul>
+          <li>
+            <Link href="/">
+              <a>Home</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/categories">
+              <a>Products</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/branches">
+              <a>Our branches</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/branches">
+              <a>Contact us</a>
+            </Link>
+          </li>
+        </ul>
+      </div>
+
+      <div className="">
+        <span className="font-bold">Our products</span>
+        <ul>
+          <li>
+            <Link href="">
+              <a>Architecture</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="">
+              <a>School supplies</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="">
+              <a>Drawing supplies</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="">
+              <a>Tables</a>
+            </Link>
+          </li>
+        </ul>
+      </div>
+      <div className="">
+        <span className="font-bold">Contact us</span>
+        <FaFacebookSquare />
+      </div>
+    </section>
   );
 };
 
