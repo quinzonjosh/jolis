@@ -59,7 +59,13 @@ const Footer = () => {
       </div>
       <div className="">
         <span className="font-bold">Contact us</span>
-        <FaFacebookSquare />
+        <div className="md:flex-none md:justify-start flex justify-center">
+          <Link href="https://www.facebook.com/jolis.espana">
+            <a>
+              <FaFacebookSquare />
+            </a>
+          </Link>
+        </div>
       </div>
     </section>
   );

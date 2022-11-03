@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <section className="flex justify-center w-full gap-2 py-5 items-center border-b-2 border-black">
       <Link href="/">
-        <span className="text-4xl font-bold cursor-pointer">
+        <span className="md:text-4xl text-2xl font-bold cursor-pointer">
           <a>JOLI&apos;S</a>
         </span>
       </Link>
@@ -53,17 +53,23 @@ const Navbar = () => {
           </button>
           <li>
             <Link href="/">
-              <a className="lg:text-xl md:text-base text:xl relative lg:top-0 md:top-6 top-0 lg:right-0 md:right-4 right-0">Home</a>
+              <a className="lg:text-xl md:text-base text:xl relative lg:top-0 md:top-6 top-0 lg:right-0 md:right-4 right-0">
+                Home
+              </a>
             </Link>
           </li>
           <li>
             <Link href="/categories">
-              <a className="lg:text-xl md:text-base text:xl relative lg:top-0 md:top-6 top-0 lg:right-0 md:right-4 right-0">Products</a>
+              <a className="lg:text-xl md:text-base text:xl relative lg:top-0 md:top-6 top-0 lg:right-0 md:right-4 right-0">
+                Products
+              </a>
             </Link>
           </li>
           <li>
             <Link href="/branches">
-              <a className="lg:text-xl md:text-base text:xl relative lg:right-0 md:right-4 right-0">Get in touch</a>
+              <a className="lg:text-xl md:text-base text:xl relative lg:right-0 md:right-4 right-0">
+                Get in touch
+              </a>
             </Link>
           </li>
         </ul>
