@@ -12,7 +12,7 @@ const branches = () => {
       <Banner title="Get in touch with us" />
 
       <BranchSection
-        branchName="Espana Branch"
+        branchName="España Branch"
         facebookLink="/jolis.espana"
         address="1567-69 España Blvd. Sampaloc Mla. 1000 Manila, Philippines"
         mapFirst={false}

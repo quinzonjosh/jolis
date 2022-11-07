@@ -17,40 +17,40 @@ const BranchInfo = ({
         mapFirst ? "order-2 md:w-2/5" : "order-1 md:1/2"
       }`}
     >
-      <p className="text-2xl font-bold mb-5 lg:mx-8">{branchName}</p>
-      <p className="text-xl font-bold mb-5 lg:mx-8">Reach Us</p>
+      <p className="text-2xl font-bold mb-5 lg:mx-8 text-[#555FB9]">{branchName}</p>
+      <p className="text-xl font-bold mb-5 lg:mx-8 text-[#474B60]">Reach Us</p>
       <span className="mb-5 lg:mx-8">
-        <p className="float-left mr-12">Facebook:</p>
+        <p className="float-left mr-12 text-[#474B60]">Facebook:</p>
         <a
           href={facebookLink}
-          className="w-1/2 md:w-2/4 hover:text-blue-400 break-words float-left relative left-12"
+          className="w-1/2 md:w-2/4 hover:text-blue-400 break-words float-left relative left-12 text-[#474B60]"
         >
           {facebookLink}
         </a>
       </span>
       <p className="mb-5 lg:mx-8">
-        <a className="float-left mr-20">Mobile:</a>
-        <a className="float-left relative left-8">{mobile}</a>
+        <a className="float-left mr-20 text-[#474B60]">Mobile:</a>
+        <a className="float-left relative left-8 text-[#474B60]">{mobile}</a>
       </p>
       <p className="mb-5 lg:mx-8">
-        <a className="float-left mr-20">Tel:</a>
-        <a className="float-left relative left-16">{tel}</a>
+        <a className="float-left mr-20 text-[#474B60]">Tel:</a>
+        <a className="float-left relative left-16 text-[#474B60]">{tel}</a>
       </p>
       <p className="mb-5 lg:mx-8">
-        <a className="float-left mr-20">Printing:</a>
-        <a className="float-left relative left-7">{printing}</a>
+        <a className="float-left mr-20 text-[#474B60]">Printing:</a>
+        <a className="float-left relative left-7 text-[#474B60]">{printing}</a>
       </p>
       <p className="mb-5 lg:mx-8">
-        <a className="float-left mr-20">Email:</a>
-        <a className="float-left relative left-12">{email}</a>
+        <a className="float-left mr-20 text-[#474B60]">Email:</a>
+        <a className="float-left relative left-12 text-[#474B60]">{email}</a>
       </p>
       <span className="mb-5 lg:mx-8">
-        <a className="float-left mr-14">Address:</a>
-        <a className="w-2/4 break-words float-left relative left-12">{address}</a>
+        <a className="float-left mr-14 text-[#474B60]">Address:</a>
+        <a className="w-2/4 break-words float-left relative left-12 text-[#474B60]">{address}</a>
       </span>
       <span className="mb-5 lg:mx-8">
-        <a className="float-left mr-14">Opening hours:</a>
-        <a className="w-2/5 break-words float-left">{hours}</a>
+        <a className="float-left mr-14 text-[#474B60]">Opening hours:</a>
+        <a className="w-2/5 break-words float-left text-[#474B60]">{hours}</a>
       </span>
     </div>
   );
@@ -81,7 +81,7 @@ const BranchSection = ({
   mapEmbed
 }) => {
   return (
-    <section className={`${mapFirst ? "bg-gray-200" : "border-b-2 border-black"}`}>
+    <section className={`${mapFirst ? "bg-[#EEEFF8]" : "border-b-2 border-black"}`}>
       <div className="container px-10 md:px-0 mx-auto py-10 flex flex-col items-center md:flex-row md:items-start justify-between">
         <BranchInfo
           branchName={branchName}
