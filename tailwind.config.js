@@ -7,7 +7,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "jolis-blue": "#5219f",
+        "primary": "#474B60",
+        "secondary": "#555FB9",
+        "tertiary": "#757DC6",
+        "white-accent":{
+          "base": "#FFFFFF",
+          "ghost": "#EEEFF8",
+          "lavender": "#DDDFF1"
+        },
+        "success": "#32B478",
+        "error": "#F05247"
       },
     },
   },
