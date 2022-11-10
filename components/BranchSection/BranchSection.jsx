@@ -14,7 +14,7 @@ const BranchInfo = ({
   return (
     <div
       className={`flex flex-col   ${
-        mapFirst ? "order-2 md:w-2/5" : "order-1 md:1/2"
+        mapFirst ? "order-2 md:w-2/5 relative md:right-10 right-0" : "order-1 md:1/2"
       }`}
     >
       <p className="text-2xl font-bold mb-5 lg:mx-8 text-[#555FB9]">{branchName}</p>
@@ -34,7 +34,7 @@ const BranchInfo = ({
       </p>
       <p className="mb-5 lg:mx-8">
         <a className="float-left mr-20 text-[#474B60]">Tel:</a>
-        <a className="float-left relative left-16 text-[#474B60]">{tel}</a>
+        <a className="float-left relative left-16 break-words w-2/4 text-[#474B60]">{tel}</a>
       </p>
       <p className="mb-5 lg:mx-8">
         <a className="float-left mr-20 text-[#474B60]">Printing:</a>
@@ -42,7 +42,7 @@ const BranchInfo = ({
       </p>
       <p className="mb-5 lg:mx-8">
         <a className="float-left mr-20 text-[#474B60]">Email:</a>
-        <a className="float-left relative left-12 text-[#474B60]">{email}</a>
+        <a className="float-left relative left-12 break-words w-2/4 text-[#474B60]">{email}</a>
       </p>
       <span className="mb-5 lg:mx-8">
         <a className="float-left mr-14 text-[#474B60]">Address:</a>
@@ -60,7 +60,7 @@ const BranchMap = ({ mapFirst, mapEmbed }) => {
   return (
     <div
       className={`relative lg:md:w-2/5 md:md:w-2/4 w-full h-96 lg:mx-8 ${
-        mapFirst ? "order-2 md:order-1" : "order-2"
+        mapFirst ? "order-2 md:order-1" : "order-2 lg:-ml-0 md:-ml-20 -ml-0"
       }`}
     >
       <div dangerouslySetInnerHTML={mapEmbed}/>
