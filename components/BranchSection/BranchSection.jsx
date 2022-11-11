@@ -17,40 +17,40 @@ const BranchInfo = ({
         mapFirst ? "order-2 md:w-2/5 relative md:right-10 right-0" : "order-1 md:1/2"
       }`}
     >
-      <p className="text-2xl font-bold mb-5 lg:mx-8 text-secondary">{branchName}</p>
-      <p className="text-xl font-bold mb-5 lg:mx-8 text-primary">Reach Us</p>
+      <p className="text-3xl font-bold mb-5 lg:mx-8 text-secondary font-['Work_sans']">{branchName}</p>
+      <p className="text-2xl font-bold mb-5 lg:mx-8 text-primary font-['Work_sans']">Reach Us</p>
       <span className="mb-5 lg:mx-8">
-        <p className="float-left mr-12 text-primary">Facebook:</p>
+        <p className="float-left mr-12 text-primary font-['merriweather']">Facebook:</p>
         <a
           href={facebookLink}
-          className="w-1/2 md:w-2/4 hover:text-blue-400 break-words float-left relative left-12 text-primary"
+          className="w-1/2 md:w-2/4 hover:text-blue-400 break-words float-left relative left-11 text-primary font-['merriweather']"
         >
           {facebookLink}
         </a>
       </span>
       <p className="mb-5 lg:mx-8">
-        <a className="float-left mr-20 text-primary">Mobile:</a>
-        <a className="float-left relative left-8 text-primary">{mobile}</a>
+        <a className="float-left mr-20 text-primary font-['merriweather']">Mobile:</a>
+        <a className="float-left relative left-7 text-primary font-['merriweather']">{mobile}</a>
       </p>
       <p className="mb-5 lg:mx-8">
-        <a className="float-left mr-20 text-primary">Tel:</a>
-        <a className="float-left relative left-16 break-words w-2/4 text-primary">{tel}</a>
+        <a className="float-left mr-20 text-primary font-['merriweather']">Tel:</a>
+        <a className="float-left relative left-14 break-words w-2/4 text-primary font-['merriweather']">{tel}</a>
       </p>
       <p className="mb-5 lg:mx-8">
-        <a className="float-left mr-20 text-primary">Printing:</a>
-        <a className="float-left relative left-7 text-primary">{printing}</a>
+        <a className="float-left mr-20 text-primary font-['merriweather']">Printing:</a>
+        <a className="float-left relative left-6 text-primary font-['merriweather']">{printing}</a>
       </p>
       <p className="mb-5 lg:mx-8">
-        <a className="float-left mr-20 text-primary">Email:</a>
-        <a className="float-left relative left-12 break-words w-2/4 text-primary">{email}</a>
+        <a className="float-left mr-20 text-primary font-['merriweather']">Email:</a>
+        <a className="float-left relative left-10 break-words w-2/4 text-primary font-['merriweather']">{email}</a>
       </p>
       <span className="mb-5 lg:mx-8">
-        <a className="float-left mr-14 text-primary">Address:</a>
-        <a className="w-2/4 break-words float-left relative left-12 text-primary">{address}</a>
+        <a className="float-left mr-14 text-primary font-['merriweather']">Address:</a>
+        <a className="lg:w-2/4 md:w-2/5 w-2/4 break-words float-left relative left-12 text-primary font-['merriweather']">{address}</a>
       </span>
       <span className="mb-5 lg:mx-8">
-        <a className="float-left mr-14 text-primary">Opening hours:</a>
-        <a className="w-2/5 break-words float-left text-primary">{hours}</a>
+        <a className="float-left mr-16 text-primary font-['merriweather']">Opening hours:</a>
+        <a className="w-2/5 break-words float-left text-primary font-['merriweather']">{hours}</a>
       </span>
     </div>
   );
