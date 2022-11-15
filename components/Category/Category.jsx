@@ -14,7 +14,7 @@ const Category = ({ imageLink, categoryName, slug }) => {
             alt="category image"
           />
         </div>
-        <p className="mb-3 text-xl font-bold text-secondary font-['Work_sans']">{categoryName}</p>
+        <p className="mb-3 text-xl font-bold text-secondary">{categoryName}</p>
       </div>
     </Link>
   );
