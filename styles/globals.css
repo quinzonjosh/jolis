@@ -17,10 +17,10 @@ a {
 }
 
 #nprogress .bar {
-  background-color: theme("colors.secondary") !important;
+  background-color: theme("colors.tertiary") !important;
 }
 
 #nprogress .spinner-icon {
-  border-top-color: theme("colors.secondary");
-  border-left-color: theme("colors.secondary");
+  border-top-color: theme("colors.tertiary");
+  border-left-color: theme("colors.tertiary");
 }
