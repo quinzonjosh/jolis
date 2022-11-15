@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect } from "react";
+import useScrollPosition from "../../hooks/useScrollPosition";
 
 import styles from "./Navbar.module.css";
 
@@ -10,18 +10,7 @@ import { AiOutlineClose } from "react-icons/ai";
 
 const Navbar = ({ page }) => {
   const [hideNav, setHideNav] = useState(true);
-  const [navStyle, setNavStyle] = useState("initial");
-
-  const handleScroll = () => {
-    const scrollY = window.scrollY;
-    setNavStyle(scrollY > 0 ? "scroll" : "initial");
-  };
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const scrollPosition = useScrollPosition();
 
   const links = [
     {
@@ -39,7 +28,10 @@ const Navbar = ({ page }) => {
   ];
 
   return (
-    <header className={styles.navbar} data-style={navStyle}>
+    <header
+      className={styles.navbar}
+      data-style={scrollPosition > 0 ? "scroll" : "initial"}
+    >
       <div className="flex justify-center w-full gap-6 md:gap-0 py-5 items-center">
         <Link href="/">
           <a className={styles.nav_logo}>JOLI&apos;S</a>
