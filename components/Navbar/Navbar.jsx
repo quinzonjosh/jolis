@@ -41,7 +41,7 @@ const Navbar = ({ page }) => {
         </button>
       </div>
       <button
-        className="md:hidden block"
+        className="md:hidden block text-primary"
         onClick={() => {
           setHideNav((hideNav) => {
             return !hideNav;
@@ -56,7 +56,7 @@ const Navbar = ({ page }) => {
       >
         <ul className="flex flex-col md:flex-row gap-6 p-5 ">
           <button
-            className="md:hidden block self-end"
+            className="md:hidden block self-end text-primary"
             onClick={() => {
               setHideNav((hideNav) => {
                 return !hideNav;

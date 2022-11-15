@@ -19,31 +19,29 @@
 }
 
 .nav_link::after {
+  @apply bg-secondary w-0;
   content: "";
   display: block;
-  background-color: theme(colors.secondary);
-  height: 3px;
+  height: 2px;
   opacity: 0;
-  width: 0%;
   transition: ease all 0.3s;
 }
 
 .nav_link:hover::after {
-  width: 100%;
+  @apply lg:w-full;
   opacity: 1;
   left: 0;
 }
 
 .nav_active {
-  @apply text-secondary;
+  @apply text-secondary border-secondary border-b-2 lg:border-0;
 }
 
 .nav_active::after {
+  @apply bg-secondary lg:w-full;
   content: "";
   display: block;
-  background-color: theme(colors.secondary);
-  height: 3px;
-  width: 100%;
+  height: 2px;
   opacity: 1;
   transition: ease all 0.5s;
 }
