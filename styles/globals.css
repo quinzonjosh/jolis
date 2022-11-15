@@ -15,3 +15,12 @@ p,
 a {
   font-family: theme("fontFamily.base");
 }
+
+#nprogress .bar {
+  background-color: theme("colors.tertiary") !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: theme("colors.tertiary");
+  border-left-color: theme("colors.tertiary");
+}
