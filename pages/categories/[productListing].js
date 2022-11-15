@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import categories from "../../data/categories.json";
 import Product from "../../components/Product/Product";
 import productsList from "../../data/products.json";
+import Banner from "../../components/Banner/Banner";
 
 export default function ProductListing({ products }) {
   const router = useRouter();
@@ -15,11 +16,9 @@ export default function ProductListing({ products }) {
   console.log(products);
   return (
     <Layout className="w-full">
-      <section className="text-4xl font-bold text-center p-10 border-b border-black">
-        {category["productListing"] != null
+      <Banner title={category["productListing"] != null
           ? category["productListing"]
-          : "Product Listing"}
-      </section>
+          : "Product Listing"}/>
 
       <section className="flex flex-col md:flex-row border-b border-black py-10">
         {/* left panel */}
