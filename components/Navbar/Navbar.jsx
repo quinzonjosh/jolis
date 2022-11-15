@@ -8,24 +8,11 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 
+import links from "../../data/navLinks.json";
+
 const Navbar = ({ page }) => {
   const [hideNav, setHideNav] = useState(true);
   const scrollPosition = useScrollPosition();
-
-  const links = [
-    {
-      name: "Home",
-      link: "/",
-    },
-    {
-      name: "Products",
-      link: "/categories",
-    },
-    {
-      name: "Get in touch",
-      link: "/branches",
-    },
-  ];
 
   return (
     <header
