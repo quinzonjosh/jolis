@@ -6,6 +6,20 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 const Navbar = () => {
   const [hideNav, setHideNav] = useState(true);
+  const links = [
+    {
+      name: "Home",
+      link: "/",
+    },
+    {
+      name: "Products",
+      link: "/categories",
+    },
+    {
+      name: "Get in touch",
+      link: "/branches",
+    },
+  ];
 
   return (
     <header className="flex justify-center w-full gap-4 py-5 items-center border-b-2 border-black">
@@ -40,7 +54,7 @@ const Navbar = () => {
       <nav
         className={`${hideNav ? "-left-full" : "left-0"} ${styles.nav_links}`}
       >
-        <ul className="flex flex-col md:flex-row gap-2 p-5">
+        <ul className="flex flex-col md:flex-row gap-6 p-5 ">
           <button
             className="md:hidden block self-end"
             onClick={() => {
@@ -51,27 +65,15 @@ const Navbar = () => {
           >
             <AiOutlineClose />
           </button>
-          <li>
-            <Link href="/">
-              <a className="text-base  relative lg:top-0 md:top-6 top-0 lg:right-0 md:right-4 right-0">
-                Home
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/categories">
-              <a className="text-base relative lg:top-0 md:top-6 top-0 lg:right-0 md:right-4 right-0">
-                Products
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/branches">
-              <a className="text-base relative lg:right-0 md:right-4 right-0">
-                Get in touch
-              </a>
-            </Link>
-          </li>
+          {links.map(({ name, link }) => {
+            return (
+              <li key={name}>
+                <Link href={link}>
+                  <a className={styles.nav_link}>{name}</a>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </header>
