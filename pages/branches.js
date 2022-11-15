@@ -16,7 +16,7 @@ const branches = () => {
 
       <BranchSection
         branchName="España Branch"
-        facebookLink="/jolis.espana"
+        facebookLink="https://www.facebook.com/jolis.espana"
         address="1567-69 España Blvd. Sampaloc Mla. 1000 Manila, Philippines"
         mapFirst={false}
         mapEmbed={espanaBranch}
@@ -24,7 +24,7 @@ const branches = () => {
 
       <BranchSection
         branchName="P.Noval Branch"
-        facebookLink="/jolis.pnoval"
+        facebookLink="https://www.facebook.com/jolis.pnoval"
         address="1567-69 España Blvd. Sampaloc Mla. 1000 Manila, Philippines"
         mapFirst={true}
         mapEmbed={espanaBranch}

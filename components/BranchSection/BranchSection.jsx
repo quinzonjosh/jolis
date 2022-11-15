@@ -25,7 +25,7 @@ const BranchInfo = ({
           href={facebookLink}
           className="w-1/2 md:w-2/4 hover:text-blue-400 break-words float-left relative left-10 text-primary"
         >
-          {facebookLink}
+          {facebookLink.replace("https://www.facebook.com", "")}
         </a>
       </span>
       <p className="mb-5 lg:mx-8">
