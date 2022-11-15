@@ -22,7 +22,7 @@ const Navbar = ({ page }) => {
   ];
 
   return (
-    <header className="flex justify-center w-full gap-4 py-5 items-center border-b-2 border-black">
+    <header className="flex justify-center w-full gap-4 py-5 items-center shadow-md">
       <Link href="/">
         <a className="md:text-4xl text-2xl font-bold cursor-pointer font-heading text-primary">
           JOLI&apos;S
