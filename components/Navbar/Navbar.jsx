@@ -4,7 +4,7 @@ import { useState } from "react";
 import styles from "./Navbar.module.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
-const Navbar = () => {
+const Navbar = ({ page }) => {
   const [hideNav, setHideNav] = useState(true);
   const links = [
     {
@@ -69,7 +69,13 @@ const Navbar = () => {
             return (
               <li key={name}>
                 <Link href={link}>
-                  <a className={styles.nav_link}>{name}</a>
+                  <a
+                    className={`${page === name ? styles.nav_active : ""} ${
+                      styles.nav_link
+                    }`}
+                  >
+                    {name}
+                  </a>
                 </Link>
               </li>
             );

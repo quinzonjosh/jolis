@@ -44,5 +44,6 @@
   background-color: theme(colors.secondary);
   height: 3px;
   width: 100%;
+  opacity: 1;
   transition: ease all 0.5s;
 }

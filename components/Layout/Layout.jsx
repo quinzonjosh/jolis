@@ -4,10 +4,10 @@ import Footer from "../Footer/Footer";
 import MobileNavbar from "../MobileNavbar/MobileNavbar";
 import Navbar from "../Navbar/Navbar";
 
-const Layout = ({ children }) => {
+const Layout = ({ page, children }) => {
   return (
     <>
-      <Navbar />
+      <Navbar page={page} />
       <main> {children} </main>
       <Footer />
       {/* <Category /> */}
