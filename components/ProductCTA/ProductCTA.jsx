@@ -10,11 +10,11 @@ const ProductCTA = ({image, image2}) => {
             <div className="text-3xl text-white-accent-ghost font-bold text-center py-[5%] z-10">
               Some Catchy Heading Here
             </div>
-            <button className="border border-secondary bg-secondary rounded-xl hover:border-white-accent-lavender p-1 w-[55%] z-10">
-              <Link href="/categories">
-                <a className="text-white-accent-ghost"> See our products </a>
-              </Link>
-            </button>
+            <Link href="/categories">
+              <button className="border border-secondary bg-secondary rounded-xl hover:border-white-accent-lavender p-1 w-[55%] z-10">
+                  <a className="text-white-accent-ghost"> See our products </a>  
+              </button>
+            </Link>
             <div className="w-full bg-primary opacity-70 h-full z-[1] absolute left-0 top-0"/>
             <Image className="z-0" src={image2} layout="fill" objectFit="cover" />
           </div>
@@ -23,11 +23,11 @@ const ProductCTA = ({image, image2}) => {
             <div className="text-3xl text-white-accent-ghost font-bold text-center py-[5%] z-10">
               Visit our stores
             </div>
-            <button className="border border-secondary bg-secondary rounded-xl hover:border-white-accent-lavender p-1 w-[55%] z-10">
-              <Link href="/branches">
+            <Link href="/branches">
+              <button className="border border-secondary bg-secondary rounded-xl hover:border-white-accent-lavender p-1 w-[55%] z-10">
                 <a className="text-white-accent-ghost"> Check out our branch locations </a>
-              </Link>
-            </button>
+              </button>
+            </Link>
             <div className="w-full bg-primary opacity-70 h-full z-[1] absolute left-0 top-0"/>
             <Image className="z-0" src={image2} layout="fill" objectFit="cover" />
           </div>
