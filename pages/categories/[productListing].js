@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import categories from "../../data/categories.json";
 import Product from "../../components/Product/Product";
 import productsList from "../../data/products.json";
+import Banner from "../../components/Banner/Banner";
 
 export default function ProductListing({ products }) {
   const router = useRouter();
@@ -15,11 +16,9 @@ export default function ProductListing({ products }) {
   console.log(products);
   return (
     <Layout className="w-full">
-      <section className="text-4xl font-bold text-center p-10 border-b border-black">
-        {category["productListing"] != null
+      <Banner title={category["productListing"] != null
           ? category["productListing"]
-          : "Product Listing"}
-      </section>
+          : "Product Listing"}/>
 
       <section className="flex flex-col md:flex-row border-b border-black py-10">
         {/* left panel */}
@@ -36,62 +35,62 @@ export default function ProductListing({ products }) {
               </button>
             </div>
 
-            <div className="flex md:w-[100%]">
+            <div className="flex md:w-[100%] border-2 rounded-xl shadow-lg">
               <input
                 type="search"
                 name="Search here"
                 placeholder="Search products"
-                className="w-[150px] md:w-[100%] text-xs md:text-xl border border-black border-r-0 p-2"
+                className="w-[150px] md:w-[100%] text-xs md:text-xl p-2"
               />
-              <button className="border border-l-0 border-black p-1">
+              <button className="p-1">
                 <GrSearch />
               </button>
             </div>
           </div>
           {/* browse type */}
-          <div className="hidden md:block w-[100%] border border-black p-2">
-            <div className="text-xl">Browse Type</div>
+          <div className="hidden md:block w-[100%] border-2 rounded-xl shadow-lg p-2">
+            <div className="text-xl py-2 text-secondary font-bold">Type</div>
             <ul className="flex flex-col gap-1">
-              <li>
+              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
                 <button>All products</button>
               </li>
-              <li>
+              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
                 <button>Architecture</button>
               </li>
-              <li>
+              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
                 <button>Drawing Supplies</button>
               </li>
-              <li>
+              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
                 <button>School Supplies</button>
               </li>
-              <li>
+              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
                 <button>Tables</button>
               </li>
-              <li>
+              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
                 <button>Books</button>
               </li>
             </ul>
           </div>
           {/* browse type */}
-          <div className="hidden md:block w-[100%] border border-black p-2">
-            <div className="text-xl">Browse Brands</div>
+          <div className="hidden md:block w-[100%] border-2 rounded-xl shadow-lg p-2">
+            <div className="text-xl py-2 text-secondary font-bold">Brand</div>
             <ul className="flex flex-col gap-1">
-              <li>
+              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
                 <button>All Brands</button>
               </li>
-              <li>
+              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
                 <button>Mongol</button>
               </li>
-              <li>
+              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
                 <button>Faber Castell</button>
               </li>
-              <li>
+              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
                 <button>Best Buy</button>
               </li>
-              <li>
+              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
                 <button>G-Tec</button>
               </li>
-              <li>
+              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
                 <button>Muji</button>
               </li>
             </ul>
@@ -101,7 +100,7 @@ export default function ProductListing({ products }) {
         {/* All products grid */}
         <div className="w-[90%] mx-auto py-5">
           <div>
-            <h2 className="font-bold text-3xl pb-5">All Products</h2>
+            <h2 className="font-bold text-3xl text-secondary pb-5">All Products</h2>
             <div className="grid md:gap-5 sm:gap-5 md:grid-cols-3 grid-cols-2 lg:px-0 md:py-5">
               {products.map((product, index) => {
                 return (
