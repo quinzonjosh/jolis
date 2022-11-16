@@ -54,7 +54,7 @@ const FeaturedProducts = ({ data }) => {
   return (
     <section className="py-8 border-b-2 border-black">
       <div className="container mx-auto">
-        <h2 className="text-2xl font-bold pl-[5%] py-[3%]">
+        <h2 className="text-3xl text-secondary font-bold pl-[5%] py-[3%]">
           Featured Products
         </h2>
         <Carousel
