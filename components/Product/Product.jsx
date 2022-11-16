@@ -16,13 +16,13 @@ function Product({ image, name, category, espana_stock, pnoval_stock }) {
       <div className="flex flex-row gap-5 ">
         <div className="flex flex-col">
           <div className="font-bold text-primary">Espana Branch</div>
-          <div className={`${espana_stock == "In Stock" ? "bg-success" : "bg-error"} rounded-xl px-1 text-center`}>
+          <div className={`${espana_stock.toUpperCase() == "IN STOCK" ? "bg-success" : "bg-error"} rounded-xl px-1 text-center`}>
             {espana_stock}
           </div>
         </div>
         <div className="flex flex-col">
           <div className="font-bold text-primary">P. Noval Branch</div>
-          <div className={`${pnoval_stock == "In Stock" ? "bg-success" : "bg-error"} rounded-xl px-3 text-center`}>
+          <div className={`${pnoval_stock.toUpperCase() == "IN STOCK" ? "bg-success" : "bg-error"} rounded-xl px-3 text-center`}>
             {pnoval_stock}
           </div>
         </div>
