@@ -17,13 +17,13 @@ const BranchInfo = ({
         mapFirst ? "order-2 md:w-2/5 relative md:right-10 right-0" : "order-1 md:1/2"
       }`}
     >
-      <p className="text-3xl font-bold mb-5 lg:mx-8 text-secondary">{branchName}</p>
-      <p className="text-2xl font-bold mb-5 lg:mx-8 text-primary">Reach Us</p>
+      <p className="text-3xl font-bold mb-5 lg:mx-8 text-secondary font-sans">{branchName}</p>
+      <p className="text-2xl font-bold mb-5 lg:mx-8 text-primary font-sans">Reach Us</p>
       <span className="mb-5 lg:mx-8">
         <p className="float-left mr-12 text-primary">Facebook:</p>
         <a
           href={facebookLink}
-          className="w-1/2 md:w-2/4 hover:text-blue-400 break-words float-left relative left-10 text-primary"
+          className="w-1/2 md:w-2/4 hover:text-blue-400 hover:underline break-words float-left relative left-10 text-primary"
         >
           {facebookLink.replace("https://www.facebook.com", "")}
         </a>
