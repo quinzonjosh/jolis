@@ -8,7 +8,7 @@ import ProductCTA from "../components/ProductCTA/ProductCTA";
 
 export default function Home({ featuredProducts }) {
   return (
-    <Layout className="w-full">
+    <Layout page="Home" className="w-full">
       <Banner title="Welcome to Joli's" />
       <FeaturedProducts data={data} />
       <ProductCTA />
