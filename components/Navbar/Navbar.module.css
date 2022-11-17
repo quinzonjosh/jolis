@@ -1,5 +1,5 @@
 .navbar {
-  @apply fixed top-0 left-0 z-30 transition-all w-full;
+  @apply fixed top-0 left-0 z-[1001] transition-all w-full;
 
   .nav_logo {
     @apply md:text-4xl text-2xl font-bold cursor-pointer font-heading;

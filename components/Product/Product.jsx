@@ -3,7 +3,7 @@ import Image from "next/image";
 function Product({ image, name, category, espana_stock, pnoval_stock }) {
   return (
     <div
-      className="block max-w-[160px] md:max-w-[310px] p-3 md:p-6 
+      className="block max-w-[200px] md:max-w-[310px] p-3 md:p-6 
                  md:text-base text-[14px] border-2 rounded-xl shadow-lg
                  mb-5"
     >

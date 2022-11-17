@@ -52,7 +52,7 @@ const FeaturedProducts = ({ data }) => {
   };
 
   return (
-    <section className="py-8 border-b-2 border-black">
+    <section className="py-8">
       <div className="container mx-auto">
         <h2 className="text-3xl text-secondary font-bold pl-[5%] py-[3%]">
           Featured Products
