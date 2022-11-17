@@ -27,11 +27,11 @@ export default function ProductListing({ products }) {
           <div className="flex justify-between">
             {/* filter and Search bar (mobile view)*/}
             <div className="flex">
-              <button className="md:hidden flex border-2 rounded-lg shadow-lg pl-2 pr-4 pt-1">
-                <div className="pt-[2px] text-secondary pr-3">
-                  <BsFilterLeft size={22} />
+              <button className="md:hidden flex border border-black pl-2 pr-4 pt-1">
+                <div className="pt-[2px]">
+                  <BsFilterLeft size={20} />
                 </div>
-                <a className="text-secondary">Filter</a>
+                Filter
               </button>
             </div>
 
