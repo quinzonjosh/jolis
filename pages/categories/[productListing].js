@@ -9,27 +9,35 @@ import categories from "../../data/categories.json";
 import Product from "../../components/Product/Product";
 import productsList from "../../data/products.json";
 import Banner from "../../components/Banner/Banner";
+import { useState, useEffect } from "react";
+import FilterBox from "../../components/FilterBox/FilterBox";
 
 export default function ProductListing({ products }) {
   const router = useRouter();
   const category = router.query;
-  console.log(products);
+
+  const [hideFilter, setHideFilter] = useState(true);
+
   return (
     <Layout className="w-full">
       <Banner title={category["productListing"] != null
           ? category["productListing"]
           : "Product Listing"}/>
 
-      <section className="flex flex-col md:flex-row border-b border-black py-10">
+      <section className="flex flex-col md:flex-row border-b border-black py-10 relative">
         {/* left panel */}
         <div className="md:w-[25%] flex flex-col px-3 md:px-10 gap-2">
           {/* Search bar (desktop view)*/}
           <div className="flex justify-between">
             {/* filter and Search bar (mobile view)*/}
             <div className="flex">
-              <button className="md:hidden flex border-2 rounded-lg shadow-lg pl-2 pr-4 pt-1">
+              <button className="md:hidden flex border-2 rounded-lg shadow-lg pl-2 pr-4 pt-1" onClick={() => { 
+                document.body.style.overflow = hideFilter ? "hidden" : "scroll";
+
+                setHideFilter((hideFilter) => !hideFilter) 
+                }}>
                 <div className="pt-[2px] text-secondary pr-3">
-                  <BsFilterLeft size={22} />
+                    <BsFilterLeft size={22} />
                 </div>
                 <a className="text-secondary">Filter</a>
               </button>
@@ -47,54 +55,14 @@ export default function ProductListing({ products }) {
               </button>
             </div>
           </div>
-          {/* browse type */}
-          <div className="hidden md:block w-[100%] border-2 rounded-xl shadow-lg p-2">
-            <div className="text-xl py-2 text-secondary font-bold">Type</div>
-            <ul className="flex flex-col gap-1">
-              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
-                <button>All products</button>
-              </li>
-              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
-                <button>Architecture</button>
-              </li>
-              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
-                <button>Drawing Supplies</button>
-              </li>
-              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
-                <button>School Supplies</button>
-              </li>
-              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
-                <button>Tables</button>
-              </li>
-              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
-                <button>Books</button>
-              </li>
-            </ul>
+          <div className={`${hideFilter ? " -left-full": "left-0"} overflow-scroll max-h-[400px] md:max-h-[auto] transition-all w-full z-10 top-[90px] md:w-auto absolute md:static`}>
+            {/* browse type */}
+            <FilterBox title="Type" items={["All Products", "Architecture", "Drawing Supplies", "School Supplies", "Tables", "Books"]} />
+            
+            {/* browse brand */}
+            <FilterBox title="Brand" items={["All Brands", "Faber Castell", "Best Buy", "G-Tec", "Muji"]} />
           </div>
-          {/* browse type */}
-          <div className="hidden md:block w-[100%] border-2 rounded-xl shadow-lg p-2">
-            <div className="text-xl py-2 text-secondary font-bold">Brand</div>
-            <ul className="flex flex-col gap-1">
-              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
-                <button>All Brands</button>
-              </li>
-              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
-                <button>Mongol</button>
-              </li>
-              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
-                <button>Faber Castell</button>
-              </li>
-              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
-                <button>Best Buy</button>
-              </li>
-              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
-                <button>G-Tec</button>
-              </li>
-              <li className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1">
-                <button>Muji</button>
-              </li>
-            </ul>
-          </div>
+
         </div>
 
         {/* All products grid */}
