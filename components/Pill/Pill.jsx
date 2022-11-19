@@ -1,7 +1,7 @@
 const Pill = (props) => {
   return (
     <div {...props}>
-      <p>{props.name}</p>
+      <p className="text-xs">{props.name}</p>
     </div>
   );
 };
