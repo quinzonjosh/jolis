@@ -20,9 +20,13 @@ export default function ProductListing({ products }) {
 
   return (
     <Layout className="w-full">
-      <Banner title={category["productListing"] != null
-          ? category["productListing"]
-          : "Product Listing"}/>
+      <Banner
+        title={
+          category["productListing"] != null
+            ? category["productListing"]
+            : "Product Listing"
+        }
+      />
 
       <section className="flex flex-col md:flex-row border-b border-black py-10 relative">
         {/* left panel */}
@@ -31,13 +35,18 @@ export default function ProductListing({ products }) {
           <div className="flex justify-between">
             {/* filter and Search bar (mobile view)*/}
             <div className="flex">
-              <button className="md:hidden flex border-2 rounded-lg shadow-lg pl-2 pr-4 pt-1" onClick={() => { 
-                document.body.style.overflow = hideFilter ? "hidden" : "scroll";
+              <button
+                className="md:hidden flex border-2 rounded-lg shadow-lg pl-2 pr-4 pt-1"
+                onClick={() => {
+                  document.body.style.overflow = hideFilter
+                    ? "hidden"
+                    : "scroll";
 
-                setHideFilter((hideFilter) => !hideFilter) 
-                }}>
+                  setHideFilter((hideFilter) => !hideFilter);
+                }}
+              >
                 <div className="pt-[2px] text-secondary pr-3">
-                    <BsFilterLeft size={22} />
+                  <BsFilterLeft size={22} />
                 </div>
                 <a className="text-secondary">Filter</a>
               </button>
@@ -55,34 +64,56 @@ export default function ProductListing({ products }) {
               </button>
             </div>
           </div>
-          <div className={`${hideFilter ? " -left-full": "left-0"} overflow-scroll max-h-[400px] md:max-h-[auto] transition-all w-full z-10 top-[90px] md:w-auto absolute md:static`}>
+          <div
+            className={`${
+              hideFilter ? " -left-full" : "left-0"
+            } overflow-scroll max-h-[400px] md:max-h-[auto] transition-all w-full z-10 top-[90px] md:w-auto absolute md:static`}
+          >
             {/* browse type */}
-            <FilterBox title="Type" items={["All Products", "Architecture", "Drawing Supplies", "School Supplies", "Tables", "Books"]} />
-            
-            {/* browse brand */}
-            <FilterBox title="Brand" items={["All Brands", "Faber Castell", "Best Buy", "G-Tec", "Muji"]} />
-          </div>
+            <FilterBox
+              title="Type"
+              items={[
+                "All Products",
+                "Architecture",
+                "Drawing Supplies",
+                "School Supplies",
+                "Tables",
+                "Books",
+              ]}
+            />
 
+            {/* browse brand */}
+            <FilterBox
+              title="Brand"
+              items={[
+                "All Brands",
+                "Faber Castell",
+                "Best Buy",
+                "G-Tec",
+                "Muji",
+              ]}
+            />
+          </div>
         </div>
 
         {/* All products grid */}
         <div className="w-[90%] mx-auto py-5">
-          <div>
-            <h2 className="font-bold text-3xl text-secondary pb-5">All Products</h2>
-            <div className="grid md:gap-5 sm:gap-5 md:grid-cols-3 grid-cols-2 lg:px-0 md:py-5">
-              {products.map((product, index) => {
-                return (
-                  <Product
-                    key={index}
-                    image={product.image}
-                    name={product.name}
-                    category={product.category}
-                    espana_stock={product.espana_stock}
-                    pnoval_stock={product.pnoval_stock}
-                  />
-                );
-              })}
-            </div>
+          <h2 className="font-bold text-3xl text-secondary pb-5">
+            All Products
+          </h2>
+          <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:px-0 md:py-5 md:w-[80%] gap-3 md:gap-x-24 ">
+            {products.map((product, index) => {
+              return (
+                <Product
+                  key={index}
+                  image={product.image}
+                  name={product.name}
+                  category={product.category}
+                  espana_stock={product.espana_stock}
+                  pnoval_stock={product.pnoval_stock}
+                />
+              );
+            })}
           </div>
         </div>
       </section>

@@ -13,7 +13,7 @@ function Product({ image, name, category, espana_stock, pnoval_stock }) {
     },
   ];
   return (
-    <div className="bg-white rounded-md shadow-md max-w-[300px] min-h-[400px] py-6 mx-auto">
+    <div className="bg-white rounded-md shadow-md min-w-[300px] max-w-[300px] min-h-[400px] py-6 mx-auto">
       <div className="flex flex-col w-[85%] mx-auto">
         <div className="relative w-full h-40 md:h-48">
           <Image src={image} alt="sample" layout="fill" objectFit="cover" />
