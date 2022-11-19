@@ -4,17 +4,21 @@ import Link from "next/link";
 const Category = ({ imageLink, categoryName, slug }) => {
   return (
     <Link href={`/categories/${slug}`}>
-      <div className="category_container border-2 text-center flex flex-col items-center 
-      hover:cursor-pointer hover:bg-white-accent-lavender rounded-xl shadow-lg">
-        <div className="relative lg:w-80 lg:h-80 md:w-56 md:h-56 w-40 h-40 mt-4 mb-2">
-          <Image
-            layout="fill"
-            priority={true}
-            src={imageLink}
-            alt="category image"
-          />
+      <div className="hover:cursor-pointer hover:scale-110 duration-300 transition-all rounded-xl shadow-lg w-[90%] mx-auto ">
+        <div className="flex flex-col items-center text-center justify-center mx-auto w-[90%]">
+          <div className="relative w-full h-64 mt-4 mb-2 aspect-h-1 aspect-w-1">
+            <Image
+              layout="fill"
+              src={imageLink}
+              alt="category image"
+              objectFit="cover"
+              objectPosition="center"
+            />
+          </div>
+          <p className="mb-3 text-xl font-bold text-secondary">
+            {categoryName}
+          </p>
         </div>
-        <p className="mb-3 text-xl font-bold text-secondary">{categoryName}</p>
       </div>
     </Link>
   );
