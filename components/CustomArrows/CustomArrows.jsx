@@ -1,28 +1,21 @@
 import styles from "./CustomArrows.module.css";
+import { useSwiper } from "swiper/react";
 
-const CustomRightArrow = ({ onClick, ...rest }) => {
-  const {
-    onMove,
-    carouselState: { currentSlide, deviceType },
-  } = rest;
-  // onMove means if dragging or swiping in progress.
+const CustomRightArrow = () => {
+  const swiper = useSwiper();
   return (
     <button
-      onClick={() => onClick()}
-      className={` ${styles.customArrow} ${styles.rightArrow}`}
+      onClick={() => swiper.slideNext()}
+      className={`${styles.customArrow} ${styles.rightArrow}`}
     />
   );
 };
 
-const CustomLeftArrow = ({ onClick, ...rest }) => {
-  const {
-    onMove,
-    carouselState: { currentSlide, deviceType },
-  } = rest;
-  // onMove means if dragging or swiping in progress.
+const CustomLeftArrow = () => {
+  const swiper = useSwiper();
   return (
     <button
-      onClick={() => onClick()}
+      onClick={() => swiper.slidePrev()}
       className={`${styles.customArrow} ${styles.leftArrow}`}
     />
   );
