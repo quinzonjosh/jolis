@@ -9,12 +9,50 @@ import categories from "../../data/categories.json";
 import Product from "../../components/Product/Product";
 import productsList from "../../data/products.json";
 import Banner from "../../components/Banner/Banner";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import FilterBox from "../../components/FilterBox/FilterBox";
+import Client from "../api/contentful";
+
 
 export default function ProductListing({ products }) {
   const router = useRouter();
   const category = router.query;
+
+  const [Entries, setEntries] = useState([]);
+
+        const cleanCategories = useCallback((rawData) => {
+            const cleanCategory = rawData.map((categories) => {
+                const {sys, fields} = categories
+                const {id} = sys
+                const categoryName = fields.categoryName
+                const categorySlug = fields.categorySlug
+                const categoryPhoto = fields.categoryPhoto.fields.file.url
+                const updatedCategories = {id, categoryName, categorySlug, categoryPhoto}
+                return updatedCategories
+            })
+
+            setEntries(cleanCategory)
+        }, [])
+
+        const getEntries = useCallback(async () => {
+        try{
+            const response = await Client.getEntries({'content_type' : 'category'})
+            const responseData = response.items
+
+            if(responseData){
+                cleanCategories(responseData)
+            } else	{
+                setEntries([])
+        }
+        } catch (error) {
+        console.log(error)
+        }
+        }, [cleanCategories])
+
+        useEffect (() =>{
+        getEntries()
+        }, [getEntries])
+    console.log(Entries)
 
   const [hideFilter, setHideFilter] = useState(true);
 

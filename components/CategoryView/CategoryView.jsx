@@ -8,7 +8,7 @@ const CategoryView = ({ categoryList }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const CATEGORY_CARDS = categoryList.map((item) => {
     return (
-      <Link href="/categories" key={item.name}>
+      <Link href="/categories" key={item.id}>
         <Category
           categoryName={item.name}
           imageLink={item.image}
