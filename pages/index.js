@@ -5,19 +5,35 @@ import FeaturedProducts from "../components/FeaturedProducts/FeaturedProducts";
 import Banner from "../components/Banner/Banner";
 import data from "../data/products.json";
 import ProductCTA from "../components/ProductCTA/ProductCTA";
+import { Client } from "../api/contentful";
+import { cleanProducts } from "../utils/cleanData";
 
 export default function Home({ featuredProducts }) {
   return (
     <Layout page="Home" className="w-full">
       <Banner title="Welcome to Joli's" />
-      <FeaturedProducts data={data} />
+      <FeaturedProducts data={featuredProducts} />
       <ProductCTA />
     </Layout>
   );
 }
 
-export function getStaticProps() {
-  const featuredProducts = data.filter((item) => {
+export async function getStaticProps() {
+  console.log("Here")
+  let products = [];
+  try{
+    const response = await Client.getEntries({'content_type' : 'products'})
+    const responseData = response.items
+
+    if(responseData){
+        products = cleanProducts(responseData)
+        console.log(products)
+    }
+  } catch (error) {
+  console.log(error)
+  }
+
+  const featuredProducts = products.filter((item) => {
     return item.featured == true;
   });
 
