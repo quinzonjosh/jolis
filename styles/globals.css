@@ -24,3 +24,11 @@ a {
   border-top-color: theme("colors.tertiary");
   border-left-color: theme("colors.tertiary");
 }
+
+.swiper-pagination {
+  @apply block md:hidden;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: theme(colors.secondary) !important;
+}

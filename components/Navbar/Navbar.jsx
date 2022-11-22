@@ -19,7 +19,7 @@ const Navbar = ({ page }) => {
       className={styles.navbar}
       data-style={scrollPosition > 0 ? "scroll" : "initial"}
     >
-      <div className="flex justify-center w-full gap-6 md:gap-0 py-5 items-center">
+      <div className="flex justify-center w-full gap-6 lg:gap-4 py-5 items-center">
         <Link href="/">
           <a className={styles.nav_logo}>JOLI&apos;S</a>
         </Link>
@@ -50,9 +50,9 @@ const Navbar = ({ page }) => {
         <nav
           className={`${hideNav ? "-left-full" : "left-0"} ${styles.nav_links}`}
         >
-          <ul className="flex flex-col md:flex-row md:justify-center p-5 md:p-0 gap-6">
+          <ul className="flex flex-col lg:items-center lg:flex-row lg:justify-center p-5 lg:p-0 gap-6">
             <button
-              className="md:hidden text-2xl block self-end text-primary"
+              className="lg:hidden text-2xl block self-end text-primary"
               onClick={() => {
                 document.body.style.overflow = "scroll";
                 setHideNav((hideNav) => {

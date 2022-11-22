@@ -1,40 +1,42 @@
-.customArrow {
-  position: absolute;
-  outline: 0;
-  transition: all 0.5s;
-  border-radius: 35px;
-  z-index: 1000;
-  border: 0;
-  background: rgba(0, 0, 0, 0.5);
-  min-width: 43px;
-  min-height: 43px;
-  opacity: 1;
-  cursor: pointer;
-  bottom: 0px;
-}
+@screen md {
+  .customArrow {
+    position: absolute;
+    outline: 0;
+    transition: all 0.5s;
+    border-radius: 35px;
+    z-index: 1000;
+    border: 0;
+    /* background: rgba(0, 0, 0, 0.5); */
+    min-width: 43px;
+    min-height: 43px;
+    opacity: 1;
+    cursor: pointer;
+    bottom: 0px;
+  }
 
-.rightArrow {
-  right: calc(42.5% + 10px);
-}
+  .rightArrow {
+    right: calc(42.5% + 10px);
+  }
 
-.leftArrow {
-  left: calc(42.5% + 10px);
-}
+  .leftArrow {
+    left: calc(42.5% + 10px);
+  }
 
-.customArrow::before {
-  font-size: 20px;
-  color: #fff;
-  display: block;
-  font-family: revicons;
-  text-align: center;
-  z-index: 2;
-  position: relative;
-}
+  .customArrow::before {
+    font-size: 30px;
+    color: theme(colors.secondary);
+    display: block;
+    font-family: swiper-icons;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+  }
 
-.rightArrow::before {
-  content: "\e825";
-}
+  .rightArrow::before {
+    content: "next";
+  }
 
-.leftArrow::before {
-  content: "\e824";
+  .leftArrow::before {
+    content: "prev";
+  }
 }

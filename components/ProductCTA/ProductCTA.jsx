@@ -8,7 +8,7 @@ const ProductCTA = ({image, image2}) => {
         <div className="flex flex-col md:flex-row">
           <div className="flex flex-col relative md:w-[50%] px-[5%] pt-[5%] pb-[10%] items-center">
             <div className="text-3xl text-white-accent-ghost font-bold text-center py-[5%] z-10">
-              Some Catchy Heading Here
+              We have lots of supplies for you
             </div>
             <Link href="/categories">
               <button className="border border-secondary bg-secondary rounded-xl hover:border-white-accent-lavender p-1 w-[55%] z-10">
