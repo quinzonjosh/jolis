@@ -11,48 +11,13 @@ import productsList from "../../data/products.json";
 import Banner from "../../components/Banner/Banner";
 import { useState, useEffect, useCallback } from "react";
 import FilterBox from "../../components/FilterBox/FilterBox";
-import Client from "../api/contentful";
-
+import {Client} from "../../api/contentful";
+import { cleanProducts } from "../../utils/cleanData";
 
 export default function ProductListing({ products }) {
   const router = useRouter();
   const category = router.query;
 
-  const [Entries, setEntries] = useState([]);
-
-        const cleanCategories = useCallback((rawData) => {
-            const cleanCategory = rawData.map((categories) => {
-                const {sys, fields} = categories
-                const {id} = sys
-                const categoryName = fields.categoryName
-                const categorySlug = fields.categorySlug
-                const categoryPhoto = fields.categoryPhoto.fields.file.url
-                const updatedCategories = {id, categoryName, categorySlug, categoryPhoto}
-                return updatedCategories
-            })
-
-            setEntries(cleanCategory)
-        }, [])
-
-        const getEntries = useCallback(async () => {
-        try{
-            const response = await Client.getEntries({'content_type' : 'category'})
-            const responseData = response.items
-
-            if(responseData){
-                cleanCategories(responseData)
-            } else	{
-                setEntries([])
-        }
-        } catch (error) {
-        console.log(error)
-        }
-        }, [cleanCategories])
-
-        useEffect (() =>{
-        getEntries()
-        }, [getEntries])
-    console.log(Entries)
 
   const [hideFilter, setHideFilter] = useState(true);
 
@@ -166,15 +131,28 @@ export function getStaticPaths() {
   return { paths, fallback: false };
 }
 
-export function getStaticProps(context) {
-  const productinCategory = productsList.filter((item) => {
+export async function getStaticProps(context) {
+  console.log(Client)
+  let allProducts = [];
+  try{
+    const response = await Client.getEntries({'content_type' : 'products'})
+    const responseData = response.items
+
+    if(responseData){
+        allProducts = cleanProducts(responseData)
+    }
+  } catch (error) {
+  console.log(error)
+  }
+
+  const productsinCategory = allProducts.filter((item) => {
     const category = item.category.toLowerCase().split(" ").join("-");
     return category == context.params.productListing;
   });
 
   return {
     props: {
-      products: productinCategory,
+      products: productsinCategory,
     },
   };
 }

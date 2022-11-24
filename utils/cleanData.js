@@ -17,8 +17,7 @@ export const cleanProducts = (rawData) => {
                 const {sys, fields} = products
                 const {id} = sys
                 const {name, category: categoryobject, pnoval_stock, espana_stock, featured, image: imageUrl} = fields
-                //const {categoryName: category} = categoryobject.fields
-                const category = categoryobject[0].fields.categoryName
+                const category = categoryobject[0].fields.categorySlug
                 const image = "https:" + imageUrl.fields.file.url
                 const updatedProducts = {id, name, category, pnoval_stock, espana_stock, featured, image}
                 return updatedProducts

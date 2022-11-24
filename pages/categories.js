@@ -24,7 +24,6 @@ export async function getStaticProps(context) {
 
     if(responseData){
         categories = cleanCategories(responseData)
-        console.log(categories)
     }
   } catch (error) {
   console.log(error)

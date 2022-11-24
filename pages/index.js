@@ -19,7 +19,6 @@ export default function Home({ featuredProducts }) {
 }
 
 export async function getStaticProps() {
-  console.log("Here")
   let products = [];
   try{
     const response = await Client.getEntries({'content_type' : 'products'})
@@ -27,7 +26,6 @@ export async function getStaticProps() {
 
     if(responseData){
         products = cleanProducts(responseData)
-        console.log(products)
     }
   } catch (error) {
   console.log(error)
