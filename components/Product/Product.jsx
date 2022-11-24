@@ -1,25 +1,44 @@
 import Image from "next/image";
+import Pill from "../Pill/Pill";
 
 function Product({ image, name, category, espana_stock, pnoval_stock }) {
+  const branches = [
+    {
+      name: "Espana Branch",
+      stock: espana_stock,
+    },
+    {
+      name: "P. Noval Branch",
+      stock: pnoval_stock,
+    },
+  ];
   return (
-    <div className="block max-w-[310px] p-6 border border-black">
-      <div className="relative w-[100%] h-48">
-        <Image src={image} alt="sample" layout="fill" />
-      </div>
-
-      <h3 className="font-bold break-words">{name}</h3>
-      <p className="mb-3">{category}</p>
-      <div className="flex flex-row gap-5">
-        <div className="flex flex-col">
-          <div className="font-bold">Espana Branch</div>
-          <div className="bg-zinc-200 rounded-xl px-1 text-center">
-            {espana_stock}
-          </div>
+    <div className="bg-white rounded-md shadow-md min-w-[300px] max-w-[300px] min-h-[400px] py-6 mx-auto">
+      <div className="flex flex-col w-[85%] mx-auto">
+        <div className="relative w-full h-40 md:h-48">
+          <Image src={image} alt="sample" layout="fill" objectFit="cover" />
         </div>
-        <div className="flex flex-col">
-          <div className="font-bold">P. Noval Branch</div>
-          <div className="bg-zinc-200 rounded-xl px-3 text-center">
-            {pnoval_stock}
+        <div>
+          <h3 className="text-xl text-secondary font-bold">{name}</h3>
+          <p className="mb-4">{category}</p>
+          <div className="flex gap-8">
+            {branches.map((branch) => {
+              return (
+                <div key={branch.name}>
+                  <h4 className="text-primary font-bold text-sm">
+                    {branch.name}
+                  </h4>
+                  <Pill
+                    className={`${
+                      branch.stock.toUpperCase() == "IN STOCK"
+                        ? "bg-success"
+                        : "bg-error"
+                    } rounded-full py-1 px-1 text-center text-white `}
+                    name={branch.stock}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

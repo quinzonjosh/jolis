@@ -9,9 +9,12 @@ const CategoryView = ({ categoryList }) => {
   const CATEGORY_CARDS = categoryList.map((item) => {
     return (
       <Link href="/categories" key={item.name}>
-        <Category categoryName={item.name} imageLink={item.image} slug={item.slug} />
+        <Category
+          categoryName={item.name}
+          imageLink={item.image}
+          slug={item.slug}
+        />
       </Link>
-
     );
   });
   const [categories, setCategories] = useState([]);
@@ -24,9 +27,9 @@ const CategoryView = ({ categoryList }) => {
   }, [pageNumber]);
 
   return (
-    <section className="py-6">
+    <section className="py-6 px-5">
       <div className="container mx-auto">
-        <div className="grid md:gap-5 sm:gap-2 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:px-10 py-10">
+        <div className="grid md:gap-5 sm:gap-2 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:px-10 py-10">
           {categories}
         </div>
         <Pagination

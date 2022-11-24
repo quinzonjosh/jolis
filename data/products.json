@@ -125,8 +125,27 @@
         "pnoval_stock": "In Stock",
         "featured": false
 
-    }
+    },
+    {
+  
+        "image": "/images/Brushes/Giorgione_Detailing_Brush3.jpg",
+        "name": "Giorgione Detailing Brush 3",
+        "category": "Brushes",
+        "espana_stock": "In Stock",
+        "pnoval_stock": "In Stock",
+        "featured": false
 
+    },
+    {
+  
+        "image": "/images/Brushes/Giorgione_Detailing_Brush3.jpg",
+        "name": "Giorgione Detailing Brush 3",
+        "category": "Brushes",
+        "espana_stock": "In Stock",
+        "pnoval_stock": "In Stock",
+        "featured": false
+
+    }
     
     
 ]
