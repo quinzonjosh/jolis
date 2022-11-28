@@ -101,7 +101,7 @@ export default function ProductListing({ products }) {
           <h2 className="font-bold text-3xl text-secondary pb-5">
             All Products
           </h2>
-          <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:px-0 md:py-5 md:w-[80%] gap-3 md:gap-x-24 ">
+          <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:px-0 md:py-5 md:w-[80%] gap-3 md:gap-x-24 ">
             {products.map((product, index) => {
               return (
                 <Product
