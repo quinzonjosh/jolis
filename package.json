@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "contentful": "^9.2.12",
+    "dotenv": "^16.0.3",
     "next": "^12.3.1",
     "next.js": "^1.0.3",
     "nprogress": "^0.2.0",

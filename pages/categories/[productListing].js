@@ -9,12 +9,15 @@ import categories from "../../data/categories.json";
 import Product from "../../components/Product/Product";
 import productsList from "../../data/products.json";
 import Banner from "../../components/Banner/Banner";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import FilterBox from "../../components/FilterBox/FilterBox";
+import {Client} from "../../api/contentful";
+import { cleanProducts } from "../../utils/cleanData";
 
 export default function ProductListing({ products }) {
   const router = useRouter();
   const category = router.query;
+
 
   const [hideFilter, setHideFilter] = useState(true);
 
@@ -128,15 +131,28 @@ export function getStaticPaths() {
   return { paths, fallback: false };
 }
 
-export function getStaticProps(context) {
-  const productinCategory = productsList.filter((item) => {
+export async function getStaticProps(context) {
+  console.log(Client)
+  let allProducts = [];
+  try{
+    const response = await Client.getEntries({'content_type' : 'products'})
+    const responseData = response.items
+
+    if(responseData){
+        allProducts = cleanProducts(responseData)
+    }
+  } catch (error) {
+  console.log(error)
+  }
+
+  const productsinCategory = allProducts.filter((item) => {
     const category = item.category.toLowerCase().split(" ").join("-");
     return category == context.params.productListing;
   });
 
   return {
     props: {
-      products: productinCategory,
+      products: productsinCategory,
     },
   };
 }
