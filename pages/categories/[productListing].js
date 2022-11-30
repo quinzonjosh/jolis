@@ -12,11 +12,35 @@ import FilterBox from "../../components/FilterBox/FilterBox";
 import {Client} from "../../api/contentful";
 import { cleanCategories, cleanProducts } from "../../utils/cleanData";
 import { GiConsoleController } from "react-icons/gi";
+import Pagination from "../../components/Pagination/Pagination";
 
 export default function ProductListing({ products }) {
   const router = useRouter();
   const category = router.query;
 
+  /* Pagination handler */
+  const PRODUCTS_PER_PAGE = 9;
+  const [pageNumber, setPageNumber] = useState(1);
+  const PRODUCT_CARDS = products.map((product, index) => {
+    return (
+      <Product
+        key={index}
+        image={product.image}
+        name={product.name}
+        category={product.category}
+        espana_stock={product.espana_stock}
+        pnoval_stock={product.pnoval_stock}
+      />
+    );
+  });
+  const [productList, setProducts] = useState([]);
+  const numPages = Math.ceil(PRODUCT_CARDS.length / PRODUCTS_PER_PAGE);
+
+  useEffect(() => {
+    const startPage = PRODUCTS_PER_PAGE * (pageNumber - 1);
+    const endPage = PRODUCTS_PER_PAGE * pageNumber;
+    setProducts(PRODUCT_CARDS.slice(startPage, endPage));
+  }, [pageNumber]);
 
   const [hideFilter, setHideFilter] = useState(true);
 
@@ -30,7 +54,7 @@ export default function ProductListing({ products }) {
         }
       />
 
-      <section className="flex flex-col md:flex-row border-b border-black py-10 relative">
+      <section className="flex flex-col md:flex-row py-10 relative">
         {/* left panel */}
         <div className="md:w-[25%] flex flex-col px-3 md:px-10 gap-2">
           {/* Search bar (desktop view)*/}
@@ -104,21 +128,19 @@ export default function ProductListing({ products }) {
             All Products
           </h2>
           <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:px-0 md:py-5 md:w-[80%] gap-3 md:gap-x-24 ">
-            {products.map((product, index) => {
-              return (
-                <Product
-                  key={index}
-                  image={product.image}
-                  name={product.name}
-                  category={product.category}
-                  espana_stock={product.espana_stock}
-                  pnoval_stock={product.pnoval_stock}
-                />
-              );
-            })}
+            {productList}
           </div>
         </div>
       </section>
+      <div className="border-b border-black">
+        <div className="pb-12">
+          <Pagination
+              numPages={numPages}
+              currentPage={pageNumber}
+              pageChanger={setPageNumber}
+            />
+        </div>
+      </div>
     </Layout>
   );
 }
