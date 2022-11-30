@@ -2,17 +2,16 @@ import Head from "next/head";
 import Image from "next/image";
 import Layout from "../../components/Layout/Layout";
 import Link from "next/link";
-import { GrSearch } from "react-icons/gr";
+import { GrSearch, GrSystem } from "react-icons/gr";
 import { BsFilterLeft } from "react-icons/bs";
 import { useRouter } from "next/router";
-import categories from "../../data/categories.json";
 import Product from "../../components/Product/Product";
-import productsList from "../../data/products.json";
 import Banner from "../../components/Banner/Banner";
 import { useState, useEffect, useCallback } from "react";
 import FilterBox from "../../components/FilterBox/FilterBox";
 import {Client} from "../../api/contentful";
-import { cleanProducts } from "../../utils/cleanData";
+import { cleanCategories, cleanProducts } from "../../utils/cleanData";
+import { GiConsoleController } from "react-icons/gi";
 
 export default function ProductListing({ products }) {
   const router = useRouter();
@@ -124,8 +123,18 @@ export default function ProductListing({ products }) {
   );
 }
 
-export function getStaticPaths() {
-  const paths = categories.map((item) => {
+export async function getStaticPaths() {
+  let allCategories = [];
+  try{
+    const response = await Client.getEntries({'content_type': 'category'})
+    const responseData = response.items;
+    if(responseData){
+      allCategories = cleanCategories(responseData);
+    }
+  } catch(error){
+    console.log(error)
+  }
+  const paths = allCategories.map((item) => {
     return { params: { productListing: item.slug } };
   });
   return { paths, fallback: false };
@@ -137,7 +146,6 @@ export async function getStaticProps(context) {
   try{
     const response = await Client.getEntries({'content_type' : 'products'})
     const responseData = response.items
-
     if(responseData){
         allProducts = cleanProducts(responseData)
     }
