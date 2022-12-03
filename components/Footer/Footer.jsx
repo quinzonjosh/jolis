@@ -27,7 +27,7 @@ const Footer = () => {
     <footer className="bg-primary text-white">
       <div className={styles.footer_wrapper}>
         <div className="font-bold text-[2rem] md:text-[3rem]">JOLI&apos;S</div>
-        <div>
+        <div className="relative bottom-4">
           <span className="font-bold text-lg">Overview</span>
           <ul>
             {links.map(({ name, link }) => {
@@ -42,33 +42,33 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div>
+        <div className="relative bottom-2">
           <span className="font-bold text-lg">Our products</span>
           <ul>
             {tempProducts.map(({ name, link }) => {
               return (
                 <li key={name}>
                   <Link href={link}>
-                    <a className="font-light">{name}</a>
+                    <a className="font-light hover:underline">{name}</a>
                   </Link>
                 </li>
               );
             })}
           </ul>
         </div>
-        <div>
+        <div className="relative bottom-1">
           <span className="font-bold text-lg">Contact us</span>
           <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
             <span className="text-2xl">
               <FaFacebookSquare />
             </span>
             <div>
-              <p className="font-bold font-heading">Facebook:</p>
               <Link href="https://www.facebook.com/jolis.espana">
-                <a className="text-sm text-white-accent-ghost hover:underline">
+                <a className="font-bold font-heading hover:underline">
                   jolis.españa
                 </a>
               </Link>
+              <p className="text-sm text-white-accent-ghost">Facebook</p>
             </div>
           </div>
           <div className="flex items-center justify-center md:justify-start gap-2">
@@ -76,12 +76,12 @@ const Footer = () => {
               <FaFacebookSquare />
             </span>
             <div>
-              <p className="font-bold font-heading">Facebook:</p>
               <Link href="https://www.facebook.com/jolis.pnoval">
-                <a className="text-sm text-white-accent-ghost hover:underline">
+                <a className="font-bold font-heading hover:underline">
                   jolis.pnoval
                 </a>
               </Link>
+              <p className="text-sm text-white-accent-ghost">Facebook</p>
             </div>
           </div>
           {/* 

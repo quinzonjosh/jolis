@@ -43,7 +43,7 @@ const FeaturedProducts = ({ data }) => {
         <Swiper
           modules={[Pagination, A11y, Autoplay]}
           spaceBetween={10}
-          slidesPerView={5}
+          slidesPerView={"auto"}
           breakpoints={breakpoints}
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}

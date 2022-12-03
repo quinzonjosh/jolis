@@ -1,7 +1,6 @@
 import Layout from "../components/Layout/Layout";
 import Banner from "../components/Banner/Banner";
 import CategoryView from "../components/CategoryView/CategoryView";
-import data from "../data/categories.json";
 import { cleanCategories } from "../utils/cleanData";
 import {Client} from "../api/contentful";
 
