@@ -83,7 +83,7 @@ export default function ProductListing({ products }) {
                 type="search"
                 name="Search here"
                 placeholder="Search products"
-                className="w-[150px] md:w-[100%] text-xs md:text-xl p-2"
+                className="w-[150px] md:w-[100%] text-xs md:text-xl p-2 rounded-xl"
               />
               <button className="p-1">
                 <GrSearch />
