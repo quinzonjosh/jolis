@@ -15,7 +15,7 @@ const categories = ({ categoryList }) => {
 
 export default categories;
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   let categories = [];
   try{
     const response = await Client.getEntries({'content_type' : 'category'})

@@ -17,7 +17,7 @@ export default function Home({ featuredProducts }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   let products = [];
   try{
     const response = await Client.getEntries({'content_type' : 'products'})
