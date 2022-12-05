@@ -7,19 +7,19 @@ const Footer = () => {
   const tempProducts = [
     {
       name: "Architecture",
-      link: "/categories/architecture",
+      link: "/",
     },
     {
       name: "School supplies",
-      link: "/categories/school-supplies",
+      link: "/",
     },
     {
       name: "Drawing supplies",
-      link: "/categories/drawing-supplies",
+      link: "/",
     },
     {
       name: "Tables",
-      link: "/categories",
+      link: "/",
     },
   ];
 
@@ -48,7 +48,9 @@ const Footer = () => {
             {tempProducts.map(({ name, link }) => {
               return (
                 <li key={name}>
-                    <a href={link} className="font-light hover:underline">{name}</a>
+                  <Link href={link}>
+                    <a className="font-light hover:underline">{name}</a>
+                  </Link>
                 </li>
               );
             })}
