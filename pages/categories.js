@@ -18,7 +18,7 @@ export default categories;
 export async function getServerSideProps(context) {
   let categories = [];
   try{
-    const response = await Client.getEntries({'content_type' : 'category'})
+    const response = await Client.getEntries({'content_type' : 'category', order: "fields.categoryName"})
     const responseData = response.items
 
     if(responseData){
@@ -27,7 +27,6 @@ export async function getServerSideProps(context) {
   } catch (error) {
   console.log(error)
   }
-
   return {
     props: {
       categoryList: categories,

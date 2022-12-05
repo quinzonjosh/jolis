@@ -9,16 +9,25 @@ import Product from "../../components/Product/Product";
 import Banner from "../../components/Banner/Banner";
 import { useState, useEffect, useCallback } from "react";
 import FilterBox from "../../components/FilterBox/FilterBox";
-import {Client} from "../../api/contentful";
+import { Client } from "../../api/contentful";
 import { cleanCategories, cleanProducts } from "../../utils/cleanData";
 import { GiConsoleController } from "react-icons/gi";
+import axios from "axios";
 
 export default function ProductListing({ products }) {
   const router = useRouter();
   const category = router.query;
 
-
   const [hideFilter, setHideFilter] = useState(true);
+  const [productList, setProductList] = useState(products);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const query = event.target.search.value;
+    const {data, status} = await axios.post("/api/search", { query })
+    console.log(data)
+    setProductList(data.products);
+  }
 
   return (
     <Layout className="w-full">
@@ -54,22 +63,23 @@ export default function ProductListing({ products }) {
               </button>
             </div>
 
-            <div className="flex md:w-[100%] border-2 rounded-xl shadow-lg">
-              <input
-                type="search"
-                name="Search here"
-                placeholder="Search products"
-                className="w-[150px] md:w-[100%] text-xs md:text-xl p-2"
-              />
-              <button className="p-1">
-                <GrSearch />
-              </button>
+            <div className="md:w-[100%] border-2 rounded-xl shadow-lg">
+              <form onSubmit={handleSubmit} className="flex">
+                <input
+                  name="search"
+                  type="text"
+                  placeholder="Search products"
+                  className="w-[150px] md:w-[100%] text-xs md:text-xl p-2"
+                />
+                <button type="submit" className="p-1">
+                  <GrSearch />
+                </button>
+              </form>
             </div>
           </div>
           <div
-            className={`${
-              hideFilter ? " -left-full" : "left-0"
-            } overflow-scroll max-h-[400px] md:max-h-[auto] transition-all w-full z-10 top-[90px] md:w-auto absolute md:static`}
+            className={`${hideFilter ? " -left-full" : "left-0"
+              } overflow-scroll max-h-[400px] md:max-h-[auto] transition-all w-full z-10 top-[90px] md:w-auto absolute md:static`}
           >
 
             {/* browse brand */}
@@ -92,7 +102,7 @@ export default function ProductListing({ products }) {
             All Products
           </h2>
           <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:px-0 md:py-5 md:w-[80%] gap-3 md:gap-x-24 ">
-            {products.map((product, index) => {
+            {productList.map((product, index) => {
               return (
                 <Product
                   key={index}
@@ -130,14 +140,14 @@ export default function ProductListing({ products }) {
 
 export async function getServerSideProps(context) {
   let allProducts = [];
-  try{
-    const response = await Client.getEntries({'content_type' : 'products'})
+  try {
+    const response = await Client.getEntries({ 'content_type': 'products'})
     const responseData = response.items
-    if(responseData){
-        allProducts = cleanProducts(responseData)
+    if (responseData) {
+      allProducts = cleanProducts(responseData)
     }
   } catch (error) {
-  console.log(error)
+    console.log(error)
   }
 
   const productsinCategory = allProducts.filter((item) => {
