@@ -111,25 +111,24 @@ export default function ProductListing({ products }) {
   );
 }
 
-export async function getStaticPaths() {
-  let allCategories = [];
-  try{
-    const response = await Client.getEntries({'content_type': 'category'})
-    const responseData = response.items;
-    if(responseData){
-      allCategories = cleanCategories(responseData);
-    }
-  } catch(error){
-    console.log(error)
-  }
-  const paths = allCategories.map((item) => {
-    return { params: { productListing: item.slug } };
-  });
-  return { paths, fallback: false };
-}
+// export async function getStaticPaths() {
+//   let allCategories = [];
+//   try{
+//     const response = await Client.getEntries({'content_type': 'category'})
+//     const responseData = response.items;
+//     if(responseData){
+//       allCategories = cleanCategories(responseData);
+//     }
+//   } catch(error){
+//     console.log(error)
+//   }
+//   const paths = allCategories.map((item) => {
+//     return { params: { productListing: item.slug } };
+//   });
+//   return { paths, fallback: false };
+// }
 
-export async function getStaticProps(context) {
-  console.log(Client)
+export async function getServerSideProps(context) {
   let allProducts = [];
   try{
     const response = await Client.getEntries({'content_type' : 'products'})
