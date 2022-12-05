@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Category from "../Category/Category";
 import Pagination from "../Pagination/Pagination";
 import Link from "next/link";
-import styles from "../../components/Navbar/Navbar.module.css";
+import styles from "./CategoryView.module.css";
 import { GrSearch } from "react-icons/gr";
 
 

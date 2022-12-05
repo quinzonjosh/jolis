@@ -1,0 +1,11 @@
+.searchbar {
+    @apply w-[90%] lg:w-[50%] border-2 border-white-accent-lavender border-r-0 rounded-l-lg p-2 text-xs focus:border-tertiary outline-none font-base;
+}
+
+.searchbar:focus-visible + button {
+    @apply border-tertiary;
+}
+
+.search_icon > path {
+    @apply stroke-secondary;
+}
