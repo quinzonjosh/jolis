@@ -13,6 +13,7 @@ import { Client } from "../../api/contentful";
 import { cleanCategories, cleanProducts } from "../../utils/cleanData";
 import { GiConsoleController } from "react-icons/gi";
 import axios from "axios";
+import Pagination from "../../components/Pagination/Pagination";
 
 export default function ProductListing({ products }) {
   const router = useRouter();
@@ -24,10 +25,34 @@ export default function ProductListing({ products }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const query = event.target.search.value;
+    router.push("/categories/search")
     const {data, status} = await axios.post("/api/search", { query })
-    console.log(data)
+    //console.log(data)
     setProductList(data.products);
+    setNumPages(Math.ceil(data.products.length / PRODUCTS_PER_PAGE));
+    //console.log(data.products.length);
+    setPageNumber(1);
+    setFlipper(!flipper);
   }
+
+  /* Pagination handler */
+  const PRODUCTS_PER_PAGE = 9;
+  const [flipper, setFlipper] = useState(true);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [productList2, setProducts] = useState(productList);
+  const [numPages, setNumPages] = useState(Math.ceil(productList.length / PRODUCTS_PER_PAGE));
+
+  useEffect(() => {
+    const startPage = PRODUCTS_PER_PAGE * (pageNumber - 1);
+    const endPage = PRODUCTS_PER_PAGE * pageNumber;
+    setProducts(productList.slice(startPage, endPage));
+  }, [pageNumber, flipper]);
+
+  //Kick to categories if no data
+  useEffect(() => {
+    if(numPages == 0)
+      router.push("/categories");
+  }, []);
 
   return (
     <Layout className="w-full">
@@ -39,7 +64,7 @@ export default function ProductListing({ products }) {
         }
       />
 
-      <section className="flex flex-col md:flex-row border-b border-black py-10 relative">
+      <section className="flex flex-col md:flex-row py-10 relative">
         {/* left panel */}
         <div className="md:w-[25%] flex flex-col px-3 md:px-10 gap-2">
           {/* Search bar (desktop view)*/}
@@ -69,7 +94,7 @@ export default function ProductListing({ products }) {
                   name="search"
                   type="text"
                   placeholder="Search products"
-                  className="w-[150px] md:w-[100%] text-xs md:text-xl p-2"
+                  className="w-[150px] md:w-[100%] text-xs md:text-xl p-2 rounded-xl"
                 />
                 <button type="submit" className="p-1">
                   <GrSearch />
@@ -99,10 +124,10 @@ export default function ProductListing({ products }) {
         {/* All products grid */}
         <div className="w-[90%] mx-auto py-5">
           <h2 className="font-bold text-3xl text-secondary pb-5">
-            All Products
+            {router.asPath == "/categories/search" ? "Search Results" : "All Products"}
           </h2>
           <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:px-0 md:py-5 md:w-[80%] gap-3 md:gap-x-24 ">
-            {productList.map((product, index) => {
+            {productList2.map((product, index) => {
               return (
                 <Product
                   key={index}
@@ -117,6 +142,15 @@ export default function ProductListing({ products }) {
           </div>
         </div>
       </section>
+      <div className="border-b border-black">
+        <div className="pb-12">
+          <Pagination
+              numPages={numPages}
+              currentPage={pageNumber}
+              pageChanger={setPageNumber}
+            />
+        </div>
+      </div>
     </Layout>
   );
 }
