@@ -9,10 +9,11 @@ import Product from "../../components/Product/Product";
 import Banner from "../../components/Banner/Banner";
 import { useState, useEffect, useCallback } from "react";
 import FilterBox from "../../components/FilterBox/FilterBox";
-import {Client} from "../../api/contentful";
+import { Client } from "../../api/contentful";
 import { cleanCategories, cleanProducts } from "../../utils/cleanData";
 import { GiConsoleController } from "react-icons/gi";
 import Pagination from "../../components/Pagination/Pagination";
+import axios from "axios";
 
 export default function ProductListing({ products }) {
   const router = useRouter();
@@ -43,6 +44,15 @@ export default function ProductListing({ products }) {
   }, [pageNumber]);
 
   const [hideFilter, setHideFilter] = useState(true);
+  const [productList, setProductList] = useState(products);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const query = event.target.search.value;
+    const {data, status} = await axios.post("/api/search", { query })
+    console.log(data)
+    setProductList(data.products);
+  }
 
   return (
     <Layout className="w-full">
@@ -78,35 +88,24 @@ export default function ProductListing({ products }) {
               </button>
             </div>
 
-            <div className="flex md:w-[100%] border-2 rounded-xl shadow-lg">
-              <input
-                type="search"
-                name="Search here"
-                placeholder="Search products"
-                className="w-[150px] md:w-[100%] text-xs md:text-xl p-2 rounded-xl"
-              />
-              <button className="p-1">
-                <GrSearch />
-              </button>
+            <div className="md:w-[100%] border-2 rounded-xl shadow-lg">
+              <form onSubmit={handleSubmit} className="flex">
+                <input
+                  name="search"
+                  type="text"
+                  placeholder="Search products"
+                  className="w-[150px] md:w-[100%] text-xs md:text-xl p-2 rounded-xl"
+                />
+                <button type="submit" className="p-1">
+                  <GrSearch />
+                </button>
+              </form>
             </div>
           </div>
           <div
-            className={`${
-              hideFilter ? " -left-full" : "left-0"
-            } overflow-scroll max-h-[400px] md:max-h-[auto] transition-all w-full z-10 top-[90px] md:w-auto absolute md:static`}
+            className={`${hideFilter ? " -left-full" : "left-0"
+              } overflow-scroll max-h-[400px] md:max-h-[auto] transition-all w-full z-10 top-[90px] md:w-auto absolute md:static`}
           >
-            {/* browse type */}
-            <FilterBox
-              title="Type"
-              items={[
-                "All Products",
-                "Architecture",
-                "Drawing Supplies",
-                "School Supplies",
-                "Tables",
-                "Books",
-              ]}
-            />
 
             {/* browse brand */}
             <FilterBox
@@ -145,34 +144,33 @@ export default function ProductListing({ products }) {
   );
 }
 
-export async function getStaticPaths() {
-  let allCategories = [];
-  try{
-    const response = await Client.getEntries({'content_type': 'category'})
-    const responseData = response.items;
-    if(responseData){
-      allCategories = cleanCategories(responseData);
-    }
-  } catch(error){
-    console.log(error)
-  }
-  const paths = allCategories.map((item) => {
-    return { params: { productListing: item.slug } };
-  });
-  return { paths, fallback: false };
-}
+// export async function getStaticPaths() {
+//   let allCategories = [];
+//   try{
+//     const response = await Client.getEntries({'content_type': 'category'})
+//     const responseData = response.items;
+//     if(responseData){
+//       allCategories = cleanCategories(responseData);
+//     }
+//   } catch(error){
+//     console.log(error)
+//   }
+//   const paths = allCategories.map((item) => {
+//     return { params: { productListing: item.slug } };
+//   });
+//   return { paths, fallback: false };
+// }
 
-export async function getStaticProps(context) {
-  console.log(Client)
+export async function getServerSideProps(context) {
   let allProducts = [];
-  try{
-    const response = await Client.getEntries({'content_type' : 'products'})
+  try {
+    const response = await Client.getEntries({ 'content_type': 'products'})
     const responseData = response.items
-    if(responseData){
-        allProducts = cleanProducts(responseData)
+    if (responseData) {
+      allProducts = cleanProducts(responseData)
     }
   } catch (error) {
-  console.log(error)
+    console.log(error)
   }
 
   const productsinCategory = allProducts.filter((item) => {

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import Category from "../Category/Category";
 import Pagination from "../Pagination/Pagination";
 import Link from "next/link";
+import styles from "./CategoryView.module.css";
+import { GrSearch } from "react-icons/gr";
+
 
 const CategoryView = ({ categoryList }) => {
   const CATEGORIES_PER_PAGE = 12;
@@ -28,7 +31,19 @@ const CategoryView = ({ categoryList }) => {
 
   return (
     <section className="py-6 px-5">
-      <div className="container mx-auto">
+      <div className="container mx-auto flex flex-col">
+        <div className="flex justify-center w-[100%]">
+            <input
+              type="search"
+              name="Search here"
+              placeholder="Search a category"
+              className={styles.searchbar}
+            />
+            <button className="border-2 border-l-0 bg-white border-white-accent-lavender rounded-r-lg p-1">
+              <GrSearch className={styles.search_icon} />
+            </button>
+        </div>
+        
         <div className="grid md:gap-5 sm:gap-2 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:px-10 py-10">
           {categories}
         </div>
