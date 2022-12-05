@@ -71,18 +71,6 @@ export default function ProductListing({ products }) {
               hideFilter ? " -left-full" : "left-0"
             } overflow-scroll max-h-[400px] md:max-h-[auto] transition-all w-full z-10 top-[90px] md:w-auto absolute md:static`}
           >
-            {/* browse type */}
-            <FilterBox
-              title="Type"
-              items={[
-                "All Products",
-                "Architecture",
-                "Drawing Supplies",
-                "School Supplies",
-                "Tables",
-                "Books",
-              ]}
-            />
 
             {/* browse brand */}
             <FilterBox
