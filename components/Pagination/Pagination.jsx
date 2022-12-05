@@ -23,7 +23,7 @@ const Pagination = ({ numPages, currentPage, pageChanger }) => {
   return (
     <p className="text-center">
       <button onClick={prevPage} className="hover:bg-gray-200 mr-7 text-gray-500 font-mono">
-        🠔PREV
+        ←PREV
       </button>
       {[...Array(numPages).keys()].map((item) => {
         return (
@@ -40,7 +40,7 @@ const Pagination = ({ numPages, currentPage, pageChanger }) => {
         );
       })}
       <button onClick={nextPage} className="hover:bg-gray-200 ml-7 text-gray-500 font-mono">
-        NEXT🠖
+        NEXT→
       </button>
     </p>
   );
