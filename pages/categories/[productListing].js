@@ -25,8 +25,10 @@ export default function ProductListing({ products }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const query = event.target.search.value;
-    router.push("/categories/search")
-    const {data, status} = await axios.post("/api/search", { query })
+    const type = "products";
+    const limit = PRODUCTS_PER_PAGE;
+    router.push("/categories/search");
+    const {data, status} = await axios.post("/api/search", { type, query, limit })
     //console.log(data)
     setProductList(data.products);
     setNumPages(Math.ceil(data.products.length / PRODUCTS_PER_PAGE));

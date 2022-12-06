@@ -4,8 +4,10 @@ import { cleanProducts } from "../../utils/cleanData";
 
 export default async function handler(req, res) {
     if (req.method === "POST") {
+        const type = req.body.type
         const query = req.body.query
-        const data = await Client.getEntries({ 'content_type': 'products', query: query, limit: 9 });
+        const limit = req.body.limit
+        const data = await Client.getEntries({ 'content_type': type, query: query, limit: limit });
         console.log(data);
         /** 
          * {
@@ -16,9 +18,19 @@ export default async function handler(req, res) {
          *  
          * }
          * 
-         * */        
-        const products = cleanProducts(data.items);
-        res.status(200).json({ products })
+         * */
+         const total = data.total; //Get total number of items for pagination
+        switch (type) {
+            case "products":
+                const products = cleanProducts(data.items);
+                res.status(200).json({ products, total })
+                break;
+            case "category":
+                const categoryList = cleanCategories(data.items);
+                res.status(200).json({ categoryList, total })
+                break;
+        }
+        
     }
 }
 
