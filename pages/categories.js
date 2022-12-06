@@ -4,11 +4,11 @@ import CategoryView from "../components/CategoryView/CategoryView";
 import { cleanCategories } from "../utils/cleanData";
 import {Client} from "../api/contentful";
 
-const categories = ({ categoryList }) => {
+const categories = ({ categoryList, total }) => {
   return (
     <Layout page="Products">
       <Banner title="Product Categories" />
-      <CategoryView categoryList={categoryList} />
+      <CategoryView categoryList={categoryList} total={total} />
     </Layout>
   );
 };
@@ -17,12 +17,14 @@ export default categories;
 
 export async function getServerSideProps(context) {
   let categories = [];
+  let total;
   try{
-    const response = await Client.getEntries({'content_type' : 'category', order: "fields.categoryName"})
+    const response = await Client.getEntries({'content_type' : 'category', order: "fields.categoryName", limit: 12})
     const responseData = response.items
 
     if(responseData){
         categories = cleanCategories(responseData)
+        total = response.total
     }
   } catch (error) {
   console.log(error)
@@ -30,6 +32,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       categoryList: categories,
+      total: total
     },
   };
 }
