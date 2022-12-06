@@ -20,15 +20,15 @@ export default async function handler(req, res) {
          * }
          * 
          * */
-         const total = data.total; //Get total number of items for pagination
+        const total = data.total; //Get total number of items for pagination
         switch (type) {
             case "products":
                 const products = cleanProducts(data.items);
-                res.status(200).json({ products, total })
+                res.status(200).json({ products, total });
                 break;
             case "category":
                 const categoryList = cleanCategories(data.items);
-                res.status(200).json({ categoryList, total })
+                res.status(200).json({ categoryList, total });
                 break;
         }
         
