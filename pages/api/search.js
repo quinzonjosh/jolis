@@ -1,11 +1,16 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { Client } from "../../api/contentful";
-import { cleanProducts } from "../../utils/cleanData";
+import { cleanCategories, cleanProducts } from "../../utils/cleanData";
 
 export default async function handler(req, res) {
     if (req.method === "POST") {
-        const query = req.body.query
-        const data = await Client.getEntries({ 'content_type': 'products', query: query, limit: 9 });
+        const type = req.body.type;
+        const query = req.body.query;
+        const limit = req.body.limit;
+        const skip = req.body.skip;
+        const categoryName = req.body.categoryName;
+        const data = await Client.getEntries({ 'content_type': type, query: query, limit: limit, skip: skip, 
+            "fields.categoryName": categoryName });
         console.log(data);
         /** 
          * {
@@ -16,9 +21,19 @@ export default async function handler(req, res) {
          *  
          * }
          * 
-         * */        
-        const products = cleanProducts(data.items);
-        res.status(200).json({ products })
+         * */
+        const total = data.total; //Get total number of items for pagination
+        switch (type) {
+            case "products":
+                const products = cleanProducts(data.items);
+                res.status(200).json({ products, total });
+                break;
+            case "category":
+                const categoryList = cleanCategories(data.items);
+                res.status(200).json({ categoryList, total });
+                break;
+        }
+        
     }
 }
 

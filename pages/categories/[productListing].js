@@ -21,31 +21,41 @@ export default function ProductListing({ products }) {
 
   const [hideFilter, setHideFilter] = useState(true);
   const [productList, setProductList] = useState(products);
+  const PRODUCTS_PER_PAGE = 9;
+  let [categoryName, setCategory] = useState(router.asPath.replace("/categories/", ""));
+  let [query, setQuery] = useState("");
+  const type = "products";
+  const limit = PRODUCTS_PER_PAGE;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const query = event.target.search.value;
-    router.push("/categories/search")
-    const {data, status} = await axios.post("/api/search", { query })
-    //console.log(data)
+    query = event.target.search.value;
+    setQuery(event.target.search.value);
+    
+    setCategory("");
+    router.push("/categories/search");
+    const {data, status} = await axios.post("/api/search", { type, query, limit });
+
     setProductList(data.products);
-    setNumPages(Math.ceil(data.products.length / PRODUCTS_PER_PAGE));
-    //console.log(data.products.length);
+    setNumPages(Math.ceil(data.total / PRODUCTS_PER_PAGE));
     setPageNumber(1);
     setFlipper(!flipper);
   }
 
   /* Pagination handler */
-  const PRODUCTS_PER_PAGE = 9;
   const [flipper, setFlipper] = useState(true);
   const [pageNumber, setPageNumber] = useState(1);
   const [productList2, setProducts] = useState(productList);
   const [numPages, setNumPages] = useState(Math.ceil(productList.length / PRODUCTS_PER_PAGE));
 
   useEffect(() => {
-    const startPage = PRODUCTS_PER_PAGE * (pageNumber - 1);
-    const endPage = PRODUCTS_PER_PAGE * pageNumber;
-    setProducts(productList.slice(startPage, endPage));
+    const fetchData = async () => {
+      const skip = (pageNumber-1)*PRODUCTS_PER_PAGE;
+      const {data, status} = await axios.post("/api/search", { type, query, limit, skip, categoryName })
+
+      setProducts(data.products);
+    };
+    fetchData().catch(console.error);
   }, [pageNumber, flipper]);
 
   //Kick to categories if no data
@@ -154,23 +164,6 @@ export default function ProductListing({ products }) {
     </Layout>
   );
 }
-
-// export async function getStaticPaths() {
-//   let allCategories = [];
-//   try{
-//     const response = await Client.getEntries({'content_type': 'category'})
-//     const responseData = response.items;
-//     if(responseData){
-//       allCategories = cleanCategories(responseData);
-//     }
-//   } catch(error){
-//     console.log(error)
-//   }
-//   const paths = allCategories.map((item) => {
-//     return { params: { productListing: item.slug } };
-//   });
-//   return { paths, fallback: false };
-// }
 
 export async function getServerSideProps(context) {
   let allProducts = [];
