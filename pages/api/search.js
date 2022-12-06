@@ -8,7 +8,9 @@ export default async function handler(req, res) {
         const query = req.body.query;
         const limit = req.body.limit;
         const skip = req.body.skip;
-        const data = await Client.getEntries({ 'content_type': type, query: query, limit: limit, skip: skip });
+        const categoryName = req.body.categoryName;
+        const data = await Client.getEntries({ 'content_type': type, query: query, limit: limit, skip: skip, 
+            "fields.categoryName": categoryName });
         console.log(data);
         /** 
          * {
