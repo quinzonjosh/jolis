@@ -4,10 +4,11 @@ import { cleanProducts } from "../../utils/cleanData";
 
 export default async function handler(req, res) {
     if (req.method === "POST") {
-        const type = req.body.type
-        const query = req.body.query
-        const limit = req.body.limit
-        const data = await Client.getEntries({ 'content_type': type, query: query, limit: limit });
+        const type = req.body.type;
+        const query = req.body.query;
+        const limit = req.body.limit;
+        const skip = req.body.skip;
+        const data = await Client.getEntries({ 'content_type': type, query: query, limit: limit, skip: skip });
         console.log(data);
         /** 
          * {
