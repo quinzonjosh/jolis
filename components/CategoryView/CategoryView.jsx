@@ -33,15 +33,17 @@ const CategoryView = ({ categoryList }) => {
     <section className="py-6 px-5">
       <div className="container mx-auto flex flex-col">
         <div className="flex justify-center w-[100%]">
-            <input
+            <form className="flex justify-center w-[90%] lg:w-[50%]">
+              <input
               type="search"
               name="Search here"
               placeholder="Search a category"
               className={styles.searchbar}
-            />
-            <button className="border-2 border-l-0 bg-white border-white-accent-lavender rounded-r-lg p-1">
-              <GrSearch className={styles.search_icon} />
-            </button>
+              />
+              <button className="border-2 border-l-0 bg-white border-white-accent-lavender rounded-r-lg p-1">
+                <GrSearch className={styles.search_icon} />
+              </button>
+            </form>
         </div>
         
         <div className="grid md:gap-5 sm:gap-2 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:px-10 py-10">
