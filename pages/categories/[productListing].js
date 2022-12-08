@@ -1,88 +1,88 @@
-import Head from "next/head";
-import Image from "next/image";
 import Layout from "../../components/Layout/Layout";
-import Link from "next/link";
 import { GrSearch, GrSystem } from "react-icons/gr";
 import { BsFilterLeft } from "react-icons/bs";
 import { useRouter } from "next/router";
 import Product from "../../components/Product/Product";
 import Banner from "../../components/Banner/Banner";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import FilterBox from "../../components/FilterBox/FilterBox";
 import { Client } from "../../api/contentful";
 import { cleanCategories, cleanProducts } from "../../utils/cleanData";
-import { GiConsoleController } from "react-icons/gi";
 import axios from "axios";
 import Pagination from "../../components/Pagination/Pagination";
 
-export default function ProductListing({ products }) {
-  const router = useRouter();
-  const category = router.query;
-
+export default function ProductListing({
+  products,
+  productsPerPage,
+  numPages,
+  category,
+}) {
   const [hideFilter, setHideFilter] = useState(true);
   const [productList, setProductList] = useState(products);
-  const PRODUCTS_PER_PAGE = 9;
-  let [categoryName, setCategory] = useState(router.asPath.replace("/categories/", ""));
-  let [query, setQuery] = useState("");
+
+  const [query, setQuery] = useState("");
   const type = "products";
-  const limit = PRODUCTS_PER_PAGE;
+  const limit = productsPerPage;
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(numPages);
+  const mounted = useRef(true);
+  const categoryName = category.split("-").join(" "); 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    query = event.target.search.value;
     setQuery(event.target.search.value);
-    
-    setCategory("");
-    router.push("/categories/search");
-    const {data, status} = await axios.post("/api/search", { type, query, limit });
+    const { data, status } = await axios.get("/api/search/products", {
+      params: {
+        type,
+        query,
+        category,
+        page,
+        limit,
+      },
+    });
 
     setProductList(data.products);
-    setNumPages(Math.ceil(data.total / PRODUCTS_PER_PAGE));
-    setPageNumber(1);
-    setFlipper(!flipper);
-  }
-
-  /* Pagination handler */
-  const [flipper, setFlipper] = useState(true);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [productList2, setProducts] = useState(productList);
-  const [numPages, setNumPages] = useState(Math.ceil(productList.length / PRODUCTS_PER_PAGE));
+    setTotalPages(data.numPages);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const skip = (pageNumber-1)*PRODUCTS_PER_PAGE;
-      const {data, status} = await axios.post("/api/search", { type, query, limit, skip, categoryName })
+    (async () => {
+      if (mounted.current) {
+        mounted.current = false;
+        return;
+      }
+      const { data, status } = await axios.get("/api/search/products", {
+        params: {
+          type,
+          query,
+          category,
+          page,
+          limit,
+        },
+      });
 
-      setProducts(data.products);
-    };
-    fetchData().catch(console.error);
-  }, [pageNumber, flipper]);
-
-  //Kick to categories if no data
-  useEffect(() => {
-    if(numPages == 0)
-      router.push("/categories");
-  }, []);
+      setProductList(data.products);
+      setTotalPages(data.numPages);
+    })();
+  }, [page]);
 
   return (
     <Layout className="w-full">
       <Banner
         title={
-          category["productListing"] != null
-            ? category["productListing"]
-            : "Product Listing"
+          categoryName
         }
       />
 
-      <section className="flex flex-col md:flex-row py-10 relative">
+      <section className="flex flex-col lg:flex-row py-10 relative">
         {/* left panel */}
-        <div className="md:w-[25%] flex flex-col px-3 md:px-10 gap-2">
+        <div className="lg:w-[25%] flex flex-col px-3 md:px-10 gap-2">
           {/* Search bar (desktop view)*/}
           <div className="flex justify-between">
             {/* filter and Search bar (mobile view)*/}
             <div className="flex">
               <button
-                className="md:hidden flex border-2 rounded-lg shadow-lg pl-2 pr-4 pt-1"
+                className="lg:hidden flex border-2 rounded-lg shadow-lg pl-2 pr-4 pt-1"
                 onClick={() => {
                   document.body.style.overflow = hideFilter
                     ? "hidden"
@@ -98,7 +98,7 @@ export default function ProductListing({ products }) {
               </button>
             </div>
 
-            <div className="md:w-[100%] border-2 rounded-xl shadow-lg">
+            <div className="lg:w-[100%] border-2 rounded-xl shadow-lg">
               <form onSubmit={handleSubmit} className="flex">
                 <input
                   name="search"
@@ -113,10 +113,10 @@ export default function ProductListing({ products }) {
             </div>
           </div>
           <div
-            className={`${hideFilter ? " -left-full" : "left-0"
-              } overflow-scroll max-h-[400px] md:max-h-[auto] transition-all w-full z-10 top-[90px] md:w-auto absolute md:static`}
+            className={`${
+              hideFilter ? " -left-full" : "left-0"
+            } overflow  lg:max-h-[auto] transition-all w-full z-[1002] top-0 lg:w-auto fixed lg:static`}
           >
-
             {/* browse brand */}
             <FilterBox
               title="Brand"
@@ -127,23 +127,24 @@ export default function ProductListing({ products }) {
                 "G-Tec",
                 "Muji",
               ]}
+              setHideFilter={setHideFilter}
             />
           </div>
         </div>
 
         {/* All products grid */}
         <div className="w-[90%] mx-auto py-5">
-          <h2 className="font-bold text-3xl text-secondary pb-5">
-            {router.asPath == "/categories/search" ? "Search Results" : "All Products"}
+          <h2 className="font-bold text-3xl text-secondary pb-5 capitalize">
+            {categoryName}
           </h2>
-          <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:px-0 md:py-5 md:w-[80%] gap-3 md:gap-x-24 ">
-            {productList2.map((product, index) => {
+          <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:px-0 md:py-5 md:w-[80%] gap-3 md:gap-x-24 lg:mx-0 mx-auto">
+            {productList.map((product, index) => {
               return (
                 <Product
                   key={index}
                   image={product.image}
                   name={product.name}
-                  category={product.category}
+                  categories={product.categories}
                   espana_stock={product.espana_stock}
                   pnoval_stock={product.pnoval_stock}
                 />
@@ -155,10 +156,10 @@ export default function ProductListing({ products }) {
       <div className="border-b border-black">
         <div className="pb-12">
           <Pagination
-              numPages={numPages}
-              currentPage={pageNumber}
-              pageChanger={setPageNumber}
-            />
+            numPages={totalPages}
+            currentPage={page}
+            pageChanger={setPage}
+          />
         </div>
       </div>
     </Layout>
@@ -166,25 +167,34 @@ export default function ProductListing({ products }) {
 }
 
 export async function getServerSideProps(context) {
-  let allProducts = [];
   try {
-    const response = await Client.getEntries({ 'content_type': 'products'})
-    const responseData = response.items
-    if (responseData) {
-      allProducts = cleanProducts(responseData)
-    }
+    const LIMIT = 9;
+    const category = context.params.productListing;
+    const response = await Client.getEntries({
+      content_type: "products",
+    });
+    const products = cleanProducts(response.items).filter((item) => {
+      return [...item.categories.map((category) => category.slug)].includes(
+        category
+      );
+    });
+    return {
+      props: {
+        products: products.slice(0, LIMIT),
+        productsPerPage: LIMIT,
+        numPages: Math.ceil(products.length / LIMIT),
+        category: category,
+      },
+    };
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    return {
+      props: {
+        products: [],
+        productsPerPage: 0,
+        numPages: 0,
+        category: "",
+      },
+    };
   }
-
-  const productsinCategory = allProducts.filter((item) => {
-    const category = item.category.toLowerCase().split(" ").join("-");
-    return category == context.params.productListing;
-  });
-
-  return {
-    props: {
-      products: productsinCategory,
-    },
-  };
 }
