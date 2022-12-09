@@ -6,7 +6,7 @@ const Banner = ({ title, image }) => {
       <div className="w-full bg-primary opacity-70 h-[100vh] z-[1] absolute left-0 top-0"></div>
       <Image src={image} alt={title} layout="fill" objectFit="cover" />
       <div className="relative z-[2] text-white h-full flex items-center justify-center text-center">
-        <h1>{title}</h1>
+        <h1 className="capitalize">{title}</h1>
       </div>
     </section>
   );
