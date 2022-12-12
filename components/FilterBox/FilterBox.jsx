@@ -19,12 +19,13 @@ const FilterBox = ({ title, items, setHideFilter, handleFilter }) => {
       <ul className="flex flex-col gap-1">
         {items.map((item, index) => {
           return (
-            <li
+            <button
               key={index}
-              className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1"
+              className="hover:cursor-pointer text-primary text-left hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1"
+              onClick={handleFilter} value={item}
             >
-              <button onClick={handleFilter} value={item}>{item}</button>
-            </li>
+              {item}
+            </button>
           );
         })}
       </ul>
