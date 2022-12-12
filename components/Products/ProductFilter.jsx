@@ -49,7 +49,7 @@ const ProductFilter = ({ handler, brands, searchRef, handleSubmit, handleFilter 
       </div>
       <div
         className={`${hideFilter ? " -left-full" : "left-0"
-          } overflow-x-scroll lg:max-h-[auto] transition-all w-full z-1002 z-[1002] lg:z-0 top-0 lg:w-auto fixed lg:static`}
+          } lg:max-h-[auto] transition-all w-full z-1002 z-[1002] lg:z-0 top-0 lg:w-auto fixed lg:static`}
       >
         {/* browse brand */}
         <FilterBox
