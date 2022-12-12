@@ -26,7 +26,7 @@ export default function ProductListing({
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(numPages);
   const mounted = useRef(true);
-  const categoryName = category.split("-").join(" "); 
+  const categoryName = category.split("-").join(" ");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,7 +34,7 @@ export default function ProductListing({
     const { data, status } = await axios.get("/api/search/products", {
       params: {
         type,
-        query,
+        query: event.target.search.value,
         category,
         page,
         limit,
@@ -113,9 +113,8 @@ export default function ProductListing({
             </div>
           </div>
           <div
-            className={`${
-              hideFilter ? " -left-full" : "left-0"
-            } overflow  lg:max-h-[auto] transition-all w-full z-[1002] top-0 lg:w-auto fixed lg:static`}
+            className={`${hideFilter ? " -left-full" : "left-0"
+              } overflow  lg:max-h-[auto] transition-all w-full z-[1002] top-0 lg:w-auto fixed lg:static`}
           >
             {/* browse brand */}
             <FilterBox
@@ -166,7 +165,20 @@ export default function ProductListing({
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticPaths() {
+  const response = await Client.getEntries({ 'content_type': 'category', order: "fields.categoryName" });
+
+  const paths = cleanCategories(response.items).map((category) => { return { params: { productListing: category.slug } } }) // [{ params: { id: '1' } }, { params: { id: '2' } }],
+
+  return {
+    paths,
+    fallback: false
+  }
+
+
+}
+
+export async function getStaticProps(context) {
   try {
     const LIMIT = 9;
     const category = context.params.productListing;
@@ -184,6 +196,7 @@ export async function getServerSideProps(context) {
         productsPerPage: LIMIT,
         numPages: Math.ceil(products.length / LIMIT),
         category: category,
+        revalidate: 10
       },
     };
   } catch (error) {
@@ -194,6 +207,7 @@ export async function getServerSideProps(context) {
         productsPerPage: 0,
         numPages: 0,
         category: "",
+        revalidate: 10
       },
     };
   }

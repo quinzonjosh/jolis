@@ -5,8 +5,13 @@ export const cleanCategories = (rawData) => {
     const { categoryName: name, categorySlug: slug, categoryPhoto } = fields;
     const image = "https:" + categoryPhoto.fields.file.url;
     const updatedCategories = { id, name, slug, image };
+    
+
     return updatedCategories;
   });
+
+  // console.log(cleanCategory);
+
   return cleanCategory;
 };
 
