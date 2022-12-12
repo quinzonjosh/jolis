@@ -27,6 +27,7 @@ const CategoryView = ({ categoryList, total }) => {
     const { data, status } = await axios.get("/api/search/categories", { params: { type: "category", limit: CATEGORIES_PER_PAGE, pageNumber, query:event.target.search.value } });
     setCategories(data.categories);
     setNumPages(data.numPages);
+    setPageNumber(1);
     setLoading(false);
   }
   useEffect(() => {

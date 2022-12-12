@@ -47,6 +47,7 @@ export default function ProductListing({
     setLoading(false);
     setProductList(data.products);
     setTotalPages(data.numPages);
+    setPage(1);
     searchRef.current.value = "";
   }
 
@@ -66,6 +67,7 @@ export default function ProductListing({
     setLoading(false);
     setProductList(data.products);
     setTotalPages(data.numPages);
+    setPage(1);
   };
 
   useEffect(() => {
