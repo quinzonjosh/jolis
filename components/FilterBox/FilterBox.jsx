@@ -1,9 +1,8 @@
 import { AiOutlineClose } from "react-icons/ai";
 
 const FilterBox = ({ title, items, setHideFilter, handleFilter }) => {
-  console.log("item",items)
   return (
-    <div className="h-screen flex flex-col lg:h-auto  lg:block w-[100%] bg-white border-2 rounded-xl shadow-lg p-2">
+    <div className="h-screen overflow-x-scroll flex flex-col lg:h-auto  lg:block w-[100%] bg-white border-2 rounded-xl shadow-lg p-2">
       <button
         className="lg:hidden text-2xl block self-end text-primary"
         onClick={() => {

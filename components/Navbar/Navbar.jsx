@@ -4,7 +4,7 @@ import useScrollPosition from "../../hooks/useScrollPosition";
 import styles from "./Navbar.module.css";
 
 import { GrSearch } from "react-icons/gr";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -14,6 +14,16 @@ import links from "../../data/navLinks.json";
 const Navbar = ({ page }) => {
   const [hideNav, setHideNav] = useState(true);
   const scrollPosition = useScrollPosition();
+
+  useEffect(()=>{
+
+    document.body.style.overflow = hideNav ? "scroll" : "hidden";
+
+
+    return () => {
+      document.body.style.overflow = "scroll";
+    }
+  }, [hideNav])
 
   return (
     <header
@@ -41,7 +51,6 @@ const Navbar = ({ page }) => {
         <button
           className={styles.hamburger_menu}
           onClick={() => {
-            document.body.style.overflow = "hidden";
             setHideNav((hideNav) => {
               return !hideNav;
             });
@@ -57,7 +66,6 @@ const Navbar = ({ page }) => {
             <button
               className="lg:hidden text-2xl block self-end text-primary"
               onClick={() => {
-                document.body.style.overflow = "scroll";
                 setHideNav((hideNav) => {
                   return !hideNav;
                 });
