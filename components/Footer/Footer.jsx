@@ -18,8 +18,8 @@ const Footer = () => {
       link: "/categories/drawing-supplies",
     },
     {
-      name: "Tables",
-      link: "/categories",
+      name: "Acrylic Color Books",
+      link: "/categories/acrylic-color-books",
     },
   ];
 
