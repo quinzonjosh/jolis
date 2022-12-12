@@ -39,7 +39,7 @@ const Pagination = ({ numPages, currentPage, pageChanger }) => {
           </button>
         );
       })}
-      <button onClick={nextPage} className="hover:bg-gray-200 ml-7 text-gray-500 font-heading">
+      <button onClick={nextPage} className="hover:bg-gray-200 ml-7 text-gray-500 font-heading ">
         NEXT→
       </button>
     </div>
