@@ -1,36 +1,59 @@
 import Layout from "../../components/Layout/Layout";
-import { GrSearch, GrSystem } from "react-icons/gr";
-import { BsFilterLeft } from "react-icons/bs";
 import { useRouter } from "next/router";
-import Product from "../../components/Product/Product";
 import Banner from "../../components/Banner/Banner";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
-import FilterBox from "../../components/FilterBox/FilterBox";
 import { Client } from "../../api/contentful";
 import { cleanCategories, cleanProducts } from "../../utils/cleanData";
 import axios from "axios";
 import Pagination from "../../components/Pagination/Pagination";
+import ProductList from "../../components/Products/ProductList";
+import ProductFilter from "../../components/Products/ProductFilter";
+
 
 export default function ProductListing({
   products,
   productsPerPage,
   numPages,
   category,
+  brands
 }) {
-  const [hideFilter, setHideFilter] = useState(true);
   const [productList, setProductList] = useState(products);
-
   const [query, setQuery] = useState("");
-  const type = "products";
-  const limit = productsPerPage;
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(numPages);
+  const [loading, setLoading] = useState(false);
+
+  const type = "products";
+  const limit = productsPerPage;
+
   const mounted = useRef(true);
   const categoryName = category.split("-").join(" ");
+  const searchRef = useRef();
+
+  const handleFilter = async (event) => {
+    event.preventDefault();
+    const brand = event.target.value === "All brands" ? "" : event.target.value;
+    setLoading(true);
+    const { data, status } = await axios.get("/api/search/products", {
+      params: {
+        type,
+        query: "",
+        category,
+        page,
+        limit,
+        brand
+      },
+    });
+    setLoading(false);
+    setProductList(data.products);
+    setTotalPages(data.numPages);
+    searchRef.current.value = "";
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setQuery(event.target.search.value);
+    setLoading(true);
     const { data, status } = await axios.get("/api/search/products", {
       params: {
         type,
@@ -40,7 +63,7 @@ export default function ProductListing({
         limit,
       },
     });
-
+    setLoading(false);
     setProductList(data.products);
     setTotalPages(data.numPages);
   };
@@ -51,6 +74,8 @@ export default function ProductListing({
         mounted.current = false;
         return;
       }
+      setLoading(true);
+
       const { data, status } = await axios.get("/api/search/products", {
         params: {
           type,
@@ -60,7 +85,7 @@ export default function ProductListing({
           limit,
         },
       });
-
+      setLoading(false);
       setProductList(data.products);
       setTotalPages(data.numPages);
     })();
@@ -76,81 +101,9 @@ export default function ProductListing({
 
       <section className="flex flex-col lg:flex-row py-10 relative">
         {/* left panel */}
-        <div className="lg:w-[25%] flex flex-col px-3 md:px-10 gap-2">
-          {/* Search bar (desktop view)*/}
-          <div className="flex justify-between">
-            {/* filter and Search bar (mobile view)*/}
-            <div className="flex">
-              <button
-                className="lg:hidden flex border-2 rounded-lg shadow-lg pl-2 pr-4 pt-1"
-                onClick={() => {
-                  document.body.style.overflow = hideFilter
-                    ? "hidden"
-                    : "scroll";
-
-                  setHideFilter((hideFilter) => !hideFilter);
-                }}
-              >
-                <div className="pt-[2px] text-secondary pr-3">
-                  <BsFilterLeft size={22} />
-                </div>
-                <a className="text-secondary">Filter</a>
-              </button>
-            </div>
-
-            <div className="lg:w-[100%] border-2 rounded-xl shadow-lg">
-              <form onSubmit={handleSubmit} className="flex">
-                <input
-                  name="search"
-                  type="text"
-                  placeholder="Search products"
-                  className="w-[150px] md:w-[100%] text-xs md:text-xl p-2 rounded-xl"
-                />
-                <button type="submit" className="p-1">
-                  <GrSearch />
-                </button>
-              </form>
-            </div>
-          </div>
-          <div
-            className={`${hideFilter ? " -left-full" : "left-0"
-              } overflow  lg:max-h-[auto] transition-all w-full z-[1002] top-0 lg:w-auto fixed lg:static`}
-          >
-            {/* browse brand */}
-            <FilterBox
-              title="Brand"
-              items={[
-                "All Brands",
-                "Faber Castell",
-                "Best Buy",
-                "G-Tec",
-                "Muji",
-              ]}
-              setHideFilter={setHideFilter}
-            />
-          </div>
-        </div>
-
+        <ProductFilter handler={""} brands={brands} handleSubmit={handleSubmit} searchRef={searchRef}  handleFilter={handleFilter} />
         {/* All products grid */}
-        <div className="w-[90%] mx-auto py-5">
-          <h2 className="font-bold text-3xl text-secondary pb-5 capitalize">
-            {categoryName}
-          </h2>
-          <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:px-0 md:py-5 md:w-[80%] gap-3 md:gap-x-24 lg:mx-0 mx-auto">
-            {productList.map((product, index) => {
-              return (
-                <Product
-                  key={index}
-                  image={product.image}
-                  name={product.name}
-                  categories={product.categories}
-                  espana_stock={product.espana_stock}
-                  pnoval_stock={product.pnoval_stock}
-                />
-              );
-            })}
-          </div>
-        </div>
+        <ProductList categoryName={categoryName} productList={productList} loading={loading} />
       </section>
       <div className="border-b border-black">
         <div className="pb-12">
@@ -190,14 +143,22 @@ export async function getStaticProps(context) {
         category
       );
     });
+
+    const brands = new Set();
+    products.forEach((product) => {
+      brands.add(product.brand)
+    })
+    console.log(brands);
+
     return {
       props: {
         products: products.slice(0, LIMIT),
         productsPerPage: LIMIT,
         numPages: Math.ceil(products.length / LIMIT),
         category: category,
-        revalidate: 10
+        brands: [...brands]
       },
+      revalidate: 10
     };
   } catch (error) {
     console.log(error);
@@ -207,8 +168,9 @@ export async function getStaticProps(context) {
         productsPerPage: 0,
         numPages: 0,
         category: "",
-        revalidate: 10
+        brands: []
       },
+      revalidate: 10
     };
   }
 }

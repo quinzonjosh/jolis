@@ -1,6 +1,7 @@
 import { AiOutlineClose } from "react-icons/ai";
 
-const FilterBox = ({ title, items, setHideFilter }) => {
+const FilterBox = ({ title, items, setHideFilter, handleFilter }) => {
+  console.log("item",items)
   return (
     <div className="h-screen flex flex-col lg:h-auto  lg:block w-[100%] bg-white border-2 rounded-xl shadow-lg p-2">
       <button
@@ -22,7 +23,7 @@ const FilterBox = ({ title, items, setHideFilter }) => {
               key={index}
               className="hover:cursor-pointer text-primary hover:bg-white-accent-lavender hover:opacity-70 rounded-md py-1 px-1"
             >
-              <button>{item}</button>
+              <button onClick={handleFilter} value={item}>{item}</button>
             </li>
           );
         })}

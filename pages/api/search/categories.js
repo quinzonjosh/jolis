@@ -6,11 +6,11 @@ import { cleanCategories } from "../../../utils/cleanData";
 export default async function handler(req, res) {
   if (req.method === "GET") {    
     const { type, limit, pageNumber, query} = req.query;
-    const data = await Client.getEntries({ content_type: type, query: query})
+    const data = await Client.getEntries({ content_type: type, order: "fields.categoryName", query: query})
     
     const firstCategory = limit * (pageNumber - 1);
     const lastCategory = limit * pageNumber;
-    const categories = cleanCategories(data.items); 
+    const categories = cleanCategories(data.items);
     console.log(categories);
 
     res.status(200).json({

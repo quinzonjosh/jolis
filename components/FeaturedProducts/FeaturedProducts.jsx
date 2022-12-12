@@ -58,7 +58,7 @@ const FeaturedProducts = ({ data }) => {
                 <Product
                   image={product.image}
                   name={product.name}
-                  category={product.category}
+                  categories={product.categories}
                   espana_stock={product.espana_stock}
                   pnoval_stock={product.pnoval_stock}
                 />
