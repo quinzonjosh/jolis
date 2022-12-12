@@ -4,7 +4,7 @@ import FilterBox from "../FilterBox/FilterBox";
 import { useState } from "react";
 
 
-const ProductFilter = ({ handler, brands, searchRef, handleSubmit, handleFilter }) => {
+const ProductFilter = ({ handler, brands, searchRef="", handleSubmit, handleFilter }) => {
   const [hideFilter, setHideFilter] = useState(true);
 
   return (

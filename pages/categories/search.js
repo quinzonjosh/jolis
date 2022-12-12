@@ -1,26 +1,21 @@
 import Layout from "../../components/Layout/Layout";
 import Banner from "../../components/Banner/Banner";
-import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Client } from "../../api/contentful";
-import { cleanCategories, cleanProducts } from "../../utils/cleanData";
+import { cleanProducts } from "../../utils/cleanData";
 import axios from "axios";
-import Pagination from "../../components/Pagination/Pagination";
-import { TailSpin } from "react-loader-spinner";
 import ProductList from "../../components/Products/ProductList";
 import ProductFilter from "../../components/Products/ProductFilter";
-import SEO from '../../components/SEO';
-
-
+import SEO from "../../components/SEO";
 
 export default function ProductListing({
   products,
   productsPerPage,
   numPages,
   brands,
-  searchQuery
+  searchQuery,
 }) {
 
-  const [hideFilter, setHideFilter] = useState(true);
   const [productList, setProductList] = useState(products);
   const [query, setQuery] = useState(searchQuery);
   const [page, setPage] = useState(1);
@@ -30,8 +25,7 @@ export default function ProductListing({
   const limit = productsPerPage;
 
   const mounted = useRef(true);
-  const searchRef = useRef();
-  const handler = "global"
+  const handler = "global";
 
   const handleFilter = async (event) => {
     event.preventDefault();
@@ -44,14 +38,13 @@ export default function ProductListing({
         page,
         limit,
         brand,
-        handler
+        handler,
       },
     });
     setLoading(false);
     setProductList(data.products);
     setTotalPages(data.numPages);
-    searchRef.current.value = "";
-  }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -63,7 +56,7 @@ export default function ProductListing({
         query: event.target.search.value,
         page,
         limit,
-        handler
+        handler,
       },
     });
     setLoading(false);
@@ -85,7 +78,7 @@ export default function ProductListing({
           query,
           page,
           limit,
-          handler
+          handler,
         },
       });
       setLoading(false);
@@ -98,48 +91,44 @@ export default function ProductListing({
     <Layout className="w-full">
       <SEO title="Search products" slug={`categories/search`} />
 
-      <Banner
-        title={
-          "All products"
-        }
-      />
+      <Banner title={"All products"} />
 
       <section className="flex flex-col lg:flex-row py-10 relative">
         {/* left panel */}
-        <ProductFilter handler={handler} brands={brands} handleSubmit={handleSubmit} searchRef={searchRef}  handleFilter={handleFilter} />
-        
+        <ProductFilter
+          handler={handler}
+          brands={brands}
+          handleSubmit={handleSubmit}
+          handleFilter={handleFilter}
+        />
+
         {/* All products grid */}
-        <ProductList categoryName={"All"} productList={productList} loading={loading} />
-        
+        <ProductList
+          productList={productList}
+          loading={loading}
+          numPages={totalPages}
+          currentPage={page}
+          pageChanger={setPage}
+        />
       </section>
-      <div className="border-b border-black">
-        <div className="pb-12">
-          <Pagination
-            numPages={totalPages}
-            currentPage={page}
-            pageChanger={setPage}
-          />
-        </div>
-      </div>
     </Layout>
   );
 }
 
 export async function getServerSideProps(context) {
   try {
-
     const LIMIT = 9;
     const response = await Client.getEntries({
       content_type: "products",
-      query: context.query.query
+      query: context.query.query,
     });
 
     const products = cleanProducts(response.items);
 
     const brands = new Set();
     products.forEach((product) => {
-      brands.add(product.brand)
-    })
+      brands.add(product.brand);
+    });
     console.log(context.query.query);
 
     return {
@@ -148,7 +137,7 @@ export async function getServerSideProps(context) {
         productsPerPage: LIMIT,
         numPages: Math.ceil(products.length / LIMIT),
         brands: [...brands],
-        searchQuery: context.query.query
+        searchQuery: context.query.query,
       },
     };
   } catch (error) {
@@ -159,7 +148,7 @@ export async function getServerSideProps(context) {
         productsPerPage: 0,
         numPages: 0,
         brands: [],
-        searchQuery: ""
+        searchQuery: "",
       },
     };
   }

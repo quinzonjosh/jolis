@@ -1,22 +1,20 @@
 import Layout from "../../components/Layout/Layout";
 import { useRouter } from "next/router";
 import Banner from "../../components/Banner/Banner";
-import { useState, useEffect,  useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Client } from "../../api/contentful";
 import { cleanCategories, cleanProducts } from "../../utils/cleanData";
 import axios from "axios";
-import Pagination from "../../components/Pagination/Pagination";
 import ProductList from "../../components/Products/ProductList";
 import ProductFilter from "../../components/Products/ProductFilter";
-import SEO from '../../components/SEO';
-
+import SEO from "../../components/SEO";
 
 export default function ProductListing({
   products,
   productsPerPage,
   numPages,
   category,
-  brands
+  brands,
 }) {
   const [productList, setProductList] = useState(products);
   const [query, setQuery] = useState("");
@@ -45,7 +43,7 @@ export default function ProductListing({
         category,
         page,
         limit,
-        brand
+        brand,
       },
     });
     setLoading(false);
@@ -53,7 +51,7 @@ export default function ProductListing({
     setTotalPages(data.numPages);
     setPage(1);
     searchRef.current.value = "";
-  }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -100,42 +98,45 @@ export default function ProductListing({
   return (
     <Layout className="w-full">
       <SEO title={categoryTitle} slug={`categories/${categoryName}`} />
-      <Banner
-        title={
-          categoryName
-        }
-      />
+      <Banner title={categoryName} />
 
       <section className="flex flex-col lg:flex-row py-10 relative">
         {/* left panel */}
-        <ProductFilter handler={""} brands={brands} handleSubmit={handleSubmit} searchRef={searchRef}  handleFilter={handleFilter} />
+        <ProductFilter
+          handler={""}
+          brands={brands}
+          handleSubmit={handleSubmit}
+          searchRef={searchRef}
+          handleFilter={handleFilter}
+        />
         {/* All products grid */}
-        <ProductList categoryName={categoryName} productList={productList} loading={loading} />
+        <ProductList
+          categoryName={categoryName}
+          productList={productList}
+          loading={loading}
+          numPages={totalPages}
+          currentPage={page}
+          pageChanger={setPage}
+        />
       </section>
-      <div className="border-b border-black">
-        <div className="pb-12">
-          <Pagination
-            numPages={totalPages}
-            currentPage={page}
-            pageChanger={setPage}
-          />
-        </div>
-      </div>
     </Layout>
   );
 }
 
 export async function getStaticPaths() {
-  const response = await Client.getEntries({ 'content_type': 'category', order: "fields.categoryName" });
+  const response = await Client.getEntries({
+    content_type: "category",
+    order: "fields.categoryName",
+  });
 
-  const paths = cleanCategories(response.items).map((category) => { return { params: { productListing: category.slug } } })
+  const paths = cleanCategories(response.items).map((category) => {
+    return { params: { productListing: category.slug } };
+  });
 
   return {
     paths,
-    fallback: false
-  }
-
-
+    fallback: false,
+  };
 }
 
 export async function getStaticProps(context) {
@@ -153,8 +154,8 @@ export async function getStaticProps(context) {
 
     const brands = new Set();
     products.forEach((product) => {
-      brands.add(product.brand)
-    })
+      brands.add(product.brand);
+    });
 
     return {
       props: {
@@ -162,9 +163,9 @@ export async function getStaticProps(context) {
         productsPerPage: LIMIT,
         numPages: Math.ceil(products.length / LIMIT),
         category: category,
-        brands: [...brands]
+        brands: [...brands],
       },
-      revalidate: 10
+      revalidate: 10,
     };
   } catch (error) {
     console.log(error);
@@ -174,9 +175,9 @@ export async function getStaticProps(context) {
         productsPerPage: 0,
         numPages: 0,
         category: "",
-        brands: []
+        brands: [],
       },
-      revalidate: 10
+      revalidate: 10,
     };
   }
 }
