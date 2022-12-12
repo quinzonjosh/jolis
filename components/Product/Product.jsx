@@ -21,13 +21,13 @@ function Product({ image, name, categories, espana_stock, pnoval_stock }) {
         <div>
           <h3 className="text-xl text-secondary font-bold">{name}</h3>
           <div>
-            {/* {categories.map((category, index) => {
+            {categories.map((category, index) => {
               return (
                 <p key={index} className="mb-4">
                   {category.name}
                 </p>
               );
-            })} */}
+            })}
           </div>
           <div className="flex gap-8">
             {branches.map((branch) => {

@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
 
         <div className="relative bottom-2">
-          <span className="font-bold text-lg">Our products</span>
+          <span className="font-bold text-lg">Our Products</span>
           <ul>
             {tempProducts.map(({ name, link }) => {
               return (
@@ -82,13 +82,6 @@ const Footer = () => {
               <p className="text-sm text-white-accent-ghost">Facebook</p>
             </div>
           </div>
-          {/* 
-          <div className="md:flex-none md:justify-start flex justify-center">
-            <Link href="https://www.facebook.com/jolis.espana">
-              <a>
-              </a>
-            </Link>
-          </div> */}
         </div>
       </div>
     </footer>

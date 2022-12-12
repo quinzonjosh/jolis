@@ -10,6 +10,7 @@ import { AiOutlineClose } from "react-icons/ai";
 
 import links from "../../data/navLinks.json";
 
+
 const Navbar = ({ page }) => {
   const [hideNav, setHideNav] = useState(true);
   const scrollPosition = useScrollPosition();
@@ -24,16 +25,18 @@ const Navbar = ({ page }) => {
           <a className={styles.nav_logo}>JOLI&apos;S</a>
         </Link>
         {/* search bar */}
-        <div className="flex w-[50%] lg:w-[55%]">
-          <input
-            type="search"
-            name="Search here"
-            placeholder="Search products"
-            className={styles.searchbar}
-          />
-          <button className="border-2 border-l-0 bg-white border-white-accent-lavender rounded-r-lg p-1">
-            <GrSearch className={styles.search_icon} />
-          </button>
+        <div className="w-[50%] lg:w-[55%]">
+          <form method="GET" action="/categories/search" className="flex w-full">
+            <input
+              type="text"
+              name="query"
+              placeholder="Search products"
+              className={styles.searchbar}
+            />
+            <button className="border-2 border-l-0 bg-white border-white-accent-lavender rounded-r-lg p-1">
+              <GrSearch className={styles.search_icon} />
+            </button>
+          </form>
         </div>
         <button
           className={styles.hamburger_menu}
