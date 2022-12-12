@@ -17,11 +17,11 @@ const Navbar = ({ page }) => {
 
   useEffect(()=>{
 
-    document.body.style.overflow = hideNav ? "scroll" : "hidden";
+    document.body.style.overflowY = hideNav ? "scroll" : "hidden";
 
 
     return () => {
-      document.body.style.overflow = "scroll";
+      document.body.style.overflowY = "scroll";
     }
   }, [hideNav])
 

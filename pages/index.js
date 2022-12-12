@@ -6,10 +6,13 @@ import Banner from "../components/Banner/Banner";
 import ProductCTA from "../components/ProductCTA/ProductCTA";
 import { Client } from "../api/contentful";
 import { cleanProducts } from "../utils/cleanData";
+import SEO from '../components/SEO';
+
 
 export default function Home({ featuredProducts }) {
   return (
     <Layout page="Home" className="w-full">
+      <SEO title="Home"  />
       <Banner title="Welcome to Joli's" />
       <FeaturedProducts data={featuredProducts} />
       <ProductCTA />

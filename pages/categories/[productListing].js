@@ -1,13 +1,14 @@
 import Layout from "../../components/Layout/Layout";
 import { useRouter } from "next/router";
 import Banner from "../../components/Banner/Banner";
-import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { useState, useEffect,  useRef } from "react";
 import { Client } from "../../api/contentful";
 import { cleanCategories, cleanProducts } from "../../utils/cleanData";
 import axios from "axios";
 import Pagination from "../../components/Pagination/Pagination";
 import ProductList from "../../components/Products/ProductList";
 import ProductFilter from "../../components/Products/ProductFilter";
+import SEO from '../../components/SEO';
 
 
 export default function ProductListing({
@@ -29,6 +30,9 @@ export default function ProductListing({
   const mounted = useRef(true);
   const categoryName = category.split("-").join(" ");
   const searchRef = useRef();
+
+  const router = useRouter();
+  const categoryTitle = router.asPath.split("/")[2].split("-").join(" ");
 
   const handleFilter = async (event) => {
     event.preventDefault();
@@ -95,6 +99,7 @@ export default function ProductListing({
 
   return (
     <Layout className="w-full">
+      <SEO title={categoryTitle} slug={`categories/${categoryName}`} />
       <Banner
         title={
           categoryName
@@ -123,7 +128,7 @@ export default function ProductListing({
 export async function getStaticPaths() {
   const response = await Client.getEntries({ 'content_type': 'category', order: "fields.categoryName" });
 
-  const paths = cleanCategories(response.items).map((category) => { return { params: { productListing: category.slug } } }) // [{ params: { id: '1' } }, { params: { id: '2' } }],
+  const paths = cleanCategories(response.items).map((category) => { return { params: { productListing: category.slug } } })
 
   return {
     paths,
@@ -150,7 +155,6 @@ export async function getStaticProps(context) {
     products.forEach((product) => {
       brands.add(product.brand)
     })
-    console.log(brands);
 
     return {
       props: {

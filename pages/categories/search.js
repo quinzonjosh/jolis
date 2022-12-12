@@ -1,11 +1,6 @@
 import Layout from "../../components/Layout/Layout";
-import { GrSearch, GrSystem } from "react-icons/gr";
-import { BsFilterLeft } from "react-icons/bs";
-import { useRouter } from "next/router";
-import Product from "../../components/Product/Product";
 import Banner from "../../components/Banner/Banner";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
-import FilterBox from "../../components/FilterBox/FilterBox";
 import { Client } from "../../api/contentful";
 import { cleanCategories, cleanProducts } from "../../utils/cleanData";
 import axios from "axios";
@@ -13,6 +8,8 @@ import Pagination from "../../components/Pagination/Pagination";
 import { TailSpin } from "react-loader-spinner";
 import ProductList from "../../components/Products/ProductList";
 import ProductFilter from "../../components/Products/ProductFilter";
+import SEO from '../../components/SEO';
+
 
 
 export default function ProductListing({
@@ -99,6 +96,8 @@ export default function ProductListing({
 
   return (
     <Layout className="w-full">
+      <SEO title="Search products" slug={`categories/search`} />
+
       <Banner
         title={
           "All products"
