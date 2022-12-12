@@ -95,13 +95,12 @@ const CategoryView = ({ categoryList, total }) => {
           ) : categories.length > 0 ? (
             categories.map((item) => {
               return (
-                <Link href="/categories" key={item.id}>
-                  <Category
-                    categoryName={item.name}
-                    imageLink={item.image}
-                    slug={item.slug}
-                  />
-                </Link>
+                <Category
+                  categoryName={item.name}
+                  imageLink={item.image}
+                  slug={item.slug}
+                  key={item.id}
+                />
               );
             })
           ) : (

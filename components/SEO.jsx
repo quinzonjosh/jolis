@@ -1,7 +1,6 @@
 import Head from "next/head";
 
 const SEO = ({ title, description = "", slug = "" }) => {
-  console.log(title);
   const URL = "https://jolis.ph";
   return (
     <Head>

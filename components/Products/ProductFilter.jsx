@@ -4,7 +4,7 @@ import FilterBox from "../FilterBox/FilterBox";
 import { useState } from "react";
 
 
-const ProductFilter = ({ handler, brands, searchRef="", handleSubmit, handleFilter }) => {
+const ProductFilter = ({ handler, brands, searchRef="", handleSubmit, handleFilter, currBrand }) => {
   const [hideFilter, setHideFilter] = useState(true);
 
   return (
@@ -57,6 +57,7 @@ const ProductFilter = ({ handler, brands, searchRef="", handleSubmit, handleFilt
           items={["All brands", ...brands]}
           setHideFilter={setHideFilter}
           handleFilter={handleFilter}
+          currBrand={currBrand}
         />
       </div>
     </div>

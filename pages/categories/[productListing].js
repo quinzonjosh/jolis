@@ -21,6 +21,7 @@ export default function ProductListing({
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(numPages);
   const [loading, setLoading] = useState(false);
+  const [brand, setBrand] = useState("All brands");
 
   const type = "products";
   const limit = productsPerPage;
@@ -35,6 +36,7 @@ export default function ProductListing({
   const handleFilter = async (event) => {
     event.preventDefault();
     const brand = event.target.value === "All brands" ? "" : event.target.value;
+    setBrand(event.target.value);
     setLoading(true);
     const { data, status } = await axios.get("/api/search/products", {
       params: {
@@ -105,6 +107,7 @@ export default function ProductListing({
         <ProductFilter
           handler={""}
           brands={brands}
+          currBrand={brand}
           handleSubmit={handleSubmit}
           searchRef={searchRef}
           handleFilter={handleFilter}
