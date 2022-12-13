@@ -30,7 +30,7 @@ const branches = () => {
         branchName="P.Noval Branch"
         facebookLink="https://www.facebook.com/jolis.pnoval"
         address="957-963 Padre Noval St, 469 Z-46 Sampaloc, Manila, 1008 Metro Manila"
-        tel="0287366361"
+        mobile="0287-366361"
         mapFirst={true}
         mapEmbed={pnovalBranch}
       />
