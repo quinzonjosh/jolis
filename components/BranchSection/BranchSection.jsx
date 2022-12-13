@@ -3,52 +3,67 @@ import Image from "next/image";
 const BranchInfo = ({
   branchName,
   facebookLink,
-  phoneNumber,
+  mobile,
+  tel,
+  printing,
+  email,
   address,
+  hours,
   mapFirst,
 }) => {
   return (
     <div
       className={`flex flex-col   ${
-        mapFirst ? "order-2 md:w-2/5" : "order-1 md:1/2"
+        mapFirst ? "order-2 md:w-2/5 relative md:right-10 right-0" : "order-1 md:1/2"
       }`}
     >
-      <p className="text-2xl font-bold mb-10">{branchName}</p>
-      <p className="text-xl font-bold mb-10">Reach Us</p>
-      <span className="mb-10">
-        <p className="float-left mr-12">Facebook</p>
+      <p className="text-3xl font-bold mb-5 lg:mx-8 text-secondary font-sans">{branchName}</p>
+      <p className="text-2xl font-bold mb-5 lg:mx-8 text-primary font-sans">Reach Us</p>
+      <span className="mb-5 lg:mx-8">
+        <p className="float-left mr-12 text-primary">Facebook:</p>
         <a
           href={facebookLink}
-          className="w-1/2 md:w-2/4 hover:text-blue-400 break-words float-left"
+          className="w-1/2 md:w-2/4 hover:text-blue-400 hover:underline break-words float-left relative left-10 text-primary"
         >
-          {facebookLink}
+          {facebookLink.replace("https://www.facebook.com", "")}
         </a>
       </span>
-      <p className="mb-10">
-        <a className="float-left mr-20">Phone</a>
-        <a className="float-left relative right-2">{phoneNumber}</a>
+      <p className="mb-5 lg:mx-8">
+        <a className="float-left mr-20 text-primary">Mobile:</a>
+        <a className="float-left relative left-7 text-primary">{mobile}</a>
       </p>
-      <span className="mb-10">
-        <a className="float-left mr-14">Address</a>
-        <a className="w-2/4 break-words float-left">{address}</a>
+      <p className="mb-5 lg:mx-8">
+        <a className="float-left mr-20 text-primary">Tel:</a>
+        <a className="float-left relative left-14 break-words w-2/4 text-primary">{tel}</a>
+      </p>
+      <p className="mb-5 lg:mx-8">
+        <a className="float-left mr-20 text-primary">Printing:</a>
+        <a className="float-left relative left-4 text-primary">{printing}</a>
+      </p>
+      <p className="mb-5 lg:mx-8">
+        <a className="float-left mr-20 text-primary">Email:</a>
+        <a className="float-left relative left-9 break-words w-2/4 text-primary">{email}</a>
+      </p>
+      <span className="mb-5 lg:mx-8">
+        <a className="float-left mr-14 text-primary">Address:</a>
+        <a className="lg:w-2/4 md:w-2/5 w-2/4 break-words float-left relative left-11 text-primary">{address}</a>
+      </span>
+      <span className="mb-5 lg:mx-8">
+        <a className="float-left mr-12 text-primary">Opening hours:</a>
+        <a className="w-2/5 break-words float-left text-primary">{hours}</a>
       </span>
     </div>
   );
 };
 
-const BranchMap = ({ mapFirst }) => {
+const BranchMap = ({ mapFirst, mapEmbed }) => {
   return (
     <div
-      className={`relative w-full md:w-2/5 h-96 ${
-        mapFirst ? "order-2 md:order-1" : "order-2"
+      className={`relative lg:md:w-2/5 md:md:w-2/4 w-full h-96 lg:mx-8 lg:top-10 md:top-16 top-0 ${
+        mapFirst ? "order-2 md:order-1" : "order-2 lg:-ml-0 md:-ml-20 -ml-0"
       }`}
     >
-      <Image
-        layout="fill"
-        priority="true"
-        src="/images/default.jpg"
-        alt="branch image"
-      />
+      <div dangerouslySetInnerHTML={mapEmbed}/>
     </div>
   );
 };
@@ -56,22 +71,31 @@ const BranchMap = ({ mapFirst }) => {
 const BranchSection = ({
   branchName,
   facebookLink,
-  phoneNumber,
+  mobile,
+  tel,
+  printing,
+  email,
   address,
+  hours,
   mapFirst,
+  mapEmbed
 }) => {
   return (
-    <section className="border-b-2 border-black">
+    <section className={`${mapFirst ? "bg-white-accent-ghost" : "border-b-2 border-black"}`}>
       <div className="container px-10 md:px-0 mx-auto py-10 flex flex-col items-center md:flex-row md:items-start justify-between">
         <BranchInfo
           branchName={branchName}
           facebookLink={facebookLink}
-          phoneNumber={phoneNumber}
+          mobile={mobile}
+          tel={tel}
+          printing={printing}
+          email={email}
           address={address}
+          hours={hours}
           mapFirst={mapFirst}
         />
         {/* TODO: add link embedd to google maps here */}
-        <BranchMap mapFirst={mapFirst} />
+        <BranchMap mapFirst={mapFirst} mapEmbed={mapEmbed} />
       </div>
     </section>
   );
@@ -80,9 +104,13 @@ const BranchSection = ({
 BranchSection.defaultProps = {
   branchName: "Location Branch",
   facebookLink: "XXXXXXXXXXXXXX",
-  phoneNumber: "09xx xxxx xxx",
+  mobile: "0917-8039316",
+  tel: "8731-3628 / 7902-7030",
+  printing: "8731-9704",
+  email: "jolisgen2@gmail.com",
   address: "XXXXXXXXXXXXXX",
-  reverse: false,
+  hours: `Mon-Sat: 8:30AM-6:00PM,
+  Sunday: Closed`
 };
 
 export default BranchSection;

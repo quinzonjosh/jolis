@@ -21,8 +21,8 @@ const Pagination = ({ numPages, currentPage, pageChanger }) => {
  
 
   return (
-    <p className="text-center">
-      <button onClick={prevPage} className="hover:bg-gray-200 mr-7">
+    <div className="text-center">
+      <button onClick={prevPage} className="hover:bg-gray-200 mr-7 text-gray-500 font-heading">
         ←PREV
       </button>
       {[...Array(numPages).keys()].map((item) => {
@@ -30,8 +30,8 @@ const Pagination = ({ numPages, currentPage, pageChanger }) => {
           <button
             onClick={(event) => changePage(event)}
             key={item + 1}
-            className={`hover:bg-gray-200 m-1 ${
-              item === currentPage - 1 ? "font-bold" : ""
+            className={`hover:bg-gray-200 m-1  font-heading ${
+              item === currentPage - 1 ? "font-bold text-secondary" : "text-gray-400"
             }`}
             data-page={item+1}
           >
@@ -39,10 +39,10 @@ const Pagination = ({ numPages, currentPage, pageChanger }) => {
           </button>
         );
       })}
-      <button onClick={nextPage} className="hover:bg-gray-200 ml-7">
+      <button onClick={nextPage} className="hover:bg-gray-200 ml-7 text-gray-500 font-heading ">
         NEXT→
       </button>
-    </p>
+    </div>
   );
 };
 

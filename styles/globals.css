@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: theme("fontFamily.heading");
+}
+
+p,
+a {
+  font-family: theme("fontFamily.base");
+}
+
+#nprogress .bar {
+  background-color: theme("colors.tertiary") !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: theme("colors.tertiary");
+  border-left-color: theme("colors.tertiary");
+}
+
+.swiper-pagination {
+  @apply block md:hidden;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: theme(colors.secondary) !important;
+}

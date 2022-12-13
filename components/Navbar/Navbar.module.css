@@ -1,4 +1,98 @@
-.nav_links{
-    @apply absolute w-full h-full top-0 bg-white z-10 transition-all md:z-0 md:w-[20%] md:bg-none md:static;
+.navbar {
+  @apply fixed top-0 left-0 z-[1001] transition-all w-full;
+
+  .nav_logo {
+    @apply lg:text-4xl text-2xl font-bold cursor-pointer font-heading;
+  }
+
+  &[data-style="initial"] {
+    .nav_logo {
+      @apply text-white;
+    }
+
+    .nav_link {
+      @apply text-primary hover:text-secondary lg:text-white-accent-ghost lg:hover:text-white-accent-lavender;
+      &::after {
+        @apply bg-white-accent-lavender;
+      }
+    }
+    .hamburger_menu {
+      @apply text-white;
+    }
+  }
+
+  &[data-style="scroll"] {
+    @apply bg-white shadow-lg;
+
+    .nav_logo {
+      @apply text-primary;
+    }
+
+    .nav_link {
+      @apply text-primary hover:text-secondary;
+      &::after {
+        @apply bg-secondary;
+      }
+    }
+
+    .hamburger_menu {
+      @apply text-primary;
+    }
+  }
+
+  .hamburger_menu {
+    @apply lg:hidden block text-2xl;
+  }
+
+  .nav_links {
+    @apply absolute w-full h-[100vh] lg:h-full top-0 z-10 transition-all lg:z-0 lg:w-[20%]  bg-white lg:bg-transparent lg:static;
+  }
+
+  .nav_link {
+    @apply text-base relative whitespace-nowrap lg:right-4 right-0;
+  }
+
+  .nav_link::after {
+    @apply w-0;
+    content: "";
+    display: block;
+    height: 2px;
+    opacity: 0;
+    transition: ease all 0.3s;
+  }
+
+  .nav_link:hover::after {
+    @apply lg:w-full;
+    opacity: 1;
+    left: 0;
+  }
+
+  .nav_active {
+    @apply text-secondary border-secondary border-b-2 lg:border-0;
+  }
+
+  .nav_active::after {
+    @apply bg-secondary lg:w-full;
+    content: "";
+    display: block;
+    height: 2px;
+    opacity: 1;
+    transition: ease all 0.5s;
+  }
+
+  .nav_logo {
+    @apply lg:w-[10%];
+  }
 }
 
+.searchbar {
+  @apply w-[90%] border-2 border-white-accent-lavender border-r-0 rounded-l-lg p-2 text-xs focus:border-tertiary outline-none font-base;
+}
+
+.searchbar:focus-visible + button {
+  @apply border-tertiary;
+}
+
+.search_icon > path {
+  @apply stroke-secondary;
+}

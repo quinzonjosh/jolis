@@ -1,0 +1,7 @@
+.footer_wrapper {
+  @apply flex md:flex-row flex-col w-full justify-center items-center text-center md:text-left  p-10 gap-2;
+
+  & > * {
+    @apply w-full md:w-[20%] mb-5 md:mb-0;
+  }
+}
