@@ -16,7 +16,7 @@ const ProductCTA = ({image, image2}) => {
               </button>
             </Link>
             <div className="w-full bg-primary opacity-70 h-full z-[1] absolute left-0 top-0"/>
-            <Image className="z-0" src={image2} layout="fill" objectFit="cover" />
+            <Image className="z-0" src={image} layout="fill" objectFit="cover" />
           </div>
 
           <div className="flex flex-col relative md:w-[50%] px-[5%] pt-[5%] pb-[10%] items-center">
@@ -38,6 +38,7 @@ const ProductCTA = ({image, image2}) => {
 };
 
 ProductCTA.defaultProps = {
+  image: "/images/image1.jpg",
   image2: "/images/default-banner.jpg",
 };
 

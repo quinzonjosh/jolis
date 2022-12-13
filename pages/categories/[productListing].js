@@ -1,158 +1,186 @@
-import Head from "next/head";
-import Image from "next/image";
 import Layout from "../../components/Layout/Layout";
-import Link from "next/link";
-import { GrSearch } from "react-icons/gr";
-import { BsFilterLeft } from "react-icons/bs";
 import { useRouter } from "next/router";
-import categories from "../../data/categories.json";
-import Product from "../../components/Product/Product";
-import productsList from "../../data/products.json";
 import Banner from "../../components/Banner/Banner";
-import { useState, useEffect, useCallback } from "react";
-import FilterBox from "../../components/FilterBox/FilterBox";
-import {Client} from "../../api/contentful";
-import { cleanProducts } from "../../utils/cleanData";
+import { useState, useEffect, useRef } from "react";
+import { Client } from "../../api/contentful";
+import { cleanCategories, cleanProducts } from "../../utils/cleanData";
+import axios from "axios";
+import ProductList from "../../components/Products/ProductList";
+import ProductFilter from "../../components/Products/ProductFilter";
+import SEO from "../../components/SEO";
 
-export default function ProductListing({ products }) {
+export default function ProductListing({
+  products,
+  productsPerPage,
+  numPages,
+  category,
+  brands,
+}) {
+  const [productList, setProductList] = useState(products);
+  const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(numPages);
+  const [loading, setLoading] = useState(false);
+  const [brand, setBrand] = useState("All brands");
+
+  const type = "products";
+  const limit = productsPerPage;
+
+  const mounted = useRef(true);
+  const categoryName = category.split("-").join(" ");
+  const searchRef = useRef();
+
   const router = useRouter();
-  const category = router.query;
+  const categoryTitle = router.asPath.split("/")[2].split("-").join(" ");
 
+  const handleFilter = async (event) => {
+    event.preventDefault();
+    const brand = event.target.value === "All brands" ? "" : event.target.value;
+    setBrand(event.target.value);
+    setLoading(true);
+    const { data, status } = await axios.get("/api/search/products", {
+      params: {
+        type,
+        query: "",
+        category,
+        page,
+        limit,
+        brand,
+      },
+    });
+    setLoading(false);
+    setProductList(data.products);
+    setTotalPages(data.numPages);
+    setPage(1);
+    searchRef.current.value = "";
+  };
 
-  const [hideFilter, setHideFilter] = useState(true);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setQuery(event.target.search.value);
+    setLoading(true);
+    const { data, status } = await axios.get("/api/search/products", {
+      params: {
+        type,
+        query: event.target.search.value,
+        category,
+        page,
+        limit,
+      },
+    });
+    setLoading(false);
+    setProductList(data.products);
+    setTotalPages(data.numPages);
+    setPage(1);
+  };
+
+  useEffect(() => {
+    (async () => {
+      if (mounted.current) {
+        mounted.current = false;
+        return;
+      }
+      setLoading(true);
+
+      const { data, status } = await axios.get("/api/search/products", {
+        params: {
+          type,
+          query,
+          category,
+          page,
+          limit,
+        },
+      });
+      setLoading(false);
+      setProductList(data.products);
+      setTotalPages(data.numPages);
+    })();
+  }, [page]);
 
   return (
     <Layout className="w-full">
-      <Banner
-        title={
-          category["productListing"] != null
-            ? category["productListing"]
-            : "Product Listing"
-        }
-      />
+      <SEO title={categoryTitle} slug={`categories/${categoryName}`} />
+      <Banner title={categoryName} />
 
-      <section className="flex flex-col md:flex-row border-b border-black py-10 relative">
+      <section className="flex flex-col lg:flex-row py-10 relative">
         {/* left panel */}
-        <div className="md:w-[25%] flex flex-col px-3 md:px-10 gap-2">
-          {/* Search bar (desktop view)*/}
-          <div className="flex justify-between">
-            {/* filter and Search bar (mobile view)*/}
-            <div className="flex">
-              <button
-                className="md:hidden flex border-2 rounded-lg shadow-lg pl-2 pr-4 pt-1"
-                onClick={() => {
-                  document.body.style.overflow = hideFilter
-                    ? "hidden"
-                    : "scroll";
-
-                  setHideFilter((hideFilter) => !hideFilter);
-                }}
-              >
-                <div className="pt-[2px] text-secondary pr-3">
-                  <BsFilterLeft size={22} />
-                </div>
-                <a className="text-secondary">Filter</a>
-              </button>
-            </div>
-
-            <div className="flex md:w-[100%] border-2 rounded-xl shadow-lg">
-              <input
-                type="search"
-                name="Search here"
-                placeholder="Search products"
-                className="w-[150px] md:w-[100%] text-xs md:text-xl p-2"
-              />
-              <button className="p-1">
-                <GrSearch />
-              </button>
-            </div>
-          </div>
-          <div
-            className={`${
-              hideFilter ? " -left-full" : "left-0"
-            } overflow-scroll max-h-[400px] md:max-h-[auto] transition-all w-full z-10 top-[90px] md:w-auto absolute md:static`}
-          >
-            {/* browse type */}
-            <FilterBox
-              title="Type"
-              items={[
-                "All Products",
-                "Architecture",
-                "Drawing Supplies",
-                "School Supplies",
-                "Tables",
-                "Books",
-              ]}
-            />
-
-            {/* browse brand */}
-            <FilterBox
-              title="Brand"
-              items={[
-                "All Brands",
-                "Faber Castell",
-                "Best Buy",
-                "G-Tec",
-                "Muji",
-              ]}
-            />
-          </div>
-        </div>
-
+        <ProductFilter
+          handler={""}
+          brands={brands}
+          currBrand={brand}
+          handleSubmit={handleSubmit}
+          searchRef={searchRef}
+          handleFilter={handleFilter}
+        />
         {/* All products grid */}
-        <div className="w-[90%] mx-auto py-5">
-          <h2 className="font-bold text-3xl text-secondary pb-5">
-            All Products
-          </h2>
-          <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:px-0 md:py-5 md:w-[80%] gap-3 md:gap-x-24 ">
-            {products.map((product, index) => {
-              return (
-                <Product
-                  key={index}
-                  image={product.image}
-                  name={product.name}
-                  category={product.category}
-                  espana_stock={product.espana_stock}
-                  pnoval_stock={product.pnoval_stock}
-                />
-              );
-            })}
-          </div>
-        </div>
+        <ProductList
+          categoryName={categoryName}
+          productList={productList}
+          loading={loading}
+          numPages={totalPages}
+          currentPage={page}
+          pageChanger={setPage}
+        />
       </section>
     </Layout>
   );
 }
 
-export function getStaticPaths() {
-  const paths = categories.map((item) => {
-    return { params: { productListing: item.slug } };
+export async function getStaticPaths() {
+  const response = await Client.getEntries({
+    content_type: "category",
+    order: "fields.categoryName",
   });
-  return { paths, fallback: false };
-}
 
-export async function getStaticProps(context) {
-  console.log(Client)
-  let allProducts = [];
-  try{
-    const response = await Client.getEntries({'content_type' : 'products'})
-    const responseData = response.items
-
-    if(responseData){
-        allProducts = cleanProducts(responseData)
-    }
-  } catch (error) {
-  console.log(error)
-  }
-
-  const productsinCategory = allProducts.filter((item) => {
-    const category = item.category.toLowerCase().split(" ").join("-");
-    return category == context.params.productListing;
+  const paths = cleanCategories(response.items).map((category) => {
+    return { params: { productListing: category.slug } };
   });
 
   return {
-    props: {
-      products: productsinCategory,
-    },
+    paths,
+    fallback: false,
   };
+}
+
+export async function getStaticProps(context) {
+  try {
+    const LIMIT = 9;
+    const category = context.params.productListing;
+    const response = await Client.getEntries({
+      content_type: "products",
+    });
+    const products = cleanProducts(response.items).filter((item) => {
+      return [...item.categories.map((category) => category.slug)].includes(
+        category
+      );
+    });
+
+    const brands = new Set();
+    products.forEach((product) => {
+      brands.add(product.brand);
+    });
+
+    return {
+      props: {
+        products: products.slice(0, LIMIT),
+        productsPerPage: LIMIT,
+        numPages: Math.ceil(products.length / LIMIT),
+        category: category,
+        brands: [...brands],
+      },
+      revalidate: 10,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: {
+        products: [],
+        productsPerPage: 0,
+        numPages: 0,
+        category: "",
+        brands: [],
+      },
+      revalidate: 10,
+    };
+  }
 }

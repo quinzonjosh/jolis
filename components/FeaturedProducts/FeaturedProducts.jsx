@@ -43,7 +43,7 @@ const FeaturedProducts = ({ data }) => {
         <Swiper
           modules={[Pagination, A11y, Autoplay]}
           spaceBetween={10}
-          slidesPerView={5}
+          slidesPerView={"auto"}
           breakpoints={breakpoints}
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}
@@ -58,7 +58,7 @@ const FeaturedProducts = ({ data }) => {
                 <Product
                   image={product.image}
                   name={product.name}
-                  category={product.category}
+                  categories={product.categories}
                   espana_stock={product.espana_stock}
                   pnoval_stock={product.pnoval_stock}
                 />

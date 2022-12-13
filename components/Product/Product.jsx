@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Pill from "../Pill/Pill";
 
-function Product({ image, name, category, espana_stock, pnoval_stock }) {
+function Product({ image, name, categories, espana_stock, pnoval_stock }) {
   const branches = [
     {
       name: "Espana Branch",
@@ -20,7 +20,15 @@ function Product({ image, name, category, espana_stock, pnoval_stock }) {
         </div>
         <div>
           <h3 className="text-xl text-secondary font-bold">{name}</h3>
-          <p className="mb-4">{category}</p>
+          <div>
+            {categories.map((category, index) => {
+              return (
+                <p key={index} className="mb-4">
+                  {category.name}
+                </p>
+              );
+            })}
+          </div>
           <div className="flex gap-8">
             {branches.map((branch) => {
               return (
