@@ -60,7 +60,7 @@ const BranchMap = ({ mapFirst, mapEmbed }) => {
   return (
     <div
       className={`relative lg:md:w-2/5 md:md:w-2/4 w-full h-96 lg:mx-8 lg:top-10 md:top-16 top-0 ${
-        mapFirst ? "order-2 md:order-1" : "order-2 lg:-ml-0 md:-ml-20 -ml-0"
+        mapFirst ? "order-2 md:order-1" : "order-2 lg:-ml-0 md:-ml-44 -ml-0"
       }`}
     >
       <div dangerouslySetInnerHTML={mapEmbed}/>

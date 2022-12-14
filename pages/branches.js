@@ -6,9 +6,12 @@ import SEO from '../components/SEO';
 const branches = () => {
   const espanaBranch = {
     __html:
-      '<div class="mapouter"><div class="gmap_canvas"><iframe width="600px" height="400px" id="gmap_canvas" src="https://maps.google.com/maps?q=1567-69%20Espa%C3%B1a%20Blvd.%20Sampaloc%20Mla.%201000%20Manila,%20Philippines&t=k&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://123movies-to.org"></a><br><style>.mapouter{position:absolute;text-align:right;height:100%;width:100%;top:0;left:0;border:0}</style><a href="https://www.embedgooglemap.net">how to add a google map to wordpress</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:100%;width:100%;}</style></div></div>',
+      '<div class="mapouter"><div class="gmap_canvas"><iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=1567-69 España Blvd. Sampaloc Mla. 1000 Manila, Philippines&amp;t=h&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://formatjson.org/">format json</a></div><style>.mapouter{position:relative;text-align:right;width:100%;height:400px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:400px;}.gmap_iframe {height:400px!important;}</style></div>'
   };
-
+  const pnovalBranch = {
+    __html:
+      '<div class="mapouter"><div class="gmap_canvas"><iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=957-963 Padre Noval St, 469 Z-46 Sampaloc, Manila, 1008 Metro Manila&amp;t=h&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://formatjson.org/">format json</a></div><style>.mapouter{position:relative;text-align:right;width:100%;height:400px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:400px;}.gmap_iframe {height:400px!important;}</style></div>'
+  };
 
   return (
     <Layout page="Get in touch">
@@ -26,9 +29,10 @@ const branches = () => {
       <BranchSection
         branchName="P.Noval Branch"
         facebookLink="https://www.facebook.com/jolis.pnoval"
-        address="1567-69 España Blvd. Sampaloc Mla. 1000 Manila, Philippines"
+        address="957-963 Padre Noval St, 469 Z-46 Sampaloc, Manila, 1008 Metro Manila"
+        mobile="0287-366361"
         mapFirst={true}
-        mapEmbed={espanaBranch}
+        mapEmbed={pnovalBranch}
       />
     </Layout>
   );

@@ -35,7 +35,7 @@ const ProductFilter = ({ handler, brands, searchRef="", handleSubmit, handleFilt
               <input
                 name="search"
                 type="text"
-                placeholder="Search products"
+                placeholder="Search in category"
                 className="w-[150px] md:w-[100%] text-xs md:text-xl p-2 rounded-xl"
                 ref={searchRef}
               />
